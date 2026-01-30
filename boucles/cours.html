@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Cours – Comprendre range() en Python</title>
+    <title>Cours – Les boucles while et for en Python</title>
 
     <style>
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
             margin: 0;
             padding: 0;
             color: #333;
@@ -15,37 +15,38 @@
 
         .container {
             max-width: 900px;
-            margin: 50px auto;
+            margin: 40px auto;
             background-color: #ffffff;
             padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
             text-align: center;
-            color: #2a5298;
+            color: #2c3e50;
             margin-bottom: 40px;
         }
 
         h2 {
-            color: #1e3c72;
-            margin-top: 30px;
+            color: #34495e;
+            margin-top: 35px;
         }
 
         h3 {
-            color: #2a5298;
-            margin-top: 20px;
+            color: #2c3e50;
+            margin-top: 25px;
         }
 
         pre {
-            background-color: #eef2f7;
+            background-color: #eef1f4;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
+            overflow-x: auto;
         }
 
         code {
-            background-color: #eef2f7;
+            background-color: #eef1f4;
             padding: 2px 6px;
             border-radius: 4px;
         }
@@ -54,28 +55,18 @@
             margin-left: 20px;
         }
 
-        .note {
-            background-color: #f4f8ff;
-            border-left: 4px solid #1e3c72;
+        .important {
+            background-color: #fdf6e3;
+            border-left: 4px solid #f1c40f;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 8px;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #eef2f7;
+        .resume {
+            background-color: #ecf4ff;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-top: 30px;
         }
 
         .back {
@@ -83,7 +74,7 @@
             margin-top: 40px;
             text-align: center;
             text-decoration: none;
-            color: #2a5298;
+            color: #3498db;
             font-weight: bold;
         }
 
@@ -97,22 +88,54 @@
 
 <div class="container">
 
-    <h1>Comprendre la fonction range() en Python</h1>
+    <h1>Les boucles while et for en Python</h1>
 
-    <h2>À quoi sert <code>range()</code> ?</h2>
+    <h2>La boucle while</h2>
 
     <p>
-        La fonction <code>range()</code> sert à générer une suite de nombres.
-        Elle est très souvent utilisée avec la boucle <code>for</code>
-        pour répéter une action plusieurs fois.
+        La boucle <code>while</code> permet de répéter des instructions
+        tant qu’une condition est vraie.
     </p>
 
-    <div class="note">
-        <strong>Important :</strong> <code>range()</code> ne fait rien tout seul.
-        Il est utilisé avec une boucle <code>for</code>.
+    <ul>
+        <li>On ne sait pas toujours combien de fois la boucle va se répéter</li>
+        <li>La condition est testée à chaque tour</li>
+        <li>La boucle s’arrête quand la condition devient fausse</li>
+    </ul>
+
+    <div class="important">
+        Il est obligatoire de faire changer la condition,
+        sinon la boucle ne s’arrête jamais.
     </div>
 
-    <h2>Utilisation la plus simple</h2>
+    <h3>Exemple</h3>
+
+    <pre>
+x = 0
+while x < 3:
+    print("Bonjour")
+    x = x + 1
+    </pre>
+
+    <p>
+        Ici, le message est affiché tant que <code>x</code> est inférieur à 3.
+        À chaque tour, <code>x</code> augmente, ce qui permet à la boucle de s’arrêter.
+    </p>
+
+    <h2>La boucle for</h2>
+
+    <p>
+        La boucle <code>for</code> permet de répéter des instructions
+        quand on sait à l’avance combien de fois cela doit se produire,
+        ou quand on veut parcourir des éléments.
+    </p>
+
+    <ul>
+        <li>La répétition est automatique</li>
+        <li>On n’a pas besoin de modifier une condition à la main</li>
+    </ul>
+
+    <h3>Exemple simple</h3>
 
     <pre>
 for i in range(3):
@@ -123,127 +146,108 @@ for i in range(3):
         Ce code affiche <strong>Bonjour</strong> trois fois.
     </p>
 
-    <h3>Que fait exactement <code>range(3)</code> ?</h3>
+    <h2>Comprendre la fonction range()</h2>
 
     <p>
-        <code>range(3)</code> crée les nombres suivants :
+        La fonction <code>range()</code> permet de créer une suite de nombres.
+        Elle est très souvent utilisée avec la boucle <code>for</code>
+        pour répéter une action un certain nombre de fois.
+    </p>
+
+    <h3>range(nombre)</h3>
+
+    <pre>
+range(3)
+    </pre>
+
+    <p>
+        Cela correspond aux nombres suivants :
     </p>
 
     <pre>
 0, 1, 2
     </pre>
 
-    <p>
-        La boucle <code>for</code> utilise ces nombres
-        pour répéter les instructions.
-    </p>
-
-    <div class="note">
-        <strong>La boucle s’arrête avant le nombre donné.</strong><br>
-        <code>range(3)</code> ne va pas jusqu’à 3.
+    <div class="important">
+        Le dernier nombre n’est jamais inclus.
+        <code>range(3)</code> s’arrête avant 3.
     </div>
 
-    <h2>Visualisation du fonctionnement</h2>
-
-    <table>
-        <tr>
-            <th>Tour de boucle</th>
-            <th>Valeur prise</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>2</td>
-        </tr>
-    </table>
-
-    <h2>range(début, fin)</h2>
-
-    <p>
-        On peut préciser un point de départ et une fin.
-    </p>
-
-    <pre>
-for i in range(2, 6):
-    print(i)
-    </pre>
-
-    <h3>Résultat affiché</h3>
-    <pre>
-2
-3
-4
-5
-    </pre>
-
-    <div class="note">
-        La boucle commence à <code>2</code> et s’arrête avant <code>6</code>.
-    </div>
-
-    <h2>range(début, fin, pas)</h2>
-
-    <p>
-        On peut aussi indiquer de combien on avance à chaque tour.
-    </p>
-
-    <pre>
-for i in range(0, 10, 2):
-    print(i)
-    </pre>
-
-    <h3>Résultat affiché</h3>
-    <pre>
-0
-2
-4
-6
-8
-    </pre>
-
-    <p>
-        Ici, la boucle avance de 2 en 2.
-    </p>
-
-    <h2>À quoi sert la variable dans la boucle ?</h2>
-
-    <p>
-        La variable utilisée dans la boucle (<code>i</code> ici)
-        reçoit automatiquement chaque nombre produit par <code>range()</code>.
-    </p>
+    <h3>Utilisation avec une boucle for</h3>
 
     <pre>
 for nombre in range(5):
     print(nombre)
     </pre>
 
-    <div class="note">
-        Le nom de la variable est libre :
-        <code>i</code>, <code>nombre</code>, <code>compteur</code>, etc.
+    <p>
+        La variable reçoit successivement chaque nombre généré par <code>range()</code>.
+    </p>
+
+    <h3>range(début, fin)</h3>
+
+    <pre>
+for nombre in range(2, 6):
+    print(nombre)
+    </pre>
+
+    <p>
+        Cette boucle affiche les nombres de 2 à 5.
+    </p>
+
+    <h3>range(début, fin, pas)</h3>
+
+    <pre>
+for nombre in range(0, 10, 2):
+    print(nombre)
+    </pre>
+
+    <p>
+        Ici, la boucle avance de 2 en 2.
+    </p>
+
+    <h2>La boucle for sans range()</h2>
+
+    <p>
+        La boucle <code>for</code> n’est pas limitée à <code>range()</code>.
+        Elle peut aussi parcourir directement des éléments.
+    </p>
+
+    <h3>Parcourir un mot</h3>
+
+    <pre>
+mot = "Python"
+
+for lettre in mot:
+    print(lettre)
+    </pre>
+
+    <p>
+        La boucle affiche chaque lettre du mot une par une.
+    </p>
+
+    <h3>Parcourir une liste</h3>
+
+    <pre>
+fruits = ["pomme", "banane", "orange"]
+
+for fruit in fruits:
+    print(fruit)
+    </pre>
+
+    <p>
+        La boucle affiche chaque élément de la liste.
+    </p>
+
+    <div class="resume">
+        <strong>En résumé :</strong>
+        <ul>
+            <li><code>while</code> répète tant qu’une condition est vraie</li>
+            <li><code>for</code> répète automatiquement</li>
+            <li><code>range()</code> génère des nombres</li>
+            <li><code>for</code> peut parcourir des nombres, des mots ou des listes</li>
+        </ul>
     </div>
-
-    <h2>Quand utiliser range() ?</h2>
-
-    <ul>
-        <li>Quand on veut répéter une action un nombre précis de fois</li>
-        <li>Quand on veut compter progressivement</li>
-        <li>Quand on veut afficher ou calculer avec des nombres</li>
-    </ul>
-
-    <h2>À retenir absolument</h2>
-
-    <ul>
-        <li><code>range()</code> génère une suite de nombres</li>
-        <li>La fin n’est jamais incluse</li>
-        <li><code>range()</code> est souvent utilisé avec <code>for</code></li>
-        <li>On peut choisir le début, la fin et le pas</li>
-    </ul>
 
     <a class="back" href="../index.html">Retour à l’accueil</a>
 
