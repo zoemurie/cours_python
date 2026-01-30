@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Exercices – Boucles for et range en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 35px;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 25px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        .exercice {
+            background-color: #f7f9fc;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .difficile {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 22px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 45px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Exercices – Boucles for et range</h1>
+
+    <div class="exercice">
+        <h2>Exercice 1 – Répéter un message</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche le mot <code>Bonjour</code> cinq fois</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 2 – Compter de 0 à 4</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche les nombres de 0 à 4</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+        <p><strong>Indice :</strong> <code>range(5)</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 3 – Compter de 1 à 5</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche les nombres de 1 à 5</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+        <p><strong>Indice :</strong> <code>range(1, 6)</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 4 – Les nombres pairs</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche les nombres pairs de 0 à 10</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+        <p><strong>Indice :</strong> avancer de 2 → <code>range(0, 11, 2)</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 5 – Compter à l’envers</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche les nombres de 5 à 1</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+        <p><strong>Indice :</strong> <code>range(5, 0, -1)</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 6 – Additionner</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>calcule la somme des nombres de 1 à 5</li>
+            <li>affiche le résultat</li>
+        </ul>
+        <p><strong>Indice :</strong> utiliser une variable <code>somme</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 7 – Avec une variable</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>crée une variable <code>n</code></li>
+            <li>affiche les nombres de 0 à <code>n</code></li>
+        </ul>
+        <p><strong>Exemple :</strong> si <code>n = 3</code> → <code>0 1 2 3</code></p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 8 – Parcourir un mot</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>affiche chaque lettre du mot <code>python</code> sur une ligne différente</li>
+            <li>utilise une boucle <code>for</code></li>
+        </ul>
+        <p><strong>Indice :</strong> on peut parcourir un mot directement</p>
+    </div>
+
+    <div class="difficile">
+        <h2>Exercice 9 – Défi final (plus difficile)</h2>
+        <p>Écris un programme qui :</p>
+        <ul>
+            <li>demande un nombre à l’utilisateur</li>
+            <li>affiche tous les nombres de 0 jusqu’à ce nombre</li>
+            <li>affiche à la fin la somme de ces nombres</li>
+        </ul>
+
+        <p><strong>Exemple :</strong></p>
+        <pre>
+Entrer un nombre : 4
+0
+1
+2
+3
+4
+Somme = 10
+        </pre>
+
+        <p>
+            Cet exercice permet de vérifier que tu sais utiliser :
+        </p>
+        <ul>
+            <li>une variable</li>
+            <li>une boucle <code>for</code></li>
+            <li>la fonction <code>range()</code></li>
+        </ul>
+    </div>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>
