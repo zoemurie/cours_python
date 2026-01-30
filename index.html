@@ -6,58 +6,89 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             margin: 0;
             padding: 0;
+            color: #333;
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 850px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #2a5298;
+            margin-bottom: 10px;
         }
 
-        p {
+        .subtitle {
             text-align: center;
             color: #555;
+            margin-bottom: 30px;
+            font-size: 18px;
         }
 
         ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin: 10px 0;
+            list-style: none;
+            padding: 0;
         }
 
         .chapitre {
+            background-color: #f4f8ff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chapitre:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .chapitre > a,
+        .chapitre > span {
+            font-size: 20px;
             font-weight: bold;
-            font-size: 18px;
-            margin-top: 20px;
-            color: #34495e;
+            color: #1e3c72;
+            text-decoration: none;
         }
 
         .sous-menu {
-            margin-left: 20px;
+            margin-top: 10px;
+            margin-left: 15px;
         }
 
-        a {
+        .sous-menu li {
+            margin: 8px 0;
+        }
+
+        .sous-menu a {
             text-decoration: none;
-            color: #3498db;
+            color: #2a5298;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .sous-menu a:hover {
+            background-color: #ffde59;
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -66,20 +97,20 @@
 
 <div class="container">
 
-    <h1>Cours de programmation Python</h1>
-    <p>Choisis un chapitre :</p>
+    <h1>🐍 Cours de programmation Python</h1>
+    <p class="subtitle">Apprends Python pas à pas, comme dans un jeu 🎮</p>
 
     <ul>
         <li class="chapitre">
             <a href="conditions/if_elif_else.html">Conditions if / elif / else</a>
             <ul class="sous-menu">
-                <li><a href="Cours.html">📘 Cours</a></li>
-                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+                <li><a href="Cours.html">Cours</a></li>
+                <li><a href="Exercices/for.html">Exercices</a></li>
             </ul>
         </li>
 
         <li class="chapitre">
-            Boucles
+            <span>Boucles</span>
             <ul class="sous-menu">
                 <li><a href="boucles/while.html">Boucle while</a></li>
                 <li><a href="boucles/for.html">Boucle for</a></li>
@@ -89,27 +120,31 @@
         <li class="chapitre">
             <a href="listes/listes.html">Listes</a>
             <ul class="sous-menu">
-                <li><a href="Cours.html">📘 Cours</a></li>
-                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+                <li><a href="Cours.html">Cours</a></li>
+                <li><a href="Exercices/for.html">Exercices</a></li>
             </ul>
         </li>
 
         <li class="chapitre">
             <a href="dictionnaires/dictionnaires.html">Dictionnaires</a>
             <ul class="sous-menu">
-                <li><a href="Cours.html">📘 Cours</a></li>
-                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+                <li><a href="Cours.html">Cours</a></li>
+                <li><a href="Exercices/for.html">Exercices</a></li>
             </ul>
         </li>
 
         <li class="chapitre">
             <a href="fonction/fonction.html">Fonctions</a>
             <ul class="sous-menu">
-                <li><a href="fonction/cours.html">📘 Cours</a></li>
-                <li><a href="fonction/exercices.html">✏️ Exercices</a></li>
+                <li><a href="fonction/cours.html">Cours</a></li>
+                <li><a href="fonction/exercices.html">Exercices</a></li>
             </ul>
         </li>
     </ul>
+
+    <footer>
+        🚀 Progresse en Python, niveau par niveau
+    </footer>
 
 </div>
 
