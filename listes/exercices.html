@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Exercices – Listes en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Fiche d’exercices – Les listes en Python</h1>
+
+    <div class="exercice">
+        <h2>Exercice 1 – Créer une liste</h2>
+        <p>Créer une liste <code>animaux</code> contenant :</p>
+        <pre>["chat", "chien", "lapin"]</pre>
+        <p>Puis afficher la liste.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 2 – Lire un élément</h2>
+        <pre>couleurs = ["rouge", "vert", "bleu"]</pre>
+        <p>Afficher :</p>
+        <ul>
+            <li>la première couleur</li>
+            <li>la dernière couleur</li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 3 – Ajouter un élément</h2>
+        <p>Créer une liste vide <code>notes</code>. Ajouter ensuite :</p>
+        <pre>[12, 15, 9]</pre>
+        <p>Puis afficher la liste.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 4 – Parcourir une liste</h2>
+        <p>Créer une liste de prénoms et utiliser une boucle <code>for</code> pour afficher chaque prénom.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 5 – Compter les éléments</h2>
+        <p>Créer une liste de nombres et afficher :</p>
+        <ul>
+            <li>la liste complète</li>
+            <li>le nombre d’éléments (<code>len()</code>)</li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 6 – Somme des nombres</h2>
+        <pre>nombres = [3, 7, 2, 5]</pre>
+        <p>Calculer et afficher la somme des nombres en utilisant une boucle <code>for</code> et une variable <code>somme</code>.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 7 – Trouver le plus grand nombre</h2>
+        <p>Créer une liste de nombres et écrire un programme qui affiche le plus grand nombre de la liste.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 8 – Liste et conditions</h2>
+        <p>Créer une liste de notes. Pour chaque note :</p>
+        <ul>
+            <li>Afficher "Réussi" si la note ≥ 10</li>
+            <li>Afficher "Échec" sinon</li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 9 – Mini défi</h2>
+        <p>Créer une liste vide. Demander à l’utilisateur d’entrer 5 nombres et les ajouter à la liste. Puis afficher la liste complète.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Projet de fin – Gestion d’une liste de notes</h2>
+
+        <h3>Objectif</h3>
+        <p>Créer un programme qui permet de gérer les notes d’un élève à l’aide d’une liste et d’un menu interactif.</p>
+
+        <h3>Consignes générales</h3>
+        <ul>
+            <li>Utiliser une liste</li>
+            <li>Utiliser <code>while</code>, <code>for</code>, et <code>if / elif / else</code></li>
+            <li>Le programme fonctionne tant que l’utilisateur ne choisit pas de quitter</li>
+        </ul>
+
+        <h3>Étapes du projet</h3>
+
+        <h4>1 – Créer la liste</h4>
+        <p>Créer une liste vide appelée <code>notes</code>.</p>
+
+        <h4>2 – Afficher un menu</h4>
+        <pre>
+1 - Ajouter une note
+2 - Afficher les notes
+3 - Calculer la moyenne
+4 - Afficher la meilleure note
+5 - Quitter
+        </pre>
+
+        <h4>3 – Choix de l’utilisateur</h4>
+        <p>Demander à l’utilisateur de choisir une option. Le programme recommence tant que l’utilisateur ne choisit pas 5.</p>
+
+        <h4>4 – Détails des options</h4>
+
+        <p><strong>Option 1 – Ajouter une note :</strong></p>
+        <ul>
+            <li>Demander une note à l’utilisateur</li>
+            <li>Ajouter la note dans la liste</li>
+        </ul>
+
+        <p><strong>Option 2 – Afficher les notes :</strong></p>
+        <ul>
+            <li>Afficher toutes les notes de la liste</li>
+            <li>Utiliser une boucle <code>for</code></li>
+        </ul>
+
+        <p><strong>Option 3 – Calculer la moyenne :</strong></p>
+        <ul>
+            <li>Calculer et afficher la moyenne des notes</li>
+            <li>Si la liste est vide, afficher "Aucune note"</li>
+        </ul>
+
+        <p><strong>Option 4 – Meilleure note :</strong></p>
+        <ul>
+            <li>Afficher la plus grande note de la liste</li>
+            <li>Si la liste est vide, afficher "Aucune note"</li>
+        </ul>
+
+        <p><strong>Option 5 – Quitter :</strong></p>
+        <p>Afficher "Au revoir" et arrêter le programme.</p>
+
+        <h4>Bonus (facultatif)</h4>
+        <ul>
+            <li>Afficher la plus petite note</li>
+            <li>Compter le nombre de notes ≥ 10</li>
+            <li>Ajouter une option pour supprimer une note</li>
+        </ul>
+
+        <h4>Conseils pour réussir</h4>
+        <ul>
+            <li>Commencer par faire fonctionner le menu</li>
+            <li>Ajouter les options une par une</li>
+            <li>Tester le programme souvent</li>
+        </ul>
+
+        <h4>Résultat attendu</h4>
+        <ul>
+            <li>Un programme qui ne plante pas</li>
+            <li>Utilise correctement une liste</li>
+            <li>Répond aux choix de l’utilisateur</li>
+            <li>S’arrête proprement</li>
+        </ul>
+
+    </div>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>

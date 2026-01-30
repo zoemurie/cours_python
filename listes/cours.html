@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Cours – Listes en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 20px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Cours – Les listes en Python</h1>
+
+    <h2>Qu’est-ce qu’une liste ?</h2>
+    <p>
+        Une liste est une variable qui peut contenir plusieurs valeurs.  
+        Au lieu d’avoir plusieurs variables :  
+    </p>
+    <pre>
+note1 = 12
+note2 = 15
+note3 = 9
+    </pre>
+    <p>On peut utiliser une seule liste :</p>
+    <pre>notes = [12, 15, 9]</pre>
+    <div class="note">
+        Une seule variable, plusieurs valeurs.
+    </div>
+
+    <h2>Créer une liste</h2>
+    <pre>
+nombres = [1, 2, 3, 4]
+mots = ["chat", "chien", "oiseau"]
+vide = []
+    </pre>
+    <p>Une liste peut contenir :</p>
+    <ul>
+        <li>des nombres</li>
+        <li>des mots</li>
+        <li>ou être vide</li>
+    </ul>
+
+    <h2>Les positions dans une liste (indices)</h2>
+    <div class="note">
+        Important : les indices commencent à 0
+    </div>
+    <pre>fruits = ["pomme", "banane", "orange"]</pre>
+    <p>Position et valeur :</p>
+    <ul>
+        <li>0 : pomme</li>
+        <li>1 : banane</li>
+        <li>2 : orange</li>
+    </ul>
+    <p>Exemples :</p>
+    <pre>
+print(fruits[0])  # affiche pomme
+print(fruits[2])  # affiche orange
+    </pre>
+
+    <h2>Ajouter un élément dans une liste</h2>
+    <pre>fruits.append("fraise")</pre>
+    <p>L’élément est ajouté à la fin de la liste.</p>
+
+    <h2>Parcourir une liste avec une boucle <code>for</code></h2>
+    <pre>
+fruits = ["pomme", "banane", "orange"]
+
+for fruit in fruits:
+    print(fruit)
+    </pre>
+    <p>La boucle affiche chaque élément de la liste.</p>
+
+    <h2>Connaître la taille d’une liste</h2>
+    <pre>print(len(fruits))</pre>
+    <p>La fonction <code>len()</code> renvoie le nombre d’éléments dans la liste.</p>
+
+    <h2>À retenir</h2>
+    <ul>
+        <li>Une liste stocke plusieurs valeurs</li>
+        <li>Les indices commencent à 0</li>
+        <li><code>append()</code> permet d’ajouter un élément</li>
+        <li>Une boucle <code>for</code> permet de parcourir la liste</li>
+    </ul>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>
