@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Exercices – Boucle while en Python</title>
+    <title>Cours Python – Les conditions if / elif / else</title>
 
     <style>
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #11998e, #38ef7d);
             margin: 0;
             padding: 0;
             color: #333;
@@ -24,13 +24,13 @@
 
         h1 {
             text-align: center;
-            color: #2a5298;
+            color: #11998e;
             margin-bottom: 40px;
         }
 
         h2 {
-            color: #1e3c72;
-            margin-top: 30px;
+            color: #0f766e;
+            margin-top: 35px;
         }
 
         p {
@@ -41,30 +41,39 @@
             margin-left: 25px;
         }
 
-        pre {
-            background-color: #eef2f7;
-            padding: 14px;
-            border-radius: 10px;
-        }
-
         code {
-            background-color: #eef2f7;
+            background-color: #eef7f6;
             padding: 3px 7px;
             border-radius: 5px;
         }
 
-        .exercice {
-            background-color: #f7f9fc;
-            border-left: 5px solid #3498db;
-            padding: 20px;
-            margin-bottom: 30px;
+        pre {
+            background-color: #eef7f6;
+            padding: 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .important {
+            background-color: #e0f2fe;
+            border-left: 5px solid #0ea5e9;
+            padding: 18px;
+            margin: 30px 0;
             border-radius: 10px;
         }
 
-        .defi {
-            background-color: #fff3cd;
-            border-left: 5px solid #f1c40f;
-            padding: 22px;
+        .example {
+            background-color: #f0fdf4;
+            border-left: 5px solid #22c55e;
+            padding: 18px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .exercise {
+            background-color: #f7f9fc;
+            border-left: 5px solid #6366f1;
+            padding: 20px;
             margin-top: 40px;
             border-radius: 10px;
         }
@@ -74,7 +83,7 @@
             margin-top: 45px;
             text-align: center;
             text-decoration: none;
-            color: #2a5298;
+            color: #0f766e;
             font-weight: bold;
         }
 
@@ -88,74 +97,129 @@
 
 <div class="container">
 
-    <h1>Exercices – Boucle <code>while</code> en Python</h1>
+    <h1>📘 Les conditions en Python<br><code>if / elif / else</code></h1>
 
-    <div class="exercice">
-        <h2>Exercice 1 – Bonjour plusieurs fois</h2>
-        <p>Écris un programme <strong>bonjour.py</strong> qui :</p>
-        <ul>
-            <li>crée une variable <code>compteur</code> initialisée à 0</li>
-            <li>affiche le mot <code>Bonjour</code> trois fois</li>
-            <li>utilise une boucle <code>while</code></li>
-            <li>augmente <code>compteur</code> de 1 à chaque tour</li>
-        </ul>
-    </div>
+    <h2>🧠 À quoi servent les conditions ?</h2>
+    <p>
+        Les conditions permettent à un programme de <strong>prendre des décisions</strong>.
+        Grâce à elles, le programme peut exécuter différentes instructions
+        selon une situation.
+    </p>
 
-    <div class="exercice">
-        <h2>Exercice 2 – Compter de 0 à 5</h2>
-        <p>Écris un programme <strong>compter.py</strong> qui :</p>
-        <ul>
-            <li>crée une variable <code>x = 0</code></li>
-            <li>affiche tous les nombres de 0 à 5</li>
-            <li>utilise une boucle <code>while</code></li>
-        </ul>
-    </div>
+    <p>
+        Exemple dans la vie réelle :
+    </p>
+    <ul>
+        <li>Si j’ai plus de 18 ans → je suis majeur</li>
+        <li>Sinon → je suis mineur</li>
+    </ul>
 
-    <div class="exercice">
-        <h2>Exercice 3 – Compte à rebours</h2>
-        <p>Écris un programme <strong>compte_a_rebours.py</strong> qui :</p>
-        <ul>
-            <li>crée une variable <code>x = 5</code></li>
-            <li>affiche : 5, 4, 3, 2, 1</li>
-            <li>diminue <code>x</code> de 1 à chaque tour</li>
-            <li>s’arrête lorsque <code>x</code> vaut 0</li>
-        </ul>
-    </div>
+    <h2>🔹 La condition <code>if</code></h2>
+    <p>
+        La condition <code>if</code> signifie <strong>« si »</strong>.
+        Le code à l’intérieur s’exécute seulement si la condition est vraie.
+    </p>
 
-    <div class="exercice">
-        <h2>Exercice 4 – Boucle infinie corrigée</h2>
-        <p>Voici un programme <strong>boucle_infinie.py</strong> incomplet :</p>
-
+    <div class="example">
         <pre>
-x = 0
-while x > 5:
-    print("Salut")
+age = 15
+
+if age >= 18:
+    print("Tu es majeur")
         </pre>
+    </div>
 
+    <div class="important">
+        ⚠️ Attention :
         <ul>
-            <li>explique pourquoi ce programme ne fonctionne pas correctement</li>
-            <li>corrige-le pour qu’il affiche <code>Salut</code> cinq fois</li>
+            <li>La condition se termine par <code>:</code></li>
+            <li>Le code à l’intérieur doit être <strong>indenté</strong></li>
         </ul>
     </div>
 
-    <div class="exercice">
-        <h2>Exercice 5 – Deviner un nombre (simplifié)</h2>
-        <p>Écris un programme <strong>deviner_nombre.py</strong> qui :</p>
+    <h2>🔹 La condition <code>else</code></h2>
+    <p>
+        <code>else</code> signifie <strong>« sinon »</strong>.
+        Il s’exécute lorsque la condition du <code>if</code> est fausse.
+    </p>
+
+    <div class="example">
+        <pre>
+age = 15
+
+if age >= 18:
+    print("Tu es majeur")
+else:
+    print("Tu es mineur")
+        </pre>
+    </div>
+
+    <h2>🔹 La condition <code>elif</code></h2>
+    <p>
+        <code>elif</code> signifie <strong>« sinon si »</strong>.
+        On l’utilise lorsqu’il y a plusieurs cas possibles.
+    </p>
+
+    <div class="example">
+        <pre>
+note = 14
+
+if note >= 16:
+    print("Très bien")
+elif note >= 10:
+    print("Moyen")
+else:
+    print("Insuffisant")
+        </pre>
+    </div>
+
+    <div class="important">
+        À retenir :
         <ul>
-            <li>choisit un nombre secret : <code>nombre_secret = 7</code></li>
-            <li>demande à l’utilisateur un nombre <code>proposition</code></li>
-            <li>tant que la proposition est incorrecte, redemande un nombre</li>
-            <li>affiche <code>Bravo !</code> quand le nombre est trouvé</li>
+            <li>On peut avoir plusieurs <code>elif</code></li>
+            <li>Il n’y a qu’un seul <code>if</code> et un seul <code>else</code></li>
+            <li>Une seule partie est exécutée</li>
         </ul>
     </div>
 
-    <div class="defi">
-        <h2>Exercice 6 – Petit défi</h2>
-        <p>Écris un programme <strong>stop.py</strong> qui :</p>
+    <h2>🔍 Les opérateurs de comparaison</h2>
+    <ul>
+        <li><code>==</code> : égal à</li>
+        <li><code>!=</code> : différent de</li>
+        <li><code>&gt;</code> : plus grand que</li>
+        <li><code>&lt;</code> : plus petit que</li>
+        <li><code>&gt;=</code> : plus grand ou égal</li>
+        <li><code>&lt;=</code> : plus petit ou égal</li>
+    </ul>
+
+    <h2>🧪 Exemple complet</h2>
+    <div class="example">
+        <pre>
+age = int(input("Quel est ton âge ? "))
+
+if age < 12:
+    print("Tu es un enfant")
+elif age < 18:
+    print("Tu es un adolescent")
+else:
+    print("Tu es adulte")
+        </pre>
+    </div>
+
+    <h2>🧠 À retenir absolument</h2>
+    <ul>
+        <li><code>if</code> teste une condition</li>
+        <li><code>elif</code> permet plusieurs cas</li>
+        <li><code>else</code> est le cas par défaut</li>
+        <li>L’indentation est obligatoire</li>
+    </ul>
+
+    <div class="exercise">
+        <h2>🟢 Exercices d’entraînement</h2>
         <ul>
-            <li>demande à l’utilisateur de taper <code>STOP</code></li>
-            <li>tant que l’utilisateur ne tape pas <code>STOP</code>, affiche <code>Je continue !</code></li>
-            <li>quand l’utilisateur tape <code>STOP</code>, affiche <code>Fini !</code></li>
+            <li>Afficher "Réussi" si une note est ≥ 10, sinon "Échec"</li>
+            <li>Dire si un nombre est positif, négatif ou nul</li>
+            <li>Vérifier si un mot est égal à "python"</li>
         </ul>
     </div>
 
