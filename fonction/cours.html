@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Cours – Les fonctions en Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Comprendre les fonctions en Python</h1>
+
+<div class="section">
+    <h2>I – Qu’est-ce qu’une fonction ?</h2>
+
+    <p>
+        Une <strong>fonction</strong> est un groupe d’instructions auquel on donne un nom
+        pour pouvoir les utiliser plusieurs fois.
+    </p>
+
+    <p>➡️ Au lieu de répéter du code, on le range dans une fonction.</p>
+
+    <h3>❌ Exemple sans fonction</h3>
+    <pre>
+print("Bonjour")
+print("Bonjour")
+print("Bonjour")
+    </pre>
+
+    <h3>✅ Même chose avec une fonction</h3>
+    <pre>
+def dire_bonjour():
+    print("Bonjour")
+
+dire_bonjour()
+dire_bonjour()
+dire_bonjour()
+    </pre>
+
+    <p>
+        ➡️ On définit la fonction avec <code>def</code><br>
+        ➡️ On appelle la fonction avec son nom
+    </p>
+</div>
+
+<div class="section">
+    <h2>📌 Règles importantes</h2>
+
+    <h3>1️⃣ Une fonction se définit avec <code>def</code></h3>
+    <pre>
+def ma_fonction():
+    ...
+    </pre>
+
+    <h3>2️⃣ Le code de la fonction est indenté</h3>
+    <pre>
+def test():
+    print("Dans la fonction")
+    </pre>
+
+    <h3>3️⃣ Une fonction ne s’exécute que si on l’appelle</h3>
+    <pre>
+test()
+    </pre>
+</div>
+
+<div class="section">
+    <h2>🎮 Pourquoi les fonctions sont indispensables pour créer des jeux ?</h2>
+
+    <p>Dans un jeu, on doit souvent :</p>
+    <ul>
+        <li>cliquer sur un bouton</li>
+        <li>déplacer un personnage</li>
+        <li>augmenter un score</li>
+    </ul>
+
+    <p>➡️ Chaque action est une fonction.</p>
+</div>
+
+<div class="section">
+    <h2>II – Les paramètres</h2>
+
+    <h3>1️⃣ Fonction simple (sans paramètre)</h3>
+    <pre>
+def dire_bonjour():
+    print("Bonjour")
+    </pre>
+
+    <p>Pour l’utiliser :</p>
+    <pre>
+dire_bonjour()
+    </pre>
+
+    <h3>2️⃣ Les paramètres (donner des informations à la fonction)</h3>
+    <p>
+        Un <strong>paramètre</strong> est une information que l’on donne à une fonction
+        pour qu’elle travaille avec.
+    </p>
+
+    <pre>
+def dire_bonjour(prenom):
+    print("Bonjour", prenom)
+    </pre>
+
+    <p>Appels :</p>
+    <pre>
+dire_bonjour("Alice")
+dire_bonjour("Lucas")
+    </pre>
+
+    <h3>3️⃣ Plusieurs paramètres</h3>
+    <pre>
+def addition(a, b):
+    print(a + b)
+    </pre>
+</div>
+
+<div class="section">
+    <h2>⚠️ print ou return ? (très important)</h2>
+
+    <div class="important">
+        <h3>🖨️ print</h3>
+        <ul>
+            <li>affiche un résultat</li>
+            <li>ne renvoie rien</li>
+        </ul>
+        <pre>
+def addition(a, b):
+    print(a + b)
+        </pre>
+    </div>
+
+    <div class="important">
+        <h3>↩️ return</h3>
+        <ul>
+            <li>renvoie un résultat</li>
+            <li>permet de le réutiliser plus tard</li>
+        </ul>
+        <pre>
+def addition(a, b):
+    return a + b
+        </pre>
+
+        <p>Utilisation :</p>
+        <pre>
+resultat = addition(3, 4)
+print(resultat)
+        </pre>
+    </div>
+</div>
+
+<p><a href="../index.html">⬅ Retour à l’accueil</a></p>
+
+</body>
+</html>
