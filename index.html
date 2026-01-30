@@ -3,40 +3,115 @@
 <head>
     <meta charset="utf-8">
     <title>Cours de programmation Python</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .chapitre {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #34495e;
+        }
+
+        .sous-menu {
+            margin-left: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Cours de programmation Python</h1>
-<p>Choisis un chapitre :</p>
+<div class="container">
 
-<ul>
-    <li><a href="conditions/if_elif_else.html">Conditions if / elif / else</a></li>
-        <ul>
-            <li><a href="Cours.html">Cours</a></li>
-            <li><a href="Exercices/for.html">Exercices</a></li>
-        </ul>
-    <li>Boucles
-        <ul>
-            <li><a href="boucles/while.html">Boucle while</a></li>
-            <li><a href="boucles/for.html">Boucle for</a></li>
-        </ul>
-    </li>
-    <li><a href="listes/listes.html">Listes</a></li>
+    <h1>Cours de programmation Python</h1>
+    <p>Choisis un chapitre :</p>
+
     <ul>
-            <li><a href="Cours.html">Cours</a></li>
-            <li><a href="Exercices/for.html">Exercices</a></li>
+        <li class="chapitre">
+            <a href="conditions/if_elif_else.html">Conditions if / elif / else</a>
+            <ul class="sous-menu">
+                <li><a href="Cours.html">📘 Cours</a></li>
+                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+            </ul>
+        </li>
+
+        <li class="chapitre">
+            Boucles
+            <ul class="sous-menu">
+                <li><a href="boucles/while.html">Boucle while</a></li>
+                <li><a href="boucles/for.html">Boucle for</a></li>
+            </ul>
+        </li>
+
+        <li class="chapitre">
+            <a href="listes/listes.html">Listes</a>
+            <ul class="sous-menu">
+                <li><a href="Cours.html">📘 Cours</a></li>
+                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+            </ul>
+        </li>
+
+        <li class="chapitre">
+            <a href="dictionnaires/dictionnaires.html">Dictionnaires</a>
+            <ul class="sous-menu">
+                <li><a href="Cours.html">📘 Cours</a></li>
+                <li><a href="Exercices/for.html">✏️ Exercices</a></li>
+            </ul>
+        </li>
+
+        <li class="chapitre">
+            <a href="fonction/fonction.html">Fonctions</a>
+            <ul class="sous-menu">
+                <li><a href="fonction/cours.html">📘 Cours</a></li>
+                <li><a href="fonction/exercices.html">✏️ Exercices</a></li>
+            </ul>
+        </li>
     </ul>
-    <li><a href="dictionnaires/dictionnaires.html">Dictionnaires</a></li>
-    <ul>
-            <li><a href="Cours.html">Cours</a></li>
-            <li><a href="Exercices/for.html">Exercices</a></li>
-    </ul>
-    <li><a href="fonction/fonction.html">Fonction</a></li>
-    <ul>
-            <li><a href="fonction/cours.html">Cours</a></li>
-            <li><a href="fonction/exercices.html">Exercices</a></li>
-    </ul>
-</ul>
+
+</div>
 
 </body>
 </html>
