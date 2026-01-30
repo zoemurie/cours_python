@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Cours – Dictionnaires en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 20px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Cours – Les dictionnaires en Python</h1>
+
+    <h2>Qu’est-ce qu’un dictionnaire ?</h2>
+    <p>
+        Un dictionnaire est une variable qui permet d’associer une information à une autre.  
+        Les données sont stockées sous la forme <code>clé → valeur</code>.
+    </p>
+
+    <h2>Créer un dictionnaire</h2>
+    <pre>eleve = {"prenom": "Alice", "age": 12, "note": 15}</pre>
+    <div class="note">
+        Ici :<br>
+        <ul>
+            <li><code>eleve</code> est le dictionnaire</li>
+            <li><code>"prenom", "age", "note"</code> sont les clés</li>
+            <li><code>"Alice", 12, 15</code> sont les valeurs</li>
+        </ul>
+    </div>
+
+    <h2>Accéder à une valeur</h2>
+    <p>On utilise la clé :</p>
+    <pre>
+print(eleve["prenom"])  # affiche Alice
+print(eleve["age"])     # affiche 12
+    </pre>
+    <div class="note">
+        La clé doit exister, sinon le programme plante.
+    </div>
+
+    <h2>Ajouter ou modifier une information</h2>
+    <p>Pour ajouter une information :</p>
+    <pre>eleve["classe"] = "5A"</pre>
+    <p>Pour modifier une valeur :</p>
+    <pre>eleve["age"] = 13</pre>
+
+    <h2>Supprimer une information</h2>
+    <pre>del eleve["note"]</pre>
+
+    <h2>Parcourir un dictionnaire</h2>
+    <p>Parcourir uniquement les clés :</p>
+    <pre>
+for cle in eleve:
+    print(cle)
+    </pre>
+    <p>Parcourir clés et valeurs :</p>
+    <pre>
+for cle, valeur in eleve.items():
+    print(cle, ":", valeur)
+    </pre>
+
+    <h2>Taille d’un dictionnaire</h2>
+    <pre>print(len(eleve))</pre>
+    <p>Affiche le nombre d’informations stockées dans le dictionnaire.</p>
+
+    <h2>À retenir</h2>
+    <ul>
+        <li>Un dictionnaire associe une clé à une valeur.</li>
+        <li>On accède aux données avec les clés.</li>
+        <li>Les clés sont souvent des mots.</li>
+        <li>Les dictionnaires sont très utiles pour organiser des informations.</li>
+    </ul>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Exercices – Dictionnaires en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 20px;
+        }
+
+        .exercice {
+            background-color: #f4f8ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Fiche d’exercices – Les dictionnaires en Python</h1>
+
+    <div class="exercice">
+        <h2>Exercice 1 – Créer un dictionnaire</h2>
+        <p>Créer un dictionnaire <code>animal</code> contenant :</p>
+        <ul>
+            <li><code>"nom"</code> : <code>"chat"</code></li>
+            <li><code>"age"</code> : 3</li>
+        </ul>
+        <p>Puis afficher le dictionnaire.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 2 – Lire une valeur</h2>
+        <p>Avec le dictionnaire :</p>
+        <pre>personne = {"prenom": "Lucas", "age": 14}</pre>
+        <p>Afficher :</p>
+        <ul>
+            <li>le prénom</li>
+            <li>l’âge</li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 3 – Ajouter des informations</h2>
+        <p>Créer un dictionnaire vide <code>eleve</code> et ajouter :</p>
+        <ul>
+            <li>le prénom</li>
+            <li>la classe</li>
+            <li>la note</li>
+        </ul>
+        <p>Puis afficher le dictionnaire.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 4 – Modifier une valeur</h2>
+        <p>Créer :</p>
+        <pre>score = {"joueur": "Alex", "points": 10}</pre>
+        <p>Modifier les points pour qu’ils valent 15.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 5 – Parcourir un dictionnaire</h2>
+        <p>Créer un dictionnaire de matières et de notes :</p>
+        <pre>notes = {"maths": 14, "francais": 12, "anglais": 16}</pre>
+        <p>Utiliser une boucle <code>for</code> pour afficher :</p>
+        <pre>
+maths : 14
+francais : 12
+anglais : 16
+        </pre>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 6 – Compter les éléments</h2>
+        <p>Créer un dictionnaire avec plusieurs informations et afficher le nombre d’éléments qu’il contient.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 7 – Conditions et dictionnaires</h2>
+        <p>Créer un dictionnaire <code>eleve</code> avec une note.</p>
+        <p>Si la note est :</p>
+        <ul>
+            <li>≥ 10 → afficher "Réussi"</li>
+            <li>Sinon → afficher "Échec"</li>
+        </ul>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 8 – Mini défi</h2>
+        <p>Créer un dictionnaire <code>contact</code> contenant :</p>
+        <ul>
+            <li>nom</li>
+            <li>telephone</li>
+            <li>email</li>
+        </ul>
+        <p>Afficher toutes les informations avec une boucle.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Exercice 9 – Dictionnaire + saisie utilisateur</h2>
+        <p>Créer un dictionnaire vide. Demander à l’utilisateur :</p>
+        <ul>
+            <li>son prénom</li>
+            <li>son âge</li>
+        </ul>
+        <p>Stocker ces informations dans le dictionnaire puis l’afficher.</p>
+    </div>
+
+    <div class="exercice">
+        <h2>Projet de fin – Répertoire d’élèves</h2>
+        <p><strong>Objectif :</strong> Créer un programme permettant de gérer un répertoire d’élèves avec des dictionnaires, un menu interactif, des boucles et des conditions.</p>
+
+        <h3>Structure attendue</h3>
+        <p>Dictionnaire principal <code>eleves</code> où chaque élève est identifié par son prénom, et ses informations sont stockées dans un dictionnaire :</p>
+        <pre>
+eleves = {
+    "Alice": {"age": 12, "classe": "5A", "moyenne": 14},
+    "Lucas": {"age": 13, "classe": "5B", "moyenne": 11}
+}
+        </pre>
+
+        <h3>Consignes générales</h3>
+        <ul>
+            <li>Utiliser des dictionnaires imbriqués</li>
+            <li>Utiliser <code>while</code>, <code>for</code>, <code>if / elif / else</code></li>
+            <li>Le programme fonctionne tant que l’utilisateur ne choisit pas de quitter</li>
+        </ul>
+
+        <h3>Étapes du projet</h3>
+
+        <h4>1 – Menu principal</h4>
+        <pre>
+1 - Ajouter un élève
+2 - Afficher tous les élèves
+3 - Afficher les informations d'un élève
+4 - Modifier la moyenne d'un élève
+5 - Supprimer un élève
+6 - Quitter
+        </pre>
+
+        <h4>2 – Ajouter un élève</h4>
+        <ul>
+            <li>Demander le prénom</li>
+            <li>Demander l’âge</li>
+            <li>Demander la classe</li>
+            <li>Demander la moyenne</li>
+            <li>Ajouter l’élève dans le dictionnaire</li>
+        </ul>
+
+        <h4>3 – Afficher tous les élèves</h4>
+        <p>Afficher la liste des prénoms. Si aucun élève n’est enregistré, afficher "Aucun élève".</p>
+
+        <h4>4 – Informations d’un élève</h4>
+        <p>Demander un prénom. Si l’élève existe, afficher toutes ses informations. Sinon, afficher "Élève introuvable".</p>
+
+        <h4>5 – Modifier la moyenne</h4>
+        <p>Demander un prénom. Si l’élève existe, demander la nouvelle moyenne et modifier la valeur. Sinon, afficher "Élève introuvable".</p>
+
+        <h4>6 – Supprimer un élève</h4>
+        <p>Demander un prénom. Supprimer l’élève s’il existe. Sinon, afficher "Élève introuvable".</p>
+
+        <h4>7 – Quitter</h4>
+        <p>Afficher "Au revoir" et arrêter le programme.</p>
+
+        <h3>Bonus (facultatif)</h3>
+        <ul>
+            <li>Afficher la moyenne générale de la classe</li>
+            <li>Afficher les élèves avec une moyenne ≥ 10</li>
+            <li>Compter le nombre d’élèves</li>
+            <li>Ajouter une option sauvegarde / chargement</li>
+        </ul>
+
+        <h3>Conseils pour réussir</h3>
+        <ul>
+            <li>Commencer par faire fonctionner le menu</li>
+            <li>Ajouter les options une par une</li>
+            <li>Tester souvent</li>
+            <li>Bien respecter l’indentation</li>
+        </ul>
+    </div>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>
