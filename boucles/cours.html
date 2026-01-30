@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Cours – Les boucles while et for en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 20px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eef2f7;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Cours – Les boucles while et for en Python</h1>
+
+    <h2>La boucle <code>while</code></h2>
+
+    <p>
+        La boucle <code>while</code> permet de répéter des instructions
+        tant qu’une condition est vraie.
+    </p>
+
+    <ul>
+        <li>On ne sait pas toujours à l’avance combien de fois la boucle va se répéter</li>
+        <li>La condition est testée à chaque tour</li>
+        <li>Si la condition devient fausse, la boucle s’arrête</li>
+    </ul>
+
+    <div class="note">
+        Il est obligatoire de faire changer la condition dans la boucle,
+        sinon elle ne s’arrête jamais.
+    </div>
+
+    <h3>Exemple</h3>
+    <pre>
+x = 0
+while x < 3:
+    print("Bonjour")
+    x = x + 1
+    </pre>
+
+    <h3>Explication</h3>
+    <ul>
+        <li><code>x</code> commence à 0</li>
+        <li>Tant que <code>x &lt; 3</code> est vrai, le message s’affiche</li>
+        <li><code>x</code> augmente de 1 à chaque tour</li>
+        <li>Quand <code>x</code> vaut 3, la boucle s’arrête</li>
+    </ul>
+
+    <h2>La boucle <code>for</code></h2>
+
+    <p>
+        La boucle <code>for</code> sert à répéter des instructions
+        un nombre précis de fois.
+    </p>
+
+    <ul>
+        <li>On sait à l’avance combien de fois la boucle va tourner</li>
+        <li>Le compteur avance automatiquement</li>
+        <li>On utilise souvent la fonction <code>range()</code></li>
+    </ul>
+
+    <h2>Qu’est-ce qu’un index ?</h2>
+
+    <p>
+        Un index est un numéro de position.
+        Il permet de savoir où se trouve un élément.
+    </p>
+
+    <pre>fruits = ["pomme", "banane", "orange"]</pre>
+
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Valeur</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>pomme</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>banane</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>orange</td>
+        </tr>
+    </table>
+
+    <div class="note">
+        Les index commencent toujours à 0.
+    </div>
+
+    <h3>Exemple</h3>
+    <pre>
+print(fruits[0])  # affiche pomme
+print(fruits[2])  # affiche orange
+    </pre>
+
+    <h2>Qu’est-ce que <code>range()</code> ?</h2>
+
+    <p>
+        La fonction <code>range()</code> permet de créer une suite de nombres.
+    </p>
+
+    <pre>range(3)</pre>
+
+    <p>Cette instruction correspond aux valeurs :</p>
+    <pre>0, 1, 2</pre>
+
+    <div class="note">
+        Le dernier nombre n’est jamais inclus.
+    </div>
+
+    <h2>Utiliser <code>range()</code> avec <code>for</code></h2>
+
+    <pre>
+for i in range(3):
+    print("Bonjour")
+    </pre>
+
+    <h3>Explication</h3>
+    <ul>
+        <li><code>range(3)</code> produit : 0, 1, 2</li>
+        <li><code>i</code> prend chaque valeur</li>
+        <li>La boucle s’exécute 3 fois</li>
+    </ul>
+
+    <h2>Le rôle de la variable <code>i</code></h2>
+
+    <pre>
+for i in range(5):
+    print(i)
+    </pre>
+
+    <p>Résultat :</p>
+    <pre>
+0
+1
+2
+3
+4
+    </pre>
+
+    <p>
+        La variable <code>i</code> est un index.
+        Elle indique le numéro du tour de boucle.
+    </p>
+
+    <h2>Lien entre <code>for</code>, <code>range()</code> et les listes</h2>
+
+    <pre>
+notes = [12, 15, 9]
+
+for i in range(len(notes)):
+    print(notes[i])
+    </pre>
+
+    <p>
+        Ici, <code>i</code> sert d’index pour accéder aux éléments de la liste.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <table>
+        <tr>
+            <th>Boucle</th>
+            <th>Utilisation</th>
+        </tr>
+        <tr>
+            <td>while</td>
+            <td>Tant qu’une condition est vraie</td>
+        </tr>
+        <tr>
+            <td>for</td>
+            <td>Un nombre précis de répétitions</td>
+        </tr>
+    </table>
+
+    <h2>À retenir absolument</h2>
+    <ul>
+        <li>Un index est un numéro de position</li>
+        <li>Les index commencent à 0</li>
+        <li><code>range(n)</code> va de 0 à n-1</li>
+        <li><code>for</code> est utilisé quand on connaît le nombre de répétitions</li>
+        <li><code>while</code> est utilisé quand on ne le connaît pas</li>
+    </ul>
+
+    <a class="back" href="../index.html">Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>
