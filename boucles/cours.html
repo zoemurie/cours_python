@@ -6,8 +6,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             margin: 0;
             padding: 0;
             color: #333;
@@ -15,66 +15,76 @@
 
         .container {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 50px auto;
             background-color: #ffffff;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #2a5298;
             margin-bottom: 40px;
         }
 
         h2 {
-            color: #34495e;
-            margin-top: 35px;
+            color: #1e3c72;
+            margin-top: 40px;
         }
 
         h3 {
-            color: #2c3e50;
+            color: #2a5298;
             margin-top: 25px;
         }
 
+        p {
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 25px;
+        }
+
         pre {
-            background-color: #eef1f4;
-            padding: 12px;
-            border-radius: 6px;
+            background-color: #eef2f7;
+            padding: 14px;
+            border-radius: 10px;
             overflow-x: auto;
         }
 
         code {
-            background-color: #eef1f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        ul {
-            margin-left: 20px;
+            background-color: #eef2f7;
+            padding: 3px 7px;
+            border-radius: 5px;
         }
 
         .important {
-            background-color: #fdf6e3;
-            border-left: 4px solid #f1c40f;
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
             padding: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
+            border-radius: 10px;
         }
 
         .resume {
             background-color: #ecf4ff;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            padding: 18px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .resume ul {
+            margin-top: 10px;
         }
 
         .back {
             display: block;
-            margin-top: 40px;
+            margin-top: 45px;
             text-align: center;
             text-decoration: none;
-            color: #3498db;
+            color: #2a5298;
             font-weight: bold;
         }
 
@@ -100,11 +110,11 @@
     <ul>
         <li>On ne sait pas toujours combien de fois la boucle va se répéter</li>
         <li>La condition est testée à chaque tour</li>
-        <li>La boucle s’arrête quand la condition devient fausse</li>
+        <li>La boucle s’arrête lorsque la condition devient fausse</li>
     </ul>
 
     <div class="important">
-        Il est obligatoire de faire changer la condition,
+        Il est indispensable de faire évoluer la condition,
         sinon la boucle ne s’arrête jamais.
     </div>
 
@@ -118,21 +128,22 @@ while x < 3:
     </pre>
 
     <p>
-        Ici, le message est affiché tant que <code>x</code> est inférieur à 3.
-        À chaque tour, <code>x</code> augmente, ce qui permet à la boucle de s’arrêter.
+        À chaque tour, la valeur de <code>x</code> augmente.
+        Lorsque <code>x</code> atteint 3, la condition devient fausse
+        et la boucle s’arrête.
     </p>
 
     <h2>La boucle for</h2>
 
     <p>
-        La boucle <code>for</code> permet de répéter des instructions
-        quand on sait à l’avance combien de fois cela doit se produire,
-        ou quand on veut parcourir des éléments.
+        La boucle <code>for</code> est utilisée lorsque l’on souhaite
+        répéter une action un nombre précis de fois
+        ou parcourir une série d’éléments.
     </p>
 
     <ul>
         <li>La répétition est automatique</li>
-        <li>On n’a pas besoin de modifier une condition à la main</li>
+        <li>Aucune condition à modifier manuellement</li>
     </ul>
 
     <h3>Exemple simple</h3>
@@ -143,15 +154,15 @@ for i in range(3):
     </pre>
 
     <p>
-        Ce code affiche <strong>Bonjour</strong> trois fois.
+        Ce programme affiche le mot <strong>Bonjour</strong> trois fois.
     </p>
 
     <h2>Comprendre la fonction range()</h2>
 
     <p>
-        La fonction <code>range()</code> permet de créer une suite de nombres.
-        Elle est très souvent utilisée avec la boucle <code>for</code>
-        pour répéter une action un certain nombre de fois.
+        La fonction <code>range()</code> permet de générer une suite de nombres.
+        Elle est très utilisée avec la boucle <code>for</code>
+        pour contrôler le nombre de répétitions.
     </p>
 
     <h3>range(nombre)</h3>
@@ -161,7 +172,7 @@ range(3)
     </pre>
 
     <p>
-        Cela correspond aux nombres suivants :
+        Cette instruction produit les nombres suivants :
     </p>
 
     <pre>
@@ -173,7 +184,7 @@ range(3)
         <code>range(3)</code> s’arrête avant 3.
     </div>
 
-    <h3>Utilisation avec une boucle for</h3>
+    <h3>Utilisation avec for</h3>
 
     <pre>
 for nombre in range(5):
@@ -181,7 +192,8 @@ for nombre in range(5):
     </pre>
 
     <p>
-        La variable reçoit successivement chaque nombre généré par <code>range()</code>.
+        À chaque tour de boucle, la variable reçoit
+        le nombre suivant généré par <code>range()</code>.
     </p>
 
     <h3>range(début, fin)</h3>
@@ -203,13 +215,13 @@ for nombre in range(0, 10, 2):
     </pre>
 
     <p>
-        Ici, la boucle avance de 2 en 2.
+        Ici, la boucle avance de deux en deux.
     </p>
 
     <h2>La boucle for sans range()</h2>
 
     <p>
-        La boucle <code>for</code> n’est pas limitée à <code>range()</code>.
+        La boucle <code>for</code> ne sert pas uniquement à compter.
         Elle peut aussi parcourir directement des éléments.
     </p>
 
@@ -223,7 +235,7 @@ for lettre in mot:
     </pre>
 
     <p>
-        La boucle affiche chaque lettre du mot une par une.
+        Chaque lettre du mot est affichée une par une.
     </p>
 
     <h3>Parcourir une liste</h3>
@@ -236,16 +248,16 @@ for fruit in fruits:
     </pre>
 
     <p>
-        La boucle affiche chaque élément de la liste.
+        Chaque élément de la liste est affiché successivement.
     </p>
 
     <div class="resume">
-        <strong>En résumé :</strong>
+        <strong>À retenir :</strong>
         <ul>
             <li><code>while</code> répète tant qu’une condition est vraie</li>
-            <li><code>for</code> répète automatiquement</li>
+            <li><code>for</code> automatise les répétitions</li>
             <li><code>range()</code> génère des nombres</li>
-            <li><code>for</code> peut parcourir des nombres, des mots ou des listes</li>
+            <li><code>for</code> peut parcourir nombres, mots ou listes</li>
         </ul>
     </div>
 
