@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Cours Python – Les conditions if / elif / else</title>
+    <title>Cours Python – Conditions if / elif / else</title>
 
     <style>
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #11998e, #38ef7d);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             margin: 0;
             padding: 0;
             color: #333;
@@ -24,12 +24,12 @@
 
         h1 {
             text-align: center;
-            color: #11998e;
+            color: #2a5298;
             margin-bottom: 40px;
         }
 
         h2 {
-            color: #0f766e;
+            color: #1e3c72;
             margin-top: 35px;
         }
 
@@ -42,48 +42,40 @@
         }
 
         code {
-            background-color: #eef7f6;
+            background-color: #eef2ff;
             padding: 3px 7px;
             border-radius: 5px;
         }
 
         pre {
-            background-color: #eef7f6;
+            background-color: #eef2ff;
             padding: 16px;
             border-radius: 10px;
             overflow-x: auto;
         }
 
-        .important {
-            background-color: #e0f2fe;
-            border-left: 5px solid #0ea5e9;
-            padding: 18px;
-            margin: 30px 0;
-            border-radius: 10px;
-        }
-
         .example {
-            background-color: #f0fdf4;
-            border-left: 5px solid #22c55e;
+            background-color: #f4f8ff;
+            border-left: 5px solid #2a5298;
             padding: 18px;
-            margin: 30px 0;
+            margin: 25px 0;
             border-radius: 10px;
         }
 
-        .exercise {
-            background-color: #f7f9fc;
-            border-left: 5px solid #6366f1;
-            padding: 20px;
-            margin-top: 40px;
+        .important {
+            background-color: #fff7ed;
+            border-left: 5px solid #f59e0b;
+            padding: 18px;
+            margin: 30px 0;
             border-radius: 10px;
         }
 
         .back {
             display: block;
-            margin-top: 45px;
+            margin-top: 40px;
             text-align: center;
             text-decoration: none;
-            color: #0f766e;
+            color: #2a5298;
             font-weight: bold;
         }
 
@@ -97,50 +89,72 @@
 
 <div class="container">
 
-    <h1>📘 Les conditions en Python<br><code>if / elif / else</code></h1>
+    <h1>Les conditions en Python<br>if / elif / else</h1>
 
-    <h2>🧠 À quoi servent les conditions ?</h2>
+    <h2>1. Comparer des valeurs</h2>
     <p>
-        Les conditions permettent à un programme de <strong>prendre des décisions</strong>.
-        Grâce à elles, le programme peut exécuter différentes instructions
-        selon une situation.
+        Avant d’utiliser des conditions, il faut savoir <strong>comparer des valeurs</strong>.
+        Une comparaison donne toujours un résultat :
+        <strong>True</strong> (vrai) ou <strong>False</strong> (faux).
     </p>
 
-    <p>
-        Exemple dans la vie réelle :
-    </p>
+    <h2>2. Les opérateurs de comparaison</h2>
     <ul>
-        <li>Si j’ai plus de 18 ans → je suis majeur</li>
-        <li>Sinon → je suis mineur</li>
+        <li><code>==</code> : égal à</li>
+        <li><code>!=</code> : différent de</li>
+        <li><code>&gt;</code> : plus grand que</li>
+        <li><code>&lt;</code> : plus petit que</li>
+        <li><code>&gt;=</code> : plus grand ou égal à</li>
+        <li><code>&lt;=</code> : plus petit ou égal à</li>
     </ul>
 
-    <h2>🔹 La condition <code>if</code></h2>
+    <div class="example">
+        <pre>
+print(5 > 3)      # True
+print(10 == 8)   # False
+print(4 <= 4)    # True
+        </pre>
+    </div>
+
+    <h2>3. À quoi sert une condition ?</h2>
     <p>
-        La condition <code>if</code> signifie <strong>« si »</strong>.
+        Une condition permet à un programme de <strong>prendre une décision</strong>.
+        Selon le résultat de la comparaison, le programme n’exécute pas le même code.
+    </p>
+
+    <p>Exemple simple dans la vie courante :</p>
+    <ul>
+        <li>Si le feu est vert → je passe</li>
+        <li>Sinon → je m’arrête</li>
+    </ul>
+
+    <h2>4. La condition <code>if</code></h2>
+    <p>
+        <code>if</code> signifie <strong>« si »</strong>.
         Le code à l’intérieur s’exécute seulement si la condition est vraie.
     </p>
 
     <div class="example">
         <pre>
-age = 15
+age = 20
 
 if age >= 18:
-    print("Tu es majeur")
+    print("Majeur")
         </pre>
     </div>
 
     <div class="important">
-        ⚠️ Attention :
+        À respecter absolument :
         <ul>
             <li>La condition se termine par <code>:</code></li>
-            <li>Le code à l’intérieur doit être <strong>indenté</strong></li>
+            <li>Le code à l’intérieur est indenté</li>
         </ul>
     </div>
 
-    <h2>🔹 La condition <code>else</code></h2>
+    <h2>5. La condition <code>else</code></h2>
     <p>
         <code>else</code> signifie <strong>« sinon »</strong>.
-        Il s’exécute lorsque la condition du <code>if</code> est fausse.
+        Il s’exécute si la condition du <code>if</code> est fausse.
     </p>
 
     <div class="example">
@@ -148,13 +162,13 @@ if age >= 18:
 age = 15
 
 if age >= 18:
-    print("Tu es majeur")
+    print("Majeur")
 else:
-    print("Tu es mineur")
+    print("Mineur")
         </pre>
     </div>
 
-    <h2>🔹 La condition <code>elif</code></h2>
+    <h2>6. La condition <code>elif</code></h2>
     <p>
         <code>elif</code> signifie <strong>« sinon si »</strong>.
         On l’utilise lorsqu’il y a plusieurs cas possibles.
@@ -162,7 +176,7 @@ else:
 
     <div class="example">
         <pre>
-note = 14
+note = 12
 
 if note >= 16:
     print("Très bien")
@@ -176,52 +190,33 @@ else:
     <div class="important">
         À retenir :
         <ul>
-            <li>On peut avoir plusieurs <code>elif</code></li>
-            <li>Il n’y a qu’un seul <code>if</code> et un seul <code>else</code></li>
+            <li>Un seul <code>if</code></li>
+            <li>Autant de <code>elif</code> que nécessaire</li>
+            <li>Un seul <code>else</code></li>
             <li>Une seule partie est exécutée</li>
         </ul>
     </div>
 
-    <h2>🔍 Les opérateurs de comparaison</h2>
-    <ul>
-        <li><code>==</code> : égal à</li>
-        <li><code>!=</code> : différent de</li>
-        <li><code>&gt;</code> : plus grand que</li>
-        <li><code>&lt;</code> : plus petit que</li>
-        <li><code>&gt;=</code> : plus grand ou égal</li>
-        <li><code>&lt;=</code> : plus petit ou égal</li>
-    </ul>
-
-    <h2>🧪 Exemple complet</h2>
+    <h2>7. Exemple très simple avec un mot</h2>
     <div class="example">
         <pre>
-age = int(input("Quel est ton âge ? "))
+mot = "python"
 
-if age < 12:
-    print("Tu es un enfant")
-elif age < 18:
-    print("Tu es un adolescent")
+if mot == "python":
+    print("Mot correct")
 else:
-    print("Tu es adulte")
+    print("Mot incorrect")
         </pre>
     </div>
 
-    <h2>🧠 À retenir absolument</h2>
+    <h2>8. À retenir absolument</h2>
     <ul>
+        <li>Les comparaisons donnent <code>True</code> ou <code>False</code></li>
         <li><code>if</code> teste une condition</li>
-        <li><code>elif</code> permet plusieurs cas</li>
-        <li><code>else</code> est le cas par défaut</li>
+        <li><code>elif</code> ajoute des cas</li>
+        <li><code>else</code> est le dernier cas</li>
         <li>L’indentation est obligatoire</li>
     </ul>
-
-    <div class="exercise">
-        <h2>🟢 Exercices d’entraînement</h2>
-        <ul>
-            <li>Afficher "Réussi" si une note est ≥ 10, sinon "Échec"</li>
-            <li>Dire si un nombre est positif, négatif ou nul</li>
-            <li>Vérifier si un mot est égal à "python"</li>
-        </ul>
-    </div>
 
     <a class="back" href="../index.html">Retour à l’accueil</a>
 
