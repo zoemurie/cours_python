@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Cours Python – Turtle</title>
+    <meta charset="utf-8">
+    <title>Cours – Le module Turtle en Python</title>
 
     <style>
         body {
@@ -30,49 +30,109 @@
 
         h2 {
             color: #1e3c72;
-            margin-top: 35px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
         }
 
         p {
             line-height: 1.7;
         }
 
-        ul {
+        ul, ol {
             margin-left: 25px;
-        }
-
-        code {
-            background-color: #eef2ff;
-            padding: 3px 7px;
-            border-radius: 5px;
+            line-height: 1.8;
         }
 
         pre {
-            background-color: #eef2ff;
-            padding: 16px;
+            background-color: #eef2f7;
+            padding: 14px;
             border-radius: 10px;
             overflow-x: auto;
+            font-family: "Courier New", monospace;
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 10px;
         }
 
         .example {
-            background-color: #f4f8ff;
-            border-left: 5px solid #2a5298;
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
             padding: 18px;
             margin: 25px 0;
             border-radius: 10px;
         }
 
-        .important {
-            background-color: #fff7ed;
-            border-left: 5px solid #f59e0b;
+        .info {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
             padding: 18px;
-            margin: 30px 0;
+            margin: 25px 0;
             border-radius: 10px;
+        }
+
+        .resume {
+            background-color: #ecf4ff;
+            border-left: 5px solid #3498db;
+            padding: 18px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .resume ul {
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #2a5298;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
         }
 
         .back {
             display: block;
-            margin-top: 40px;
+            margin-top: 45px;
             text-align: center;
             text-decoration: none;
             color: #2a5298;
@@ -88,155 +148,322 @@
 <body>
 
 <div class="container">
+    <h1>Le Module Turtle en Python</h1>
+    <p class="subtitle">Dessiner avec du code !</p>
 
-    <h1>Le module Turtle en Python</h1>
+    <h2>Introduction</h2>
+    <p>Le module <code>turtle</code> est un outil magique qui permet de dessiner en programmant ! Imagine une petite tortue qui se déplace sur l'écran avec un crayon. Tu lui donnes des instructions et elle dessine ce que tu veux : lignes, formes géométriques, spirales, et bien plus encore.</p>
 
-    <h2>1. À quoi sert Turtle ?</h2>
-    <p>
-        Le module <strong>Turtle</strong> permet de <strong>dessiner avec Python</strong>.
-        On contrôle une petite tortue qui se déplace à l’écran et trace des lignes.
-    </p>
+    <p>C'est un excellent moyen d'apprendre la programmation tout en s'amusant !</p>
 
-    <p>
-        Turtle est très utile pour :
-    </p>
-    <ul>
-        <li>apprendre la programmation de manière visuelle</li>
-        <li>comprendre les boucles et les angles</li>
-        <li>dessiner des formes géométriques</li>
-    </ul>
+    <h2>1. Démarrer avec Turtle</h2>
+    
+    <h3>Importer le module</h3>
+    <p>Pour utiliser turtle, il faut d'abord l'importer dans ton programme :</p>
+    
+    <pre>import turtle</pre>
 
-    <h2>2. Importer Turtle</h2>
-    <p>
-        Avant d’utiliser Turtle, il faut importer le module.
-    </p>
-
-    <div class="example">
-        <pre>
-import turtle
-        </pre>
+    <div class="info">
+        <strong>💡 Astuce :</strong> Tu peux aussi écrire <code>from turtle import *</code> pour importer toutes les fonctions directement, mais c'est moins recommandé pour les gros projets.
     </div>
 
-    <h2>3. Créer la tortue</h2>
-    <p>
-        On crée ensuite une tortue que l’on va contrôler.
-    </p>
+    <h3>Créer ta tortue</h3>
+    <pre>import turtle
 
+# Créer une tortue
+ma_tortue = turtle.Turtle()
+
+# Garder la fenêtre ouverte
+turtle.done()</pre>
+
+    <p>La commande <code>turtle.done()</code> est importante : elle garde la fenêtre ouverte jusqu'à ce que tu la fermes manuellement.</p>
+
+    <h2>2. Déplacements de Base</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Commande</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>forward(distance)</code></td>
+                <td>Avancer d'une certaine distance</td>
+                <td><code>ma_tortue.forward(100)</code></td>
+            </tr>
+            <tr>
+                <td><code>backward(distance)</code></td>
+                <td>Reculer d'une certaine distance</td>
+                <td><code>ma_tortue.backward(50)</code></td>
+            </tr>
+            <tr>
+                <td><code>right(angle)</code></td>
+                <td>Tourner à droite (en degrés)</td>
+                <td><code>ma_tortue.right(90)</code></td>
+            </tr>
+            <tr>
+                <td><code>left(angle)</code></td>
+                <td>Tourner à gauche (en degrés)</td>
+                <td><code>ma_tortue.left(45)</code></td>
+            </tr>
+            <tr>
+                <td><code>goto(x, y)</code></td>
+                <td>Aller à une position précise</td>
+                <td><code>ma_tortue.goto(100, 50)</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Exemple : Dessiner un carré</h3>
     <div class="example">
-        <pre>
-t = turtle.Turtle()
-        </pre>
-    </div>
+        <pre>import turtle
 
-    <h2>4. Avancer et tourner</h2>
-    <p>
-        La tortue peut avancer et tourner.
-    </p>
+ma_tortue = turtle.Turtle()
 
-    <ul>
-        <li><code>forward(distance)</code> : avance</li>
-        <li><code>right(angle)</code> : tourne à droite</li>
-        <li><code>left(angle)</code> : tourne à gauche</li>
-    </ul>
-
-    <div class="example">
-        <pre>
-t.forward(100)
-t.right(90)
-t.forward(100)
-        </pre>
-    </div>
-
-    <h2>5. Dessiner un carré</h2>
-    <p>
-        En combinant déplacements et rotations, on peut dessiner des formes.
-    </p>
-
-    <div class="example">
-        <pre>
-import turtle
-
-t = turtle.Turtle()
-
-t.forward(100)
-t.right(90)
-t.forward(100)
-t.right(90)
-t.forward(100)
-t.right(90)
-t.forward(100)
-        </pre>
-    </div>
-
-    <h2>6. Utiliser une boucle</h2>
-    <p>
-        Pour éviter de répéter le même code, on utilise une boucle <code>for</code>.
-    </p>
-
-    <div class="example">
-        <pre>
-import turtle
-
-t = turtle.Turtle()
-
+# Dessiner un carré
 for i in range(4):
-    t.forward(100)
-    t.right(90)
-        </pre>
+    ma_tortue.forward(100)
+    ma_tortue.right(90)
+
+turtle.done()</pre>
     </div>
 
-    <h2>7. Changer la vitesse et la couleur</h2>
+    <h2>3. Contrôler le Crayon</h2>
+
+    <h3>Lever et baisser le crayon</h3>
     <ul>
-        <li><code>speed()</code> : change la vitesse</li>
-        <li><code>color()</code> : change la couleur</li>
+        <li><code>penup()</code> ou <code>up()</code> : Lever le crayon (ne dessine plus)</li>
+        <li><code>pendown()</code> ou <code>down()</code> : Baisser le crayon (dessine à nouveau)</li>
     </ul>
 
     <div class="example">
-        <pre>
-t.speed(3)
-t.color("blue")
-        </pre>
+        <pre>ma_tortue.forward(50)
+ma_tortue.penup()      # Lever le crayon
+ma_tortue.forward(50)  # Se déplacer sans dessiner
+ma_tortue.pendown()    # Baisser le crayon
+ma_tortue.forward(50)  # Dessiner à nouveau</pre>
     </div>
 
-    <h2>8. Lever et baisser le stylo</h2>
-    <p>
-        La tortue peut se déplacer sans dessiner.
-    </p>
+    <h3>Changer la couleur et l'épaisseur</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Commande</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>pencolor(couleur)</code></td>
+                <td>Changer la couleur du trait</td>
+                <td><code>ma_tortue.pencolor("red")</code></td>
+            </tr>
+            <tr>
+                <td><code>pensize(largeur)</code></td>
+                <td>Changer l'épaisseur du trait</td>
+                <td><code>ma_tortue.pensize(5)</code></td>
+            </tr>
+            <tr>
+                <td><code>fillcolor(couleur)</code></td>
+                <td>Couleur de remplissage</td>
+                <td><code>ma_tortue.fillcolor("blue")</code></td>
+            </tr>
+        </tbody>
+    </table>
 
-    <ul>
-        <li><code>penup()</code> : lève le stylo</li>
-        <li><code>pendown()</code> : baisse le stylo</li>
-    </ul>
+    <div class="info">
+        <strong>🎨 Couleurs disponibles :</strong> "red", "blue", "green", "yellow", "orange", "purple", "pink", "brown", "black", "white", etc. Tu peux aussi utiliser des codes hexadécimaux comme "#FF5733".
+    </div>
+
+    <h2>4. Remplir des Formes</h2>
+    
+    <p>Pour colorier l'intérieur d'une forme, utilise <code>begin_fill()</code> et <code>end_fill()</code> :</p>
 
     <div class="example">
-        <pre>
-t.penup()
-t.forward(50)
-t.pendown()
-t.forward(100)
-        </pre>
+        <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.fillcolor("yellow")
+
+# Commencer le remplissage
+ma_tortue.begin_fill()
+
+# Dessiner un triangle
+for i in range(3):
+    ma_tortue.forward(100)
+    ma_tortue.left(120)
+
+# Terminer le remplissage
+ma_tortue.end_fill()
+
+turtle.done()</pre>
     </div>
 
-    <h2>9. Garder la fenêtre ouverte</h2>
-    <p>
-        Pour éviter que la fenêtre se ferme automatiquement :
-    </p>
+    <h2>5. Dessiner des Cercles</h2>
 
+    <p>La commande <code>circle(rayon)</code> permet de dessiner un cercle :</p>
+
+    <pre>ma_tortue.circle(50)  # Cercle de rayon 50</pre>
+
+    <p>Tu peux aussi dessiner une portion de cercle en ajoutant un angle :</p>
+
+    <pre>ma_tortue.circle(50, 180)  # Demi-cercle</pre>
+
+    <h2>6. Vitesse et Apparence</h2>
+
+    <h3>Contrôler la vitesse</h3>
+    <pre>ma_tortue.speed(1)   # Très lent (1)
+ma_tortue.speed(5)   # Moyen (par défaut)
+ma_tortue.speed(10)  # Très rapide
+ma_tortue.speed(0)   # Instantané (pas d'animation)</pre>
+
+    <h3>Changer l'apparence de la tortue</h3>
+    <pre>ma_tortue.shape("turtle")   # Forme de tortue
+ma_tortue.shape("arrow")    # Flèche (par défaut)
+ma_tortue.shape("circle")   # Cercle
+ma_tortue.shape("square")   # Carré
+ma_tortue.shape("triangle") # Triangle</pre>
+
+    <h3>Cacher ou montrer la tortue</h3>
+    <pre>ma_tortue.hideturtle()  # Cacher
+ma_tortue.showturtle()  # Montrer</pre>
+
+    <h2>7. Personnaliser la Fenêtre</h2>
+
+    <h3>Changer la couleur de fond</h3>
+    <pre>screen = turtle.Screen()
+screen.bgcolor("lightblue")</pre>
+
+    <h3>Changer le titre et la taille</h3>
+    <pre>screen = turtle.Screen()
+screen.title("Mon dessin Turtle")
+screen.setup(width=800, height=600)</pre>
+
+    <h2>8. Exemples Complets</h2>
+
+    <h3>Exemple 1 : Maison colorée</h3>
     <div class="example">
-        <pre>
-turtle.done()
-        </pre>
+        <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.speed(3)
+
+# Dessiner le carré (murs)
+ma_tortue.fillcolor("yellow")
+ma_tortue.begin_fill()
+for i in range(4):
+    ma_tortue.forward(100)
+    ma_tortue.left(90)
+ma_tortue.end_fill()
+
+# Dessiner le toit
+ma_tortue.fillcolor("red")
+ma_tortue.begin_fill()
+ma_tortue.goto(150, 100)
+ma_tortue.goto(100, 150)
+ma_tortue.goto(50, 100)
+ma_tortue.end_fill()
+
+ma_tortue.hideturtle()
+turtle.done()</pre>
     </div>
 
-    <h2>10. À retenir absolument</h2>
-    <ul>
-        <li>Turtle permet de dessiner avec Python</li>
-        <li>On contrôle une tortue avec des commandes simples</li>
-        <li>Les boucles permettent de dessiner plus facilement</li>
-        <li>C’est un excellent outil pour débuter</li>
-    </ul>
+    <h3>Exemple 2 : Spirale arc-en-ciel</h3>
+    <div class="example">
+        <pre>import turtle
 
-    <a class="back" href="../index.html">Retour à l’accueil</a>
+ma_tortue = turtle.Turtle()
+ma_tortue.speed(0)
+
+couleurs = ["red", "orange", "yellow", "green", "blue", "purple"]
+
+for i in range(360):
+    ma_tortue.pencolor(couleurs[i % 6])
+    ma_tortue.width(i // 100 + 1)
+    ma_tortue.forward(i)
+    ma_tortue.left(59)
+
+ma_tortue.hideturtle()
+turtle.done()</pre>
+    </div>
+
+    <h3>Exemple 3 : Étoile</h3>
+    <div class="example">
+        <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.speed(5)
+ma_tortue.pencolor("gold")
+ma_tortue.fillcolor("yellow")
+
+# Dessiner une étoile à 5 branches
+ma_tortue.begin_fill()
+for i in range(5):
+    ma_tortue.forward(100)
+    ma_tortue.right(144)
+ma_tortue.end_fill()
+
+ma_tortue.hideturtle()
+turtle.done()</pre>
+    </div>
+
+    <h2>9. Combiner avec les Boucles</h2>
+
+    <p>Turtle devient vraiment puissant quand on le combine avec des boucles !</p>
+
+    <h3>Dessiner plusieurs carrés en rotation</h3>
+    <div class="example">
+        <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.speed(0)
+
+for i in range(36):
+    # Dessiner un carré
+    for j in range(4):
+        ma_tortue.forward(50)
+        ma_tortue.right(90)
+    # Tourner un peu
+    ma_tortue.right(10)
+
+ma_tortue.hideturtle()
+turtle.done()</pre>
+    </div>
+
+    <div class="important">
+        <strong>⚠️ Attention :</strong> N'oublie pas <code>turtle.done()</code> à la fin de ton programme, sinon la fenêtre se fermera immédiatement !
+    </div>
+
+    <h2>10. Exercices à Essayer</h2>
+
+    <ol>
+        <li><strong>Hexagone :</strong> Dessine un hexagone (6 côtés) de couleur verte.</li>
+        <li><strong>Fleur :</strong> Dessine plusieurs cercles en forme de fleur en tournant la tortue après chaque cercle.</li>
+        <li><strong>Damier :</strong> Crée un damier avec des carrés noirs et blancs alternés.</li>
+        <li><strong>Ton prénom :</strong> Essaie de dessiner les lettres de ton prénom avec la tortue !</li>
+        <li><strong>Sapin de Noël :</strong> Dessine un sapin avec plusieurs triangles verts empilés.</li>
+    </ol>
+
+    <div class="resume">
+        <h3>📌 Résumé des Commandes Importantes</h3>
+        <ul>
+            <li><strong>Déplacements :</strong> <code>forward()</code>, <code>backward()</code>, <code>right()</code>, <code>left()</code>, <code>goto()</code></li>
+            <li><strong>Crayon :</strong> <code>penup()</code>, <code>pendown()</code>, <code>pencolor()</code>, <code>pensize()</code></li>
+            <li><strong>Remplissage :</strong> <code>fillcolor()</code>, <code>begin_fill()</code>, <code>end_fill()</code></li>
+            <li><strong>Formes :</strong> <code>circle()</code></li>
+            <li><strong>Apparence :</strong> <code>speed()</code>, <code>shape()</code>, <code>hideturtle()</code>, <code>showturtle()</code></li>
+            <li><strong>Fenêtre :</strong> <code>bgcolor()</code>, <code>title()</code>, <code>setup()</code></li>
+            <li><strong>Important :</strong> <code>turtle.done()</code> à la fin du programme</li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <strong>🚀 Pour aller plus loin :</strong> Le module turtle peut faire bien plus ! Tu peux détecter les clics de souris, les touches du clavier, créer des animations, et même faire des mini-jeux. Continue à explorer et à t'amuser !
+    </div>
 
 </div>
 
