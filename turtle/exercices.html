@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Exercices Python – Turtle</title>
+    <title>Exercices – Module Turtle Python</title>
 
     <style>
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             margin: 0;
             padding: 0;
             color: #333;
@@ -24,56 +24,136 @@
 
         h1 {
             text-align: center;
-            color: #2a5298;
-            margin-bottom: 30px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: -10px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
         }
 
         h2 {
-            color: #1e3c72;
-            margin-top: 35px;
+            color: #34495e;
+            margin-top: 40px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
         }
 
         p {
             line-height: 1.7;
         }
 
-        ul {
+        ul, ol {
             margin-left: 25px;
-        }
-
-        code {
-            background-color: #eef2ff;
-            padding: 3px 7px;
-            border-radius: 5px;
+            line-height: 1.8;
         }
 
         .exercise {
-            background-color: #f4f8ff;
-            border-left: 5px solid #2a5298;
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
             padding: 20px;
             margin: 25px 0;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
-        .important {
-            background-color: #fff7ed;
-            border-left: 5px solid #f59e0b;
+        .exercise h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .exercise p {
+            margin-bottom: 10px;
+        }
+
+        .hint {
+            background-color: #ecf0f1;
+            border-left: 4px solid #95a5a6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 14px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            line-height: 1.6;
+            border: 1px solid #e1e4e8;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            border: 1px solid #e1e4e8;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .easy {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .medium {
+            background-color: #bdc3c7;
+            color: #2c3e50;
+        }
+
+        .hard {
+            background-color: #95a5a6;
+            color: #ffffff;
+        }
+
+        .info-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e4e8;
             padding: 18px;
             margin: 30px 0;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
-        .back {
+        .answer-space {
+            border: 1px dashed #95a5a6;
+            min-height: 100px;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            background-color: #fdfdfd;
+        }
+
+        .answer-space::before {
+            content: "💻 Écris ton code ici :";
             display: block;
-            margin-top: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: #2a5298;
-            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
         }
 
-        .back:hover {
-            text-decoration: underline;
+        strong {
+            color: #2c3e50;
         }
     </style>
 </head>
@@ -81,121 +161,172 @@
 <body>
 
 <div class="container">
+    <h1>Exercices Module Turtle</h1>
+    <p class="subtitle">Dessiner avec Python 🐢</p>
 
-    <h1>Exercices – Turtle en Python</h1>
+    <h2>Niveau 1 : Formes de Base</h2>
 
-    <div class="important">
-        Règles :
-        <ul>
-            <li>Utilise le module <code>turtle</code></li>
-            <li>Teste ton programme après chaque exercice</li>
-            <li>Soigne l’indentation</li>
-        </ul>
+    <div class="exercise">
+        <h3>Exercice 1 : Carré Simple <span class="difficulty easy">Facile</span></h3>
+        <p>Dessine un carré de 100 pixels de côté avec une ligne rouge de 3 pixels d'épaisseur.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise une boucle <code>for</code> qui se répète 4 fois. À chaque tour : avance de 100 et tourne à droite de 90°.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 1 – Avancer simplement</h2>
-        <p>
-            Écris un programme qui :
-        </p>
-        <ul>
-            <li>crée une tortue</li>
-            <li>fait avancer la tortue de 100 pixels</li>
-        </ul>
+        <h3>Exercice 2 : Triangle Coloré <span class="difficulty easy">Facile</span></h3>
+        <p>Dessine un triangle équilatéral rempli de la couleur de ton choix avec des côtés de 120 pixels.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Un triangle a 3 côtés. Angle de rotation : 360° / 3 = 120°. N'oublie pas <code>begin_fill()</code> et <code>end_fill()</code>.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 2 – L</h2>
-        <p>
-            Écris un programme qui dessine la lettre <strong>L</strong>.
-        </p>
-        <ul>
-            <li>avance</li>
-            <li>tourne à droite</li>
-            <li>avance à nouveau</li>
-        </ul>
+        <h3>Exercice 3 : Pentagone <span class="difficulty easy">Facile</span></h3>
+        <p>Dessine un pentagone régulier (5 côtés égaux) de 80 pixels de côté.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Angle de rotation : 360° / 5 = 72°.
+        </div>>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 3 – Carré</h2>
-        <p>
-            Dessine un carré :
-        </p>
+        <h3>Exercice 4 : Hexagone Rempli <span class="difficulty medium">Moyen</span></h3>
+        <p>Dessine un hexagone (6 côtés) rempli en bleu avec un contour noir de 2 pixels.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise <code>pencolor()</code> pour le contour et <code>fillcolor()</code> pour l'intérieur. Angle : 360° / 6 = 60°.
+        </div>
+    </div>
+
+    <h2>Niveau 2 : Dessins Créatifs</h2>
+
+    <div class="exercise">
+        <h3>Exercice 5 : Maison <span class="difficulty medium">Moyen</span></h3>
+        <p>Dessine une maison complète avec :</p>
         <ul>
-            <li>sans utiliser de boucle</li>
-            <li>avec des côtés de 100 pixels</li>
+            <li>Un carré pour les murs (couleur au choix)</li>
+            <li>Un triangle pour le toit (couleur différente)</li>
+            <li>Un rectangle pour la porte</li>
+            <li>Deux carrés pour les fenêtres</li>
         </ul>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise <code>goto(x, y)</code> pour te déplacer vers les différentes parties. Pense à <code>penup()</code> et <code>pendown()</code> pour ne pas tracer en te déplaçant.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 4 – Carré avec une boucle</h2>
-        <p>
-            Dessine le même carré, mais :
-        </p>
-        <ul>
-            <li>en utilisant une boucle <code>for</code></li>
-            <li>sans répéter le même code plusieurs fois</li>
-        </ul>
+        <h3>Exercice 6 : Fleur <span class="difficulty medium">Moyen</span></h3>
+        <p>Dessine une fleur composée de 8 cercles (pétales) disposés en cercle autour d'un centre. Rayon de chaque pétale : 50 pixels.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise une boucle qui se répète 8 fois. À chaque tour : dessine un cercle, puis tourne de 45° (360° / 8). Utilise <code>penup()</code> pour revenir au centre entre chaque pétale.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 5 – Triangle</h2>
-        <p>
-            Dessine un triangle équilatéral :
-        </p>
-        <ul>
-            <li>utilise une boucle</li>
-            <li>réfléchis à l’angle à utiliser</li>
-        </ul>
+        <h3>Exercice 7 : Damier <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine un damier 4x4 (16 cases) avec des carrés noirs et blancs alternés. Chaque carré fait 50 pixels de côté.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise deux boucles imbriquées (une pour les lignes, une pour les colonnes). Alterne la couleur avec une condition : <code>if (i + j) % 2 == 0</code>.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 6 – Changer la couleur</h2>
-        <p>
-            Dessine une forme de ton choix en :
-        </p>
+        <h3>Exercice 8 : Sapin de Noël <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine un sapin composé de :</p>
         <ul>
-            <li>changeant la couleur de la tortue</li>
-            <li>changeant la vitesse</li>
+            <li>3 triangles verts empilés (tailles décroissantes : 150, 120, 90 pixels de base)</li>
+            <li>Un rectangle marron pour le tronc (30x40 pixels)</li>
+            <li>Une étoile jaune au sommet (optionnel)</li>
         </ul>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Dessine chaque triangle séparément en utilisant <code>goto()</code> pour te positionner. Décale chaque triangle vers le haut.
+        </div>
+    </div>
+
+    <h2>Niveau 3 : Motifs et Spirales</h2>
+
+    <div class="exercise">
+        <h3>Exercice 9 : Carrés en Rotation <span class="difficulty medium">Moyen</span></h3>
+        <p>Dessine 36 carrés de 60 pixels en faisant pivoter de 10° entre chaque carré pour créer un motif en rosace.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Boucle de 36 répétitions. À chaque tour : dessine un carré, puis tourne de 10°. Mets <code>speed(0)</code> pour accélérer.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 7 – Se déplacer sans dessiner</h2>
-        <p>
-            Écris un programme qui :
-        </p>
-        <ul>
-            <li>dessine un trait</li>
-            <li>se déplace sans dessiner</li>
-            <li>dessine un deuxième trait ailleurs</li>
-        </ul>
+        <h3>Exercice 10 : Spirale Circulaire <span class="difficulty medium">Moyen</span></h3>
+        <p>Crée une spirale en dessinant des cercles de rayons croissants. Commence avec un rayon de 10, puis augmente de 5 à chaque tour. Dessine 20 cercles.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Utilise une boucle et une variable pour le rayon : <code>rayon = 10 + i * 5</code>.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 8 – Forme répétée</h2>
-        <p>
-            Dessine plusieurs carrés :
-        </p>
-        <ul>
-            <li>en utilisant une boucle</li>
-            <li>en tournant légèrement entre chaque carré</li>
-        </ul>
+        <h3>Exercice 11 : Spirale Carrée <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine une spirale avec des lignes de longueur croissante. Commence à 10 pixels, augmente de 5 à chaque segment. Fais au moins 50 segments.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Boucle de 50 répétitions. À chaque tour : avance d'une distance croissante, puis tourne de 90°. Variable : <code>distance = 10 + i * 5</code>.
+        </div>
     </div>
 
     <div class="exercise">
-        <h2>Exercice 9 – Mini défi</h2>
-        <p>
-            Dessine une figure libre en utilisant :
-        </p>
-        <ul>
-            <li>une boucle</li>
-            <li>au moins une couleur</li>
-            <li>au moins un changement de direction</li>
-        </ul>
+        <h3>Exercice 12 : Arc-en-Ciel <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine un arc-en-ciel avec 7 demi-cercles concentriques de couleurs différentes (du plus grand au plus petit) :</p>
+        <p>Couleurs : rouge, orange, jaune, bleu clair, bleu, violet, rose</p>
+        <p>Rayons : 150, 130, 110, 90, 70, 50, 30</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Crée deux listes (une pour les couleurs, une pour les rayons). Utilise une boucle avec <code>zip()</code> ou un index. Dessine des demi-cercles avec <code>circle(rayon, 180)</code>.
+        </div>
     </div>
 
-    <a class="back" href="../index.html">Retour à l’accueil</a>
+    <h2>Niveau 4 : Défis Avancés</h2>
+
+    <div class="exercise">
+        <h3>Exercice 13 : Étoile à 5 Branches <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine une étoile à 5 branches parfaite, remplie en jaune avec un contour doré.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Une étoile à 5 branches nécessite 5 segments. À chaque sommet, tourne de 144° (pas 72°). Utilise une boucle de 5 répétitions.
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 14 : Soleil <span class="difficulty hard">Difficile</span></h3>
+        <p>Dessine un soleil avec :</p>
+        <ul>
+            <li>Un cercle jaune au centre (rayon 60)</li>
+            <li>16 rayons partant du cercle (lignes de 40 pixels)</li>
+        </ul>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Dessine d'abord le cercle. Puis utilise une boucle de 16 répétitions. Pour chaque rayon : positionne-toi sur le bord du cercle, dessine la ligne, reviens au centre, tourne de 22.5° (360° / 16).
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 15 : Mandala <span class="difficulty hard">Difficile</span></h3>
+        <p>Crée un mandala en dessinant 12 hexagones disposés en cercle autour d'un point central. Chaque hexagone a 40 pixels de côté.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Boucle de 12 répétitions. À chaque tour : dessine un hexagone, reviens au centre avec <code>penup()</code>, tourne de 30° (360° / 12).
+        </div>
+    </div>
+
+    <h2>Projet Final</h2>
+
+    <div class="exercise">
+        <h3>Exercice 16 : Paysage Complet <span class="difficulty hard">Difficile</span></h3>
+        <p>Crée un paysage complet de ton imagination incluant au minimum :</p>
+        <ul>
+            <li>Un ciel (fond bleu ou dégradé)</li>
+            <li>Un soleil ou une lune</li>
+            <li>Des montagnes ou des collines</li>
+            <li>Au moins 2 arbres ou sapins</li>
+            <li>Une maison</li>
+            <li>Des nuages (cercles blancs)</li>
+        </ul>
+        <p><strong>Sois créatif !</strong> Ajoute des détails et des couleurs.</p>
+        <div class="hint">
+            💡 <strong>Indice :</strong> Planifie ton dessin sur papier d'abord. Utilise <code>screen.bgcolor()</code> pour le fond. Crée des fonctions pour chaque élément (arbre, maison, nuage) pour réutiliser ton code.
+        </div>
+    </div>
 
 </div>
 
