@@ -68,88 +68,106 @@
 
 <div class="container">
 
-    <h1>📝 Exercices – Les variables en Python</h1>
+    <h1>🧠 Exercices – Comprendre les variables</h1>
 
     <div class="exercise">
-        <h2>🟢 Exercice 1 – Première variable</h2>
+        <h2>🟢 Exercice 1 – Devine le résultat</h2>
         <p>
-            Crée une variable appelée <code>age</code> qui contient ton âge,
-            puis affiche sa valeur.
+            Sans exécuter le programme, écris ce qui sera affiché :
         </p>
+        <pre>
+x = 5
+y = x
+x = 10
+print(y)
+        </pre>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 2 – Texte et variable</h2>
+        <h2>🟢 Exercice 2 – Erreur ou pas ?</h2>
         <p>
-            Crée une variable <code>prenom</code> contenant ton prénom.
-            Affiche ensuite :
+            Le programme suivant fonctionne-t-il ?
+            Si non, explique pourquoi.
+        </p>
+        <pre>
+age = 12
+print(Age)
+        </pre>
+    </div>
+
+    <div class="exercise">
+        <h2>🟢 Exercice 3 – Choisir les bonnes variables</h2>
+        <p>
+            Pour chaque information, propose un nom de variable adapté :
         </p>
         <ul>
-            <li>Bonjour</li>
-            <li>suivi de ton prénom</li>
+            <li>Le nombre de vies dans un jeu</li>
+            <li>Le prénom d’un utilisateur</li>
+            <li>Le prix d’un objet</li>
+            <li>La température extérieure</li>
         </ul>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 3 – Modifier une variable</h2>
+        <h2>🟢 Exercice 4 – Programme incomplet</h2>
         <p>
-            Crée une variable <code>score</code> avec la valeur 10.
-            Modifie ensuite sa valeur pour qu’elle devienne 20,
-            puis affiche-la.
+            Complète le programme pour qu’il affiche :
+            <strong>Le double du nombre</strong>.
         </p>
+        <pre>
+nombre = 7
+# compléter ici
+        </pre>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 4 – Calcul simple</h2>
+        <h2>🔵 Exercice 5 – Changement de valeur</h2>
         <p>
-            Crée deux variables <code>a</code> et <code>b</code> contenant des nombres.
-            Crée une troisième variable <code>somme</code> qui contient leur addition,
-            puis affiche le résultat.
+            Que vaut la variable <code>score</code> à la fin du programme ?
         </p>
+        <pre>
+score = 0
+score = score + 10
+score = score + 5
+score = score - 3
+        </pre>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 5 – Calcul avec des points</h2>
+        <h2>🔵 Exercice 6 – Comprendre input()</h2>
         <p>
-            Crée une variable <code>points</code> avec la valeur 50.
-            Ajoute 10 points à cette variable,
-            puis affiche la nouvelle valeur.
+            Un utilisateur tape <strong>4</strong>.
+            Que va afficher ce programme ?
         </p>
+        <pre>
+nombre = input("Entre un nombre : ")
+print(nombre + nombre)
+        </pre>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 6 – Variable et input()</h2>
+        <h2>🔵 Exercice 7 – Corriger le programme</h2>
         <p>
-            Demande à l’utilisateur son prénom à l’aide de <code>input()</code>,
-            stocke la réponse dans une variable,
-            puis affiche un message de bienvenue.
+            Le programme suivant ne fait pas ce qu’on attend.
+            Explique pourquoi et corrige-le.
         </p>
+        <pre>
+age = input("Quel est ton âge ? ")
+print(age + 1)
+        </pre>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 7 – Variable numérique et input()</h2>
+        <h2>🔴 Exercice 8 – Mini situation réelle</h2>
         <p>
-            Demande à l’utilisateur son âge,
-            stocke la réponse dans une variable,
-            puis affiche :
+            Tu crées un jeu vidéo.
+            Le joueur commence avec 3 vies.
+            À chaque erreur, il perd 1 vie.
         </p>
-        <ul>
-            <li>Son âge</li>
-            <li>Son âge dans 1 an</li>
-        </ul>
-    </div>
-
-    <div class="exercise">
-        <h2>🔵 Exercice 8 – Mini défi</h2>
         <p>
-            Crée un petit programme qui :
+            Écris un programme qui met à jour le nombre de vies
+            après deux erreurs.
         </p>
-        <ul>
-            <li>demande le prénom de l’utilisateur</li>
-            <li>demande son score</li>
-            <li>stocke ces informations dans des variables</li>
-            <li>affiche un message personnalisé avec le prénom et le score</li>
-        </ul>
     </div>
 
     <a class="back" href="../index.html">⬅ Retour à l’accueil</a>
