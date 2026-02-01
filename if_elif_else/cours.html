@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Cours Python – Conditions if / elif / else</title>
+    <title>Python – Prendre des décisions</title>
 
     <style>
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #11998e, #38ef7d);
             margin: 0;
             padding: 0;
             color: #333;
@@ -24,12 +24,12 @@
 
         h1 {
             text-align: center;
-            color: #2a5298;
+            color: #11998e;
             margin-bottom: 40px;
         }
 
         h2 {
-            color: #1e3c72;
+            color: #0f766e;
             margin-top: 35px;
         }
 
@@ -42,29 +42,29 @@
         }
 
         code {
-            background-color: #eef2ff;
+            background-color: #eef7f6;
             padding: 3px 7px;
             border-radius: 5px;
         }
 
         pre {
-            background-color: #eef2ff;
+            background-color: #eef7f6;
             padding: 16px;
             border-radius: 10px;
             overflow-x: auto;
         }
 
-        .example {
-            background-color: #f4f8ff;
-            border-left: 5px solid #2a5298;
+        .important {
+            background-color: #e0f2fe;
+            border-left: 5px solid #0ea5e9;
             padding: 18px;
-            margin: 25px 0;
+            margin: 30px 0;
             border-radius: 10px;
         }
 
-        .important {
-            background-color: #fff7ed;
-            border-left: 5px solid #f59e0b;
+        .example {
+            background-color: #f0fdf4;
+            border-left: 5px solid #22c55e;
             padding: 18px;
             margin: 30px 0;
             border-radius: 10px;
@@ -75,12 +75,8 @@
             margin-top: 40px;
             text-align: center;
             text-decoration: none;
-            color: #2a5298;
+            color: #0f766e;
             font-weight: bold;
-        }
-
-        .back:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -89,49 +85,88 @@
 
 <div class="container">
 
-    <h1>Les conditions en Python<br>if / elif / else</h1>
+    <h1>🤖 Prendre des décisions en Python</h1>
 
-    <h2>1. Comparer des valeurs</h2>
+    <h2>🧠 Qu’est-ce qu’une condition ?</h2>
     <p>
-        Avant d’utiliser des conditions, il faut savoir <strong>comparer des valeurs</strong>.
-        Une comparaison donne toujours un résultat :
-        <strong>True</strong> (vrai) ou <strong>False</strong> (faux).
+        Une <strong>condition</strong> est une question que l’ordinateur se pose.
+        Elle permet de <strong>comparer deux informations</strong>.
     </p>
 
-    <h2>2. Les opérateurs de comparaison</h2>
+    <p>
+        Exemple dans la vie réelle :
+    </p>
     <ul>
-        <li><code>==</code> : égal à</li>
-        <li><code>!=</code> : différent de</li>
-        <li><code>&gt;</code> : plus grand que</li>
-        <li><code>&lt;</code> : plus petit que</li>
-        <li><code>&gt;=</code> : plus grand ou égal à</li>
-        <li><code>&lt;=</code> : plus petit ou égal à</li>
+        <li>Est-ce qu’il pleut ?</li>
+        <li>Est-ce que j’ai plus de 18 ans ?</li>
+    </ul>
+
+    <p>
+        En Python, une condition renvoie toujours :
+    </p>
+    <ul>
+        <li><code>True</code> → vrai</li>
+        <li><code>False</code> → faux</li>
     </ul>
 
     <div class="example">
         <pre>
-print(5 > 3)      # True
-print(10 == 8)   # False
-print(4 <= 4)    # True
+age = 10
+age == 12
         </pre>
+        <p>➡️ Cette condition est <code>False</code> car 10 n’est pas égal à 12.</p>
     </div>
 
-    <h2>3. À quoi sert une condition ?</h2>
+    <h2>🔍 Les opérateurs de comparaison</h2>
     <p>
-        Une condition permet à un programme de <strong>prendre une décision</strong>.
-        Selon le résultat de la comparaison, le programme n’exécute pas le même code.
+        Pour comparer des valeurs, Python utilise des <strong>opérateurs de comparaison</strong>.
     </p>
 
-    <p>Exemple simple dans la vie courante :</p>
     <ul>
-        <li>Si le feu est vert → je passe</li>
-        <li>Sinon → je m’arrête</li>
+        <li><code>==</code> : est égal à</li>
+        <li><code>!=</code> : est différent de</li>
+        <li><code>&gt;</code> : est plus grand que</li>
+        <li><code>&lt;</code> : est plus petit que</li>
+        <li><code>&gt;=</code> : est plus grand ou égal à</li>
+        <li><code>&lt;=</code> : est plus petit ou égal à</li>
     </ul>
 
-    <h2>4. La condition <code>if</code></h2>
+    <div class="example">
+        <pre>
+note = 15
+note >= 10
+        </pre>
+        <p>➡️ Cette condition est <code>True</code>.</p>
+    </div>
+
+    <div class="important">
+        ⚠️ Attention :
+        <ul>
+            <li><code>=</code> sert à donner une valeur</li>
+            <li><code>==</code> sert à comparer</li>
+        </ul>
+    </div>
+
+    <h2>🔢 Les valeurs booléennes</h2>
+    <p>
+        Une condition est aussi appelée une <strong>expression booléenne</strong>.
+        Elle peut être seulement :
+    </p>
+    <ul>
+        <li><code>True</code> (vrai)</li>
+        <li><code>False</code> (faux)</li>
+    </ul>
+
+    <h2>🚦 Qu’est-ce qu’une instruction conditionnelle ?</h2>
+    <p>
+        Une <strong>instruction conditionnelle</strong> permet au programme de
+        <strong>choisir un chemin</strong> selon le résultat de la condition.
+    </p>
+
+    <h2>🔹 L’instruction <code>if</code></h2>
     <p>
         <code>if</code> signifie <strong>« si »</strong>.
-        Le code à l’intérieur s’exécute seulement si la condition est vraie.
+        Le code est exécuté seulement si la condition est vraie.
     </p>
 
     <div class="example">
@@ -139,22 +174,22 @@ print(4 <= 4)    # True
 age = 20
 
 if age >= 18:
-    print("Majeur")
+    print("Tu es majeur")
         </pre>
     </div>
 
     <div class="important">
-        À respecter absolument :
+        À retenir :
         <ul>
-            <li>La condition se termine par <code>:</code></li>
-            <li>Le code à l’intérieur est indenté</li>
+            <li>La ligne se termine par <code>:</code></li>
+            <li>Le code à l’intérieur est <strong>indenté</strong></li>
         </ul>
     </div>
 
-    <h2>5. La condition <code>else</code></h2>
+    <h2>🔹 L’instruction <code>else</code></h2>
     <p>
         <code>else</code> signifie <strong>« sinon »</strong>.
-        Il s’exécute si la condition du <code>if</code> est fausse.
+        Elle s’exécute si la condition du <code>if</code> est fausse.
     </p>
 
     <div class="example">
@@ -162,63 +197,21 @@ if age >= 18:
 age = 15
 
 if age >= 18:
-    print("Majeur")
+    print("Tu es majeur")
 else:
-    print("Mineur")
-        </pre>
-    </div>
-
-    <h2>6. La condition <code>elif</code></h2>
-    <p>
-        <code>elif</code> signifie <strong>« sinon si »</strong>.
-        On l’utilise lorsqu’il y a plusieurs cas possibles.
-    </p>
-
-    <div class="example">
-        <pre>
-note = 12
-
-if note >= 16:
-    print("Très bien")
-elif note >= 10:
-    print("Moyen")
-else:
-    print("Insuffisant")
+    print("Tu es mineur")
         </pre>
     </div>
 
     <div class="important">
-        À retenir :
+        Une seule partie est exécutée :
         <ul>
-            <li>Un seul <code>if</code></li>
-            <li>Autant de <code>elif</code> que nécessaire</li>
-            <li>Un seul <code>else</code></li>
-            <li>Une seule partie est exécutée</li>
+            <li>soit le <code>if</code></li>
+            <li>soit le <code>else</code></li>
         </ul>
     </div>
 
-    <h2>7. Exemple très simple avec un mot</h2>
-    <div class="example">
-        <pre>
-mot = "python"
-
-if mot == "python":
-    print("Mot correct")
-else:
-    print("Mot incorrect")
-        </pre>
-    </div>
-
-    <h2>8. À retenir absolument</h2>
-    <ul>
-        <li>Les comparaisons donnent <code>True</code> ou <code>False</code></li>
-        <li><code>if</code> teste une condition</li>
-        <li><code>elif</code> ajoute des cas</li>
-        <li><code>else</code> est le dernier cas</li>
-        <li>L’indentation est obligatoire</li>
-    </ul>
-
-    <a class="back" href="../index.html">Retour à l’accueil</a>
+    <a class="back" href="../index.html">⬅ Retour à l’accueil</a>
 
 </div>
 
