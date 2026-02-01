@@ -25,7 +25,7 @@
         h1 {
             text-align: center;
             color: #11998e;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         h2 {
@@ -54,7 +54,7 @@
             overflow-x: auto;
         }
 
-        .important {
+        .info {
             background-color: #e0f2fe;
             border-left: 5px solid #0ea5e9;
             padding: 18px;
@@ -85,133 +85,138 @@
 
 <div class="container">
 
-    <h1>🤖 Prendre des décisions en Python</h1>
+<h1>🤖 Prendre des décisions</h1>
 
-    <h2>🧠 Qu’est-ce qu’une condition ?</h2>
-    <p>
-        Une <strong>condition</strong> est une question que l’ordinateur se pose.
-        Elle permet de <strong>comparer deux informations</strong>.
-    </p>
+<p>
+Pour écrire un programme permettant de prendre des décisions, l’ordinateur doit réagir
+différemment à différentes questions. Pour cela, tu as besoin de <strong>conditions</strong>
+pour comparer les informations et d’<strong>instructions conditionnelles</strong> pour créer
+différents chemins dans les programmes.
+</p>
 
-    <p>
-        Exemple dans la vie réelle :
-    </p>
-    <ul>
-        <li>Est-ce qu’il pleut ?</li>
-        <li>Est-ce que j’ai plus de 18 ans ?</li>
-    </ul>
+<h2>❓ Qu’est-ce qu’une condition ?</h2>
 
-    <p>
-        En Python, une condition renvoie toujours :
-    </p>
-    <ul>
-        <li><code>True</code> → vrai</li>
-        <li><code>False</code> → faux</li>
-    </ul>
+<p>
+Une condition est une portion de code qui compare deux informations.
+Pour établir ces comparaisons, les conditions utilisent des opérateurs.
+Par exemple, l’opérateur <code>==</code> vérifie que deux informations sont identiques.
+</p>
 
-    <div class="example">
-        <pre>
+<div class="example">
+<pre>
 age = 10
 age == 12
-        </pre>
-        <p>➡️ Cette condition est <code>False</code> car 10 n’est pas égal à 12.</p>
-    </div>
+</pre>
+</div>
 
-    <h2>🔍 Les opérateurs de comparaison</h2>
-    <p>
-        Pour comparer des valeurs, Python utilise des <strong>opérateurs de comparaison</strong>.
-    </p>
+<p>
+La condition s’avère fausse parce que l’âge est fixé à 10 ans et non à 12 ans.
+Pour un ordinateur, une condition ne peut être que <code>True</code> (vraie) ou
+<code>False</code> (fausse).
+</p>
 
-    <ul>
-        <li><code>==</code> : est égal à</li>
-        <li><code>!=</code> : est différent de</li>
-        <li><code>&gt;</code> : est plus grand que</li>
-        <li><code>&lt;</code> : est plus petit que</li>
-        <li><code>&gt;=</code> : est plus grand ou égal à</li>
-        <li><code>&lt;=</code> : est plus petit ou égal à</li>
-    </ul>
+<div class="example">
+<pre>
+age = 10
+age == 10
+</pre>
+</div>
 
-    <div class="example">
-        <pre>
-note = 15
-note >= 10
-        </pre>
-        <p>➡️ Cette condition est <code>True</code>.</p>
-    </div>
+<p>
+Cette fois-ci, la condition est vraie.
+</p>
 
-    <div class="important">
-        ⚠️ Attention :
-        <ul>
-            <li><code>=</code> sert à donner une valeur</li>
-            <li><code>==</code> sert à comparer</li>
-        </ul>
-    </div>
+<div class="info">
+<p>
+Dans Python, <code>True</code> (vrai) et <code>False</code> (faux) s’écrivent en anglais
+avec une majuscule pour montrer qu’il s’agit de conditions.
+</p>
+</div>
 
-    <h2>🔢 Les valeurs booléennes</h2>
-    <p>
-        Une condition est aussi appelée une <strong>expression booléenne</strong>.
-        Elle peut être seulement :
-    </p>
-    <ul>
-        <li><code>True</code> (vrai)</li>
-        <li><code>False</code> (faux)</li>
-    </ul>
+<h2>🔍 Les opérateurs comparatifs</h2>
 
-    <h2>🚦 Qu’est-ce qu’une instruction conditionnelle ?</h2>
-    <p>
-        Une <strong>instruction conditionnelle</strong> permet au programme de
-        <strong>choisir un chemin</strong> selon le résultat de la condition.
-    </p>
+<p>
+Voici les symboles que les ordinateurs utilisent pour comparer deux informations :
+</p>
 
-    <h2>🔹 L’instruction <code>if</code></h2>
-    <p>
-        <code>if</code> signifie <strong>« si »</strong>.
-        Le code est exécuté seulement si la condition est vraie.
-    </p>
+<ul>
+    <li><code>==</code> est égal à</li>
+    <li><code>!=</code> n’est pas égal à</li>
+    <li><code>&lt;</code> est inférieur à</li>
+    <li><code>&gt;</code> est supérieur à</li>
+    <li><code>&lt;=</code> est inférieur ou égal à</li>
+    <li><code>&gt;=</code> est supérieur ou égal à</li>
+</ul>
 
-    <div class="example">
-        <pre>
-age = 20
+<h2>🔢 Les expressions booléennes</h2>
 
-if age >= 18:
-    print("Tu es majeur")
-        </pre>
-    </div>
+<p>
+Les conditions sont aussi appelées <strong>expressions booléennes</strong>.
+Le statut vrai ou faux d’une expression booléenne constitue sa
+<strong>valeur booléenne</strong>.
+</p>
 
-    <div class="important">
-        À retenir :
-        <ul>
-            <li>La ligne se termine par <code>:</code></li>
-            <li>Le code à l’intérieur est <strong>indenté</strong></li>
-        </ul>
-    </div>
+<h2>🚦 Qu’est-ce qu’une instruction conditionnelle ?</h2>
 
-    <h2>🔹 L’instruction <code>else</code></h2>
-    <p>
-        <code>else</code> signifie <strong>« sinon »</strong>.
-        Elle s’exécute si la condition du <code>if</code> est fausse.
-    </p>
+<p>
+Pour introduire une condition dans ton script, tu as besoin d’une commande
+appelée <strong>instruction conditionnelle</strong>.
+Ce type d’instruction fait appel à des conditions pour déterminer si une chose
+est <code>True</code> (vraie) ou <code>False</code> (fausse).
+Puis, en fonction de la réponse, elle emprunte un chemin distinct dans le programme.
+</p>
 
-    <div class="example">
-        <pre>
-age = 15
+<p>
+Ces chemins sont aussi appelés des <strong>branches</strong>, car ils créent une structure
+en forme d’arbre.
+</p>
 
-if age >= 18:
-    print("Tu es majeur")
+<h2>▶️ L’instruction <code>if</code> (si)</h2>
+
+<p>
+Une instruction conditionnelle importante est appelée instruction <code>if</code>.
+Elle vérifie si une condition est vraie. Si elle l’est, l’ordinateur suit les
+instructions liées à la condition <code>if</code>. Sinon, il les ignore.
+</p>
+
+<div class="example">
+<pre>
+reponse_utilisateur = input("Aimes-tu les robots ? (Tape oui ou non)")
+
+if reponse_utilisateur == "oui":
+    print("Bip bip !")
+</pre>
+</div>
+
+<p>
+Les instructions conditionnelles et autres mots-clés apparaissent toujours en couleur
+dans l’éditeur de code.
+</p>
+
+<h2>🔁 L’instruction <code>else</code> (sinon)</h2>
+
+<p>
+Le mot <code>else</code> indique à l’ordinateur quel chemin suivre si la condition
+correspondante à <code>if</code> n’est pas remplie.
+</p>
+
+<div class="example">
+<pre>
+reponse_utilisateur = input("Aimes-tu les robots ? (Tape oui ou non)")
+
+if reponse_utilisateur == "oui":
+    print("Bip bip !")
 else:
-    print("Tu es mineur")
-        </pre>
-    </div>
+    print("Les robots ne t’aiment pas non plus.")
+</pre>
+</div>
 
-    <div class="important">
-        Une seule partie est exécutée :
-        <ul>
-            <li>soit le <code>if</code></li>
-            <li>soit le <code>else</code></li>
-        </ul>
-    </div>
+<p>
+Quand les conditions <code>if</code> du script ne sont pas remplies,
+<code>else</code> entre en action et récupère ce qui reste.
+</p>
 
-    <a class="back" href="../index.html">⬅ Retour à l’accueil</a>
+<a class="back" href="../index.html">⬅ Retour à l’accueil</a>
 
 </div>
 
