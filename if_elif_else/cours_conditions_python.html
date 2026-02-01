@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>Cours – Fonctions en Python</title>
+    <meta charset="UTF-8">
+    <title>Python – Prendre des décisions</title>
 
     <style>
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #11998e, #38ef7d);
             margin: 0;
             padding: 0;
             color: #333;
@@ -17,42 +17,113 @@
             max-width: 900px;
             margin: 50px auto;
             background-color: #ffffff;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
             text-align: center;
-            color: #2a5298;
-            margin-bottom: 40px;
+            color: #11998e;
+            margin-bottom: 30px;
         }
 
         h2 {
-            color: #1e3c72;
-            margin-top: 30px;
+            color: #0f766e;
+            margin-top: 35px;
         }
 
         h3 {
-            color: #2a5298;
-            margin-top: 20px;
+            color: #14b8a6;
+            margin-top: 25px;
         }
 
-        pre {
-            background-color: #eef2f7;
-            padding: 12px;
-            border-radius: 8px;
-            overflow-x: auto;
+        p {
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            line-height: 1.8;
         }
 
         code {
-            background-color: #eef2f7;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background-color: #eef7f6;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
         }
 
-        ul {
-            margin-left: 20px;
+        pre {
+            background-color: #eef7f6;
+            padding: 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            line-height: 1.6;
+        }
+
+        .info {
+            background-color: #e0f2fe;
+            border-left: 5px solid #0ea5e9;
+            padding: 18px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .example {
+            background-color: #f0fdf4;
+            border-left: 5px solid #22c55e;
+            padding: 18px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .warning {
+            background-color: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 18px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .recap {
+            background-color: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #11998e;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
         }
 
         .back {
@@ -60,26 +131,11 @@
             margin-top: 40px;
             text-align: center;
             text-decoration: none;
-            color: #2a5298;
+            color: #0f766e;
             font-weight: bold;
-        }
-
-        .back:hover {
-            text-decoration: underline;
-        }
-
-        .note {
-            background-color: #f4f8ff;
-            border-left: 4px solid #1e3c72;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 8px;
         }
     </style>
 </head>
-
-<body>
-
 
 <body>
 
