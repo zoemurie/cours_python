@@ -41,6 +41,13 @@
             margin-left: 20px;
         }
 
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
         .exercise {
             background-color: #f4f8ff;
             border-left: 4px solid #1e3c72;
@@ -68,106 +75,126 @@
 
 <div class="container">
 
-    <h1>🧠 Exercices – Comprendre les variables</h1>
+    <h1>🧠 Exercices – Les variables en Python</h1>
 
     <div class="exercise">
-        <h2>🟢 Exercice 1 – Devine le résultat</h2>
-        <p>
-            Sans exécuter le programme, écris ce qui sera affiché :
-        </p>
-        <pre>
-x = 5
-y = x
-x = 10
-print(y)
-        </pre>
+        <h2>Exercice 1 – Créer des variables</h2>
+        <p>Crée trois variables :</p>
+        <ul>
+            <li>une variable <code>prenom</code> contenant ton prénom</li>
+            <li>une variable <code>age</code> contenant ton âge</li>
+            <li>une variable <code>ville</code> contenant le nom de ta ville</li>
+        </ul>
+        <p>Affiche les trois variables.</p>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 2 – Erreur ou pas ?</h2>
+        <h2>Exercice 2 – Modifier une variable</h2>
         <p>
-            Le programme suivant fonctionne-t-il ?
-            Si non, explique pourquoi.
+            Crée une variable <code>score</code> contenant la valeur <code>5</code>.
         </p>
-        <pre>
-age = 12
-print(Age)
-        </pre>
-    </div>
-
-    <div class="exercise">
-        <h2>🟢 Exercice 3 – Choisir les bonnes variables</h2>
         <p>
-            Pour chaque information, propose un nom de variable adapté :
+            Puis :
         </p>
         <ul>
-            <li>Le nombre de vies dans un jeu</li>
-            <li>Le prénom d’un utilisateur</li>
-            <li>Le prix d’un objet</li>
-            <li>La température extérieure</li>
+            <li>ajoute <code>3</code> au score</li>
+            <li>affiche la nouvelle valeur de <code>score</code></li>
         </ul>
     </div>
 
     <div class="exercise">
-        <h2>🟢 Exercice 4 – Programme incomplet</h2>
+        <h2>Exercice 3 – Calcul simple</h2>
+        <p>Crée deux variables :</p>
+        <ul>
+            <li><code>a</code> contenant <code>4</code></li>
+            <li><code>b</code> contenant <code>6</code></li>
+        </ul>
         <p>
-            Complète le programme pour qu’il affiche :
-            <strong>Le double du nombre</strong>.
+            Crée une troisième variable <code>multiplication</code> qui contient la multiplication de <code>a</code> par <code>b</code>.
         </p>
-        <pre>
-nombre = 7
-# compléter ici
-        </pre>
+        <p>Affiche la variable <code>multiplication</code>.</p>
     </div>
 
     <div class="exercise">
-        <h2>🔵 Exercice 5 – Changement de valeur</h2>
+        <h2>Exercice 4 – Utiliser input</h2>
         <p>
-            Que vaut la variable <code>score</code> à la fin du programme ?
+            Crée une variable <code>nom</code>.
         </p>
-        <pre>
-score = 0
-score = score + 10
-score = score + 5
-score = score - 3
-        </pre>
+        <p>
+            Demande à l’utilisateur d’entrer son nom, puis affiche :
+        </p>
+        <pre>Bonjour nom</pre>
     </div>
 
     <div class="exercise">
-        <h2>🔵 Exercice 6 – Comprendre input()</h2>
+        <h2>Exercice 5 – Nombre et calcul</h2>
         <p>
-            Un utilisateur tape <strong>4</strong>.
-            Que va afficher ce programme ?
+            Crée une variable <code>nombre</code>.
         </p>
-        <pre>
-nombre = input("Entre un nombre : ")
-print(nombre + nombre)
-        </pre>
+        <p>
+            Demande à l’utilisateur d’entrer un nombre, puis affiche :
+        </p>
+        <ul>
+            <li>le double de ce nombre</li>
+        </ul>
     </div>
 
     <div class="exercise">
-        <h2>🔵 Exercice 7 – Corriger le programme</h2>
+        <h2>Exercice 6 – Mise à jour d’une valeur</h2>
         <p>
-            Le programme suivant ne fait pas ce qu’on attend.
-            Explique pourquoi et corrige-le.
+            Crée une variable <code>vies</code> contenant <code>3</code>.
         </p>
-        <pre>
-age = input("Quel est ton âge ? ")
-print(age + 1)
-        </pre>
+        <p>
+            Puis :
+        </p>
+        <ul>
+            <li>enlève 1 vie</li>
+            <li>enlève encore 1 vie</li>
+            <li>affiche le nombre de vies restantes</li>
+        </ul>
     </div>
 
     <div class="exercise">
-        <h2>🔴 Exercice 8 – Mini situation réelle</h2>
+        <h2>Exercice 7 – Variable numérique et input()</h2>
         <p>
-            Tu crées un jeu vidéo.
-            Le joueur commence avec 3 vies.
-            À chaque erreur, il perd 1 vie.
+            Demande à l’utilisateur son âge,
+            stocke la réponse dans une variable,
+            puis affiche :
+        </p>
+        <ul>
+            <li>Son âge</li>
+            <li>Son âge dans 1 an</li>
+        </ul>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercice 8 – Petite situation</h2>
+        <p>
+            Crée une variable <code>argent</code> contenant <code>10</code>.
         </p>
         <p>
-            Écris un programme qui met à jour le nombre de vies
-            après deux erreurs.
+            Puis :
         </p>
+        <ul>
+            <li>enlève <code>4</code></li>
+            <li>ajoute <code>7</code></li>
+        </ul>
+        <p>Affiche le montant final.</p>
+    </div>
+
+    <div class="exercise">
+        <h2>Exercice 9 – Message personnalisé</h2>
+        <p>
+            Demande à l’utilisateur :
+        </p>
+        <ul>
+            <li>son prénom</li>
+            <li>son âge</li>
+        </ul>
+        <p>
+            Affiche ensuite une phrase du type :
+        </p>
+        <pre>Tu t'appelles prenom et tu as age ans</pre>
     </div>
 
     <a class="back" href="../index.html">⬅ Retour à l’accueil</a>
