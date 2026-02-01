@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Cours – Les variables en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 20px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📦 Les variables en Python</h1>
+
+    <h2>🧠 Qu’est-ce qu’une variable ?</h2>
+    <p>
+        Une variable est une <strong>boîte qui sert à stocker une information</strong>.
+        Cette information peut être un nombre, un mot, ou autre chose.
+    </p>
+
+    <p>
+        En Python, on utilise les variables pour <strong>mémoriser des données</strong>
+        et les réutiliser plus tard dans le programme.
+    </p>
+
+    <h2>✏️ Créer une variable</h2>
+    <p>
+        Pour créer une variable, on écrit :
+    </p>
+
+    <pre>
+age = 12
+    </pre>
+
+    <p>
+        Ici :
+    </p>
+    <ul>
+        <li><code>age</code> est le nom de la variable</li>
+        <li><code>=</code> sert à donner une valeur</li>
+        <li><code>12</code> est la valeur stockée</li>
+    </ul>
+
+    <h2>👀 Utiliser une variable</h2>
+    <p>
+        On peut afficher le contenu d’une variable avec <code>print</code> :
+    </p>
+
+    <pre>
+age = 12
+print(age)
+    </pre>
+
+    <p>
+        Le programme affiche :
+    </p>
+    <pre>
+12
+    </pre>
+
+    <h2>🔁 Modifier la valeur d’une variable</h2>
+    <p>
+        Une variable peut changer de valeur pendant le programme :
+    </p>
+
+    <pre>
+score = 10
+score = 15
+print(score)
+    </pre>
+
+    <div class="note">
+        💡 La nouvelle valeur remplace l’ancienne.
+    </div>
+
+    <h2>🔢 Les types de variables courants</h2>
+
+    <h3>Les nombres</h3>
+    <pre>
+age = 14
+points = 250
+    </pre>
+
+    <h3>Les nombres décimaux</h3>
+    <pre>
+prix = 3.5
+moyenne = 12.75
+    </pre>
+
+    <h3>Les textes (chaînes de caractères)</h3>
+    <pre>
+prenom = "Alice"
+message = "Bonjour"
+    </pre>
+
+    <div class="note">
+        ⚠️ Les textes doivent toujours être entre guillemets.
+    </div>
+
+    <h2>➕ Utiliser les variables dans des calculs</h2>
+    <pre>
+a = 5
+b = 3
+resultat = a + b
+print(resultat)
+    </pre>
+
+    <p>
+        Le programme affiche :
+    </p>
+    <pre>
+8
+    </pre>
+
+    <h2>⌨️ Les variables et input()</h2>
+    <p>
+        On peut stocker une réponse de l’utilisateur dans une variable :
+    </p>
+
+    <pre>
+prenom = input("Quel est ton prénom ? ")
+print("Bonjour", prenom)
+    </pre>
+
+    <h2>🧠 À retenir absolument</h2>
+    <ul>
+        <li>Une variable stocke une information</li>
+        <li>On utilise <code>=</code> pour donner une valeur</li>
+        <li>La valeur peut changer</li>
+        <li>Une variable peut contenir un nombre ou un texte</li>
+    </ul>
+
+    <a class="back" href="../index.html">⬅ Retour à l’accueil</a>
+
+</div>
+
+</body>
+</html>
