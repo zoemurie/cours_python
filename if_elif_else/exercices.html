@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Exercices – Les variables en Python</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 30px;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .exercise {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Exercices – Les variables en Python</h1>
+
+<div class="exercise">
+<h2>Exercice 1 – Le nombre est-il positif ?</h2>
+<p>Écris un programme <code>nombre.py</code> qui :</p>
+<ul>
+    <li>crée une variable <code>nombre</code> et lui donne une valeur</li>
+    <li>affiche "positif" si le nombre est supérieur à 0</li>
+    <li>sinon affiche "négatif ou nul"</li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 2 – Pair ou impair</h2>
+<p>Écris un programme <code>pair_ou_impair.py</code> qui :</p>
+<ul>
+    <li>crée une variable <code>nombre</code></li>
+    <li>affiche "pair" si le nombre est divisible par 2</li>
+    <li>sinon affiche "impair"</li>
+</ul>
+<p><strong>Indice :</strong> utiliser <code>% 2</code></p>
+
+<h3>L’opérateur <code>%</code></h3>
+<p>En Python (et dans beaucoup d’autres langages), <code>%</code> s’appelle l’opérateur modulo. Il sert à <strong>calculer le reste d’une division entière</strong> (division euclidienne).</p>
+<p>Exemples :</p>
+<pre>
+7 % 2 = 1   # 7 = 2 x 3 + 1 → reste 1
+10 % 2 = 0  # 10 = 2 x 5 + 0 → reste 0
+15 % 3 = 0  # 15 = 3 x 5 + 0 → reste 0
+14 % 5 = 4  # 14 = 5 x 2 + 4 → reste 4
+</pre>
+<p>Donc :</p>
+<ul>
+    <li>Si <code>nombre % 2 == 0</code>, le nombre est divisible par 2 → <strong>pair</strong></li>
+    <li>Sinon, il reste 1 → <strong>impair</strong></li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 3 – Comparer deux nombres</h2>
+<p>Écris un programme <code>nombre_max.py</code> qui :</p>
+<ul>
+    <li>crée deux variables : <code>a</code> et <code>b</code></li>
+    <li>affiche la valeur de <code>a</code> si <code>a > b</code></li>
+    <li>affiche la valeur de <code>b</code> sinon</li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 4 – Test de température</h2>
+<p>Écris un programme <code>temperature.py</code> qui :</p>
+<ul>
+    <li>affiche "froid" si la température est inférieure à 10</li>
+    <li>affiche "bon" si elle est entre 10 et 25</li>
+    <li>affiche "chaud" sinon</li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 5 – Note d’un élève</h2>
+<p>Écris un programme <code>note.py</code> qui :</p>
+<ul>
+    <li>affiche "Très bien" si la note est ≥ 16</li>
+    <li>affiche "Moyen" si la note est entre 10 et 15</li>
+    <li>affiche "Insuffisant" sinon</li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 6 – Deviner un mot</h2>
+<p>Écris un programme <code>deviner_mot.py</code> qui :</p>
+<ul>
+    <li>crée une variable <code>mot_secret = "chat"</code></li>
+    <li>demande à l’utilisateur d’entrer un mot</li>
+    <li>affiche "Bravo" si le mot est correct</li>
+    <li>affiche "Essaie encore" sinon</li>
+</ul>
+</div>
+
+<div class="exercise">
+<h2>Exercice 7 – Mini jeu</h2>
+<p>Écris un programme <code>age.py</code> qui :</p>
+<ul>
+    <li>demande l’âge de l’utilisateur</li>
+    <li>affiche :</li>
+    <ul>
+        <li>"Enfant" si âge &lt; 12</li>
+        <li>"Ado" si âge entre 12 et 17</li>
+        <li>"Adulte" sinon</li>
+    </ul>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
