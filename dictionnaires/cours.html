@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Cours – Dictionnaires en Python</title>
+    <title>Cours – Les Dictionnaires en Python</title>
 
     <style>
         body {
@@ -17,9 +17,9 @@
             max-width: 900px;
             margin: 50px auto;
             background-color: #ffffff;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
@@ -30,42 +30,117 @@
 
         h2 {
             color: #1e3c72;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         h3 {
             color: #2a5298;
-            margin-top: 20px;
+            margin-top: 25px;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            line-height: 1.8;
         }
 
         pre {
             background-color: #eef2f7;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 10px;
             overflow-x: auto;
+            font-family: "Courier New", monospace;
+            line-height: 1.6;
         }
 
         code {
             background-color: #eef2f7;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
         }
 
-        ul {
-            margin-left: 20px;
-        }
-
-        .note {
-            background-color: #f4f8ff;
-            border-left: 4px solid #1e3c72;
+        .important {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
             padding: 15px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 5px solid #2a5298;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .resume {
+            background-color: #ecf4ff;
+            border-left: 5px solid #3498db;
+            padding: 18px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .resume ul {
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
-            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #2a5298;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .comparison {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
         }
 
         .back {
             display: block;
-            margin-top: 40px;
+            margin-top: 45px;
             text-align: center;
             text-decoration: none;
             color: #2a5298;
@@ -81,70 +156,375 @@
 <body>
 
 <div class="container">
+    <h1>Les Dictionnaires en Python</h1>
+    <p class="subtitle">Stocker des données avec des clés et des valeurs</p>
 
-    <h1>Cours – Les dictionnaires en Python</h1>
+    <h2>Introduction</h2>
+    <p>Un dictionnaire est une structure de données qui permet de stocker des informations sous forme de paires <strong>clé : valeur</strong>. C'est comme un vrai dictionnaire où tu cherches un mot (la clé) pour trouver sa définition (la valeur).</p>
 
-    <h2>Qu’est-ce qu’un dictionnaire ?</h2>
-    <p>
-        Un dictionnaire est une variable qui permet d’associer une information à une autre.  
-        Les données sont stockées sous la forme <code>clé → valeur</code>.
-    </p>
+    <p>Les dictionnaires sont très utiles pour organiser des données de manière structurée et y accéder rapidement.</p>
 
-    <h2>Créer un dictionnaire</h2>
-    <pre>eleve = {"prenom": "Alice", "age": 12, "note": 15}</pre>
-    <div class="note">
-        Ici :<br>
+    <h2>1. Créer un Dictionnaire</h2>
+    
+    <h3>Syntaxe de base</h3>
+    <p>Un dictionnaire se crée avec des accolades <code>{}</code> et contient des paires clé-valeur séparées par des virgules :</p>
+    
+    <pre>nom_dictionnaire = {
+    "clé1": "valeur1",
+    "clé2": "valeur2",
+    "clé3": "valeur3"
+}</pre>
+
+    <h3>Exemples concrets</h3>
+    <div class="example">
+        <pre># Dictionnaire vide
+mon_dico = {}
+
+# Informations sur une personne
+personne = {
+    "nom": "Dupont",
+    "prenom": "Marie",
+    "age": 14,
+    "classe": "3ème"
+}
+
+# Capitales de pays
+capitales = {
+    "France": "Paris",
+    "Espagne": "Madrid",
+    "Italie": "Rome",
+    "Allemagne": "Berlin"
+}
+
+# Notes d'un élève
+notes = {
+    "maths": 15,
+    "français": 13,
+    "anglais": 16,
+    "SVT": 14
+}</pre>
+    </div>
+
+    <div class="info">
+        <strong>💡 À noter :</strong> Les clés sont généralement des chaînes de caractères (entre guillemets), mais elles peuvent aussi être des nombres. Les valeurs peuvent être de n'importe quel type : nombres, chaînes, listes, ou même d'autres dictionnaires !
+    </div>
+
+    <h2>2. Accéder aux Valeurs</h2>
+
+    <p>Pour accéder à une valeur, on utilise la clé correspondante entre crochets :</p>
+
+    <div class="example">
+        <pre>personne = {
+    "nom": "Dupont",
+    "prenom": "Marie",
+    "age": 14
+}
+
+# Accéder aux valeurs
+print(personne["nom"])      # Affiche : Dupont
+print(personne["age"])      # Affiche : 14
+
+# Utiliser dans une phrase
+print("Bonjour", personne["prenom"])  # Affiche : Bonjour Marie</pre>
+    </div>
+
+    <h3>Méthode sécurisée avec get()</h3>
+    <p>La méthode <code>get()</code> permet d'éviter les erreurs si une clé n'existe pas :</p>
+
+    <div class="example">
+        <pre>personne = {"nom": "Dupont", "age": 14}
+
+# Avec []
+print(personne["ville"])  # ❌ ERREUR : KeyError
+
+# Avec get()
+print(personne.get("ville"))           # Affiche : None
+print(personne.get("ville", "Inconnue"))  # Affiche : Inconnue</pre>
+    </div>
+
+    <h2>3. Modifier et Ajouter des Éléments</h2>
+
+    <h3>Modifier une valeur existante</h3>
+    <pre>personne = {"nom": "Dupont", "age": 14}
+personne["age"] = 15  # Modifier l'âge
+print(personne)  # {'nom': 'Dupont', 'age': 15}</pre>
+
+    <h3>Ajouter une nouvelle paire clé-valeur</h3>
+    <pre>personne = {"nom": "Dupont", "age": 14}
+personne["ville"] = "Lyon"  # Ajouter une ville
+print(personne)  # {'nom': 'Dupont', 'age': 14, 'ville': 'Lyon'}</pre>
+
+    <div class="example">
+        <pre># Exemple complet
+notes = {"maths": 15, "français": 13}
+
+# Modifier une note
+notes["maths"] = 17
+print(notes)  # {'maths': 17, 'français': 13}
+
+# Ajouter une nouvelle matière
+notes["anglais"] = 16
+print(notes)  # {'maths': 17, 'français': 13, 'anglais': 16}</pre>
+    </div>
+
+    <h2>4. Supprimer des Éléments</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Méthode</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>del dictionnaire[clé]</code></td>
+                <td>Supprime une paire clé-valeur</td>
+                <td><code>del notes["maths"]</code></td>
+            </tr>
+            <tr>
+                <td><code>pop(clé)</code></td>
+                <td>Supprime et retourne la valeur</td>
+                <td><code>notes.pop("maths")</code></td>
+            </tr>
+            <tr>
+                <td><code>clear()</code></td>
+                <td>Vide complètement le dictionnaire</td>
+                <td><code>notes.clear()</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="example">
+        <pre>notes = {"maths": 15, "français": 13, "anglais": 16}
+
+# Supprimer avec del
+del notes["anglais"]
+print(notes)  # {'maths': 15, 'français': 13}
+
+# Supprimer avec pop (récupère la valeur)
+note_maths = notes.pop("maths")
+print(note_maths)  # 15
+print(notes)  # {'français': 13}</pre>
+    </div>
+
+    <h2>5. Parcourir un Dictionnaire</h2>
+
+    <h3>Parcourir les clés</h3>
+    <pre>capitales = {"France": "Paris", "Espagne": "Madrid", "Italie": "Rome"}
+
+for pays in capitales:
+    print(pays)
+# Affiche :
+# France
+# Espagne
+# Italie</pre>
+
+    <h3>Parcourir les valeurs</h3>
+    <pre>for ville in capitales.values():
+    print(ville)
+# Affiche :
+# Paris
+# Madrid
+# Rome</pre>
+
+    <h3>Parcourir les clés et valeurs ensemble</h3>
+    <div class="example">
+        <pre>capitales = {"France": "Paris", "Espagne": "Madrid", "Italie": "Rome"}
+
+for pays, ville in capitales.items():
+    print("La capitale de", pays, "est", ville)
+
+# Affiche :
+# La capitale de France est Paris
+# La capitale de Espagne est Madrid
+# La capitale de Italie est Rome</pre>
+    </div>
+
+    <h2>6. Méthodes Utiles</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Méthode</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>keys()</code></td>
+                <td>Retourne toutes les clés</td>
+                <td><code>capitales.keys()</code></td>
+            </tr>
+            <tr>
+                <td><code>values()</code></td>
+                <td>Retourne toutes les valeurs</td>
+                <td><code>capitales.values()</code></td>
+            </tr>
+            <tr>
+                <td><code>items()</code></td>
+                <td>Retourne les paires clé-valeur</td>
+                <td><code>capitales.items()</code></td>
+            </tr>
+            <tr>
+                <td><code>len()</code></td>
+                <td>Nombre de paires dans le dictionnaire</td>
+                <td><code>len(capitales)</code></td>
+            </tr>
+            <tr>
+                <td><code>in</code></td>
+                <td>Vérifier si une clé existe</td>
+                <td><code>"France" in capitales</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="example">
+        <pre>notes = {"maths": 15, "français": 13, "anglais": 16}
+
+# Vérifier l'existence d'une clé
+if "maths" in notes:
+    print("La note de maths existe")
+
+# Nombre d'éléments
+print("Nombre de matières :", len(notes))  # 3
+
+# Liste des matières
+print("Matières :", list(notes.keys()))
+# ['maths', 'français', 'anglais']</pre>
+    </div>
+
+    <h2>7. Dictionnaires Imbriqués</h2>
+
+    <p>Un dictionnaire peut contenir d'autres dictionnaires !</p>
+
+    <div class="example">
+        <pre>classe = {
+    "eleve1": {
+        "nom": "Dupont",
+        "age": 14,
+        "notes": {"maths": 15, "français": 13}
+    },
+    "eleve2": {
+        "nom": "Martin",
+        "age": 13,
+        "notes": {"maths": 17, "français": 16}
+    }
+}
+
+# Accéder aux données
+print(classe["eleve1"]["nom"])  # Dupont
+print(classe["eleve2"]["notes"]["maths"])  # 17</pre>
+    </div>
+
+    <h2>8. Cas d'Usage Pratiques</h2>
+
+    <h3>Exemple 1 : Carnet d'adresses</h3>
+    <div class="example">
+        <pre>contacts = {
+    "Alice": "alice@email.com",
+    "Bob": "bob@email.com",
+    "Charlie": "charlie@email.com"
+}
+
+# Rechercher un contact
+nom = input("Nom du contact : ")
+if nom in contacts:
+    print("Email :", contacts[nom])
+else:
+    print("Contact introuvable")</pre>
+    </div>
+
+    <h3>Exemple 2 : Compter les occurrences</h3>
+    <div class="example">
+        <pre>phrase = "bonjour le monde bonjour"
+mots = phrase.split()
+
+compteur = {}
+for mot in mots:
+    if mot in compteur:
+        compteur[mot] += 1
+    else:
+        compteur[mot] = 1
+
+print(compteur)
+# {'bonjour': 2, 'le': 1, 'monde': 1}</pre>
+    </div>
+
+    <h3>Exemple 3 : Traduction</h3>
+    <div class="example">
+        <pre>traduction = {
+    "hello": "bonjour",
+    "goodbye": "au revoir",
+    "thanks": "merci",
+    "please": "s'il vous plaît"
+}
+
+mot_anglais = input("Mot en anglais : ")
+print("Traduction :", traduction.get(mot_anglais, "Non trouvé"))</pre>
+    </div>
+
+    <h2>9. Comparaison : Liste vs Dictionnaire</h2>
+
+    <div class="comparison">
+        <h3>Liste</h3>
         <ul>
-            <li><code>eleve</code> est le dictionnaire</li>
-            <li><code>"prenom", "age", "note"</code> sont les clés</li>
-            <li><code>"Alice", 12, 15</code> sont les valeurs</li>
+            <li>Utilise des indices numériques (0, 1, 2...)</li>
+            <li>Ordre des éléments important</li>
+            <li>Bonne pour les séquences</li>
+        </ul>
+        <pre>fruits = ["pomme", "banane", "orange"]
+print(fruits[0])  # pomme</pre>
+
+        <h3 style="margin-top: 25px;">Dictionnaire</h3>
+        <ul>
+            <li>Utilise des clés personnalisées</li>
+            <li>Ordre moins important (Python 3.7+)</li>
+            <li>Bon pour les données structurées</li>
+        </ul>
+        <pre>prix = {"pomme": 1.5, "banane": 0.8, "orange": 2.0}
+print(prix["pomme"])  # 1.5</pre>
+    </div>
+
+    <div class="important">
+        <strong>⚠️ Points importants :</strong>
+        <ul>
+            <li>Les clés doivent être <strong>uniques</strong> (pas de doublons)</li>
+            <li>Les clés sont généralement des chaînes de caractères</li>
+            <li>L'accès par clé est très rapide, même pour de gros dictionnaires</li>
+            <li>Si une clé n'existe pas, utilise <code>get()</code> pour éviter les erreurs</li>
         </ul>
     </div>
 
-    <h2>Accéder à une valeur</h2>
-    <p>On utilise la clé :</p>
-    <pre>
-print(eleve["prenom"])  # affiche Alice
-print(eleve["age"])     # affiche 12
-    </pre>
-    <div class="note">
-        La clé doit exister, sinon le programme plante.
+    <h2>10. Exercices d'Entraînement</h2>
+
+    <ol>
+        <li><strong>Annuaire téléphonique :</strong> Crée un dictionnaire avec des noms et numéros de téléphone. Permets de rechercher un numéro.</li>
+        <li><strong>Inventaire :</strong> Crée un dictionnaire d'objets avec leurs quantités. Ajoute, modifie et supprime des objets.</li>
+        <li><strong>Quiz :</strong> Crée un dictionnaire de questions-réponses et vérifie les réponses de l'utilisateur.</li>
+        <li><strong>Calculateur de moyenne :</strong> Stocke des notes dans un dictionnaire et calcule la moyenne.</li>
+        <li><strong>Convertisseur :</strong> Crée un dictionnaire de taux de change et convertis des montants entre devises.</li>
+    </ol>
+
+    <div class="resume">
+        <h3>📌 Résumé des Commandes Importantes</h3>
+        <ul>
+            <li><strong>Créer :</strong> <code>dico = {"clé": "valeur"}</code></li>
+            <li><strong>Accéder :</strong> <code>dico["clé"]</code> ou <code>dico.get("clé")</code></li>
+            <li><strong>Ajouter/Modifier :</strong> <code>dico["nouvelle_clé"] = valeur</code></li>
+            <li><strong>Supprimer :</strong> <code>del dico["clé"]</code> ou <code>dico.pop("clé")</code></li>
+            <li><strong>Parcourir :</strong> <code>for clé, valeur in dico.items()</code></li>
+            <li><strong>Vérifier :</strong> <code>"clé" in dico</code></li>
+            <li><strong>Taille :</strong> <code>len(dico)</code></li>
+            <li><strong>Méthodes :</strong> <code>keys()</code>, <code>values()</code>, <code>items()</code>, <code>clear()</code></li>
+        </ul>
     </div>
 
-    <h2>Ajouter ou modifier une information</h2>
-    <p>Pour ajouter une information :</p>
-    <pre>eleve["classe"] = "5A"</pre>
-    <p>Pour modifier une valeur :</p>
-    <pre>eleve["age"] = 13</pre>
-
-    <h2>Supprimer une information</h2>
-    <pre>del eleve["note"]</pre>
-
-    <h2>Parcourir un dictionnaire</h2>
-    <p>Parcourir uniquement les clés :</p>
-    <pre>
-for cle in eleve:
-    print(cle)
-    </pre>
-    <p>Parcourir clés et valeurs :</p>
-    <pre>
-for cle, valeur in eleve.items():
-    print(cle, ":", valeur)
-    </pre>
-
-    <h2>Taille d’un dictionnaire</h2>
-    <pre>print(len(eleve))</pre>
-    <p>Affiche le nombre d’informations stockées dans le dictionnaire.</p>
-
-    <h2>À retenir</h2>
-    <ul>
-        <li>Un dictionnaire associe une clé à une valeur.</li>
-        <li>On accède aux données avec les clés.</li>
-        <li>Les clés sont souvent des mots.</li>
-        <li>Les dictionnaires sont très utiles pour organiser des informations.</li>
-    </ul>
-
-    <a class="back" href="../index.html">Retour à l’accueil</a>
+    <div class="info">
+        <strong>🚀 Pour aller plus loin :</strong> Les dictionnaires sont au cœur de Python ! Ils sont utilisés partout : configuration, bases de données, APIs web, et bien plus. Maîtriser les dictionnaires est essentiel pour devenir un bon programmeur Python.
+    </div>
 
 </div>
 
