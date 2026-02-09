@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Les variables en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#definition">Qu'est-ce qu'une variable ?</a></li>
+                <li><a href="#creer">Créer une variable</a></li>
+                <li><a href="#utiliser">Utiliser une variable</a></li>
+                <li><a href="#modifier">Modifier une variable</a></li>
+                <li><a href="#types">Types de variables</a></li>
+                <li><a href="#calculs">Calculs avec variables</a></li>
+                <li><a href="#input">Variables et input()</a></li>
+                <li><a href="#retenir">À retenir</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Exercice 1 - Création simple</a></li>
+                <li><a href="#ex2">Exercice 2 - Affichage</a></li>
+                <li><a href="#ex3">Exercice 3 - Calculs</a></li>
+                <li><a href="#ex4">Exercice 4 - Input utilisateur</a></li>
+                <li><a href="#ex5">Exercice 5 - Modification</a></li>
+                <li><a href="#ex6">Exercice 6 - Projet final</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🐍 Les variables en Python</h1>
+
+        <!-- PARTIE COURS -->
+        <h2 id="definition">Qu'est-ce qu'une variable ?</h2>
+        <p>
+            Une variable est une <strong>boîte qui sert à stocker une information</strong>.
+            Cette information peut être un nombre, un mot, ou autre chose.
+        </p>
+        <p>
+            En Python, on utilise les variables pour <strong>mémoriser des données</strong>
+            et les réutiliser plus tard dans le programme.
+        </p>
+
+        <h2 id="creer">Créer une variable</h2>
+        <p>Pour créer une variable, on écrit :</p>
+        <pre>age = 12</pre>
+        <p>Ici :</p>
+        <ul>
+            <li><code>age</code> est le nom de la variable</li>
+            <li><code>=</code> sert à donner une valeur</li>
+            <li><code>12</code> est la valeur stockée</li>
+        </ul>
+
+        <h2 id="utiliser">Utiliser une variable</h2>
+        <p>On peut afficher le contenu d'une variable avec <code>print</code> :</p>
+        <pre>age = 12
+print(age)</pre>
+        <p>Le programme affiche :</p>
+        <pre>12</pre>
+
+        <h2 id="modifier">Modifier la valeur d'une variable</h2>
+        <p>Une variable peut changer de valeur pendant le programme :</p>
+        <pre>score = 10
+score = 15
+print(score)</pre>
+        <div class="note">
+            💡 La nouvelle valeur remplace l'ancienne.
+        </div>
+
+        <h2 id="types">Les types de variables courants</h2>
+
+        <h3>Les nombres entiers</h3>
+        <pre>age = 14
+points = 250</pre>
+
+        <h3>Les nombres décimaux</h3>
+        <pre>prix = 3.5
+moyenne = 12.75</pre>
+
+        <h3>Les textes (chaînes de caractères)</h3>
+        <pre>prenom = "Alice"
+message = "Bonjour"</pre>
+        <div class="note">
+            ⚠️ Les textes doivent toujours être entre guillemets.
+        </div>
+
+        <h2 id="calculs">Utiliser les variables dans des calculs</h2>
+        <pre>a = 5
+b = 3
+resultat = a + b
+print(resultat)</pre>
+        <p>Le programme affiche :</p>
+        <pre>8</pre>
+
+        <h2 id="input">Les variables et input()</h2>
+        <p>On peut stocker une réponse de l'utilisateur dans une variable :</p>
+        <pre>prenom = input("Quel est ton prénom ? ")
+print("Bonjour", prenom)</pre>
+
+        <h2 id="retenir">À retenir absolument</h2>
+        <ul>
+            <li>Une variable stocke une information</li>
+            <li>On utilise <code>=</code> pour donner une valeur</li>
+            <li>La valeur peut changer</li>
+            <li>Une variable peut contenir un nombre ou un texte</li>
+        </ul>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 - Création simple de variables</h3>
+            <p><strong>Consigne :</strong> Crée trois variables :</p>
+            <ul>
+                <li><code>nom</code> avec ton nom</li>
+                <li><code>age</code> avec ton âge</li>
+                <li><code>ville</code> avec ta ville</li>
+            </ul>
+            <p>Affiche ensuite chaque variable avec <code>print()</code></p>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 - Affichage personnalisé</h3>
+            <p><strong>Consigne :</strong> Crée une variable <code>prenom</code> et affiche un message de bienvenue complet :</p>
+            <pre>prenom = "Thomas"
+print("Bienvenue", prenom, "dans le cours Python !")</pre>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 - Calculs simples</h3>
+            <p><strong>Consigne :</strong> Crée deux variables <code>nombre1</code> et <code>nombre2</code>. Calcule et affiche :</p>
+            <ul>
+                <li>Leur somme</li>
+                <li>Leur différence</li>
+                <li>Leur produit</li>
+            </ul>
+            <pre># Exemple
+nombre1 = 10
+nombre2 = 5
+somme = nombre1 + nombre2
+print("La somme est :", somme)</pre>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 - Interaction avec l'utilisateur</h3>
+            <p><strong>Consigne :</strong> Demande à l'utilisateur :</p>
+            <ul>
+                <li>Son prénom</li>
+                <li>Son âge</li>
+            </ul>
+            <p>Puis affiche : "Bonjour [prénom], tu as [âge] ans !"</p>
+            <pre># À compléter
+prenom = input("Quel est ton prénom ? ")
+age = input("Quel est ton âge ? ")
+print(...)  # À compléter</pre>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 - Modification de variables</h3>
+            <p><strong>Consigne :</strong> Crée une variable <code>score</code> avec la valeur 0. Ensuite :</p>
+            <ul>
+                <li>Ajoute 10 points</li>
+                <li>Ajoute encore 5 points</li>
+                <li>Affiche le score final</li>
+            </ul>
+            <pre>score = 0
+score = score + 10
+score = score + 5
+print("Score final :", score)</pre>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 - Projet : Calculatrice d'âge</h3>
+            <p><strong>Consigne :</strong> Crée un programme qui :</p>
+            <ol>
+                <li>Demande l'année de naissance</li>
+                <li>Calcule l'âge (en utilisant l'année actuelle : 2024)</li>
+                <li>Affiche : "Tu as environ [âge] ans"</li>
+            </ol>
+            <div class="note">
+                💡 <strong>Astuce :</strong> Pour convertir du texte en nombre, utilise <code>int()</code><br>
+                Exemple : <code>annee = int(input("Année ? "))</code>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
