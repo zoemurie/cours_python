@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>La Boucle for en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .resume {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h2 {
+            margin-top: 0;
+            color: #1e3c72;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .difficile {
+            background-color: #fff8e1;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .difficile h2 {
+            margin-top: 0;
+            color: #e65100;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .exemple-correct {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#definition">Qu'est-ce qu'une boucle for ?</a></li>
+                <li><a href="#exemple-simple">Exemple simple</a></li>
+                <li><a href="#range">Fonction range()</a></li>
+                <li><a href="#range-simple">range(nombre)</a></li>
+                <li><a href="#range-debut-fin">range(début, fin)</a></li>
+                <li><a href="#range-pas">range(début, fin, pas)</a></li>
+                <li><a href="#sans-range">for sans range()</a></li>
+                <li><a href="#retenir">À retenir</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Exercice 1 - Répéter message</a></li>
+                <li><a href="#ex2">Exercice 2 - Compter 0 à 4</a></li>
+                <li><a href="#ex3">Exercice 3 - Compter 1 à 5</a></li>
+                <li><a href="#ex4">Exercice 4 - Nombres pairs</a></li>
+                <li><a href="#ex5">Exercice 5 - Compte à rebours</a></li>
+                <li><a href="#ex6">Exercice 6 - Additionner</a></li>
+                <li><a href="#ex7">Exercice 7 - Avec variable</a></li>
+                <li><a href="#ex8">Exercice 8 - Parcourir mot</a></li>
+                <li><a href="#ex9">Exercice 9 - Défi final</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🔁 La Boucle for en Python</h1>
+
+        <!-- PARTIE COURS -->
+        <h2 id="definition">Qu'est-ce qu'une boucle for ?</h2>
+
+        <p>
+            La boucle <code>for</code> est utilisée lorsque l'on souhaite
+            <strong>répéter une action un nombre précis de fois</strong>
+            ou <strong>parcourir une série d'éléments</strong>.
+        </p>
+
+        <p><strong>Avantages de la boucle for :</strong></p>
+        <ul>
+            <li>La répétition est <strong>automatique</strong></li>
+            <li>Aucune condition à modifier manuellement (contrairement à <code>while</code>)</li>
+            <li>Pas de risque de boucle infinie</li>
+            <li>Code plus court et plus lisible</li>
+        </ul>
+
+        <div class="note">
+            💡 <strong>Différence avec while :</strong><br>
+            - <code>while</code> : "Répète <strong>tant que</strong> quelque chose est vrai"<br>
+            - <code>for</code> : "Répète <strong>pour chaque</strong> élément d'une série"
+        </div>
+
+        <h2 id="exemple-simple">Exemple simple</h2>
+
+        <pre>for i in range(3):
+    print("Bonjour")</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>Bonjour
+Bonjour
+Bonjour</pre>
+
+        <p>
+            Ce programme affiche le mot <strong>"Bonjour"</strong> trois fois.
+        </p>
+
+        <div class="note">
+            💡 La variable <code>i</code> prend automatiquement les valeurs 0, 1, 2 (même si on ne l'utilise pas ici).
+        </div>
+
+        <h2 id="range">Comprendre la fonction range()</h2>
+
+        <p>
+            La fonction <code>range()</code> permet de <strong>générer une suite de nombres</strong>.
+            Elle est très utilisée avec la boucle <code>for</code>
+            pour contrôler le nombre de répétitions.
+        </p>
+
+        <h3 id="range-simple">1. range(nombre)</h3>
+
+        <pre>range(3)</pre>
+
+        <p>
+            Cette instruction produit les nombres suivants :
+        </p>
+
+        <pre>0, 1, 2</pre>
+
+        <div class="important">
+            ⚠️ <strong>IMPORTANT :</strong> Le dernier nombre n'est <strong>jamais inclus</strong>.<br>
+            <code>range(3)</code> produit 0, 1, 2 (s'arrête <strong>avant</strong> 3).
+        </div>
+
+        <h3>Utilisation avec for :</h3>
+
+        <pre>for nombre in range(5):
+    print(nombre)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>0
+1
+2
+3
+4</pre>
+
+        <p>
+            À chaque tour de boucle, la variable <code>nombre</code> reçoit
+            le nombre suivant généré par <code>range()</code>.
+        </p>
+
+        <h3 id="range-debut-fin">2. range(début, fin)</h3>
+
+        <pre>for nombre in range(2, 6):
+    print(nombre)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>2
+3
+4
+5</pre>
+
+        <p>
+            Cette boucle affiche les nombres de <strong>2 à 5</strong> (le 6 n'est pas inclus).
+        </p>
+
+        <div class="warning">
+            ⚠️ <strong>Rappel :</strong> La fin n'est <strong>jamais</strong> incluse !<br>
+            Pour aller jusqu'à 5, il faut écrire <code>range(2, 6)</code>
+        </div>
+
+        <h3 id="range-pas">3. range(début, fin, pas)</h3>
+
+        <p>Le troisième paramètre permet de définir le <strong>"pas"</strong>, c'est-à-dire de combien on avance à chaque fois.</p>
+
+        <h4>Exemple 1 - Avancer de 2 en 2 :</h4>
+        <pre>for nombre in range(0, 10, 2):
+    print(nombre)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>0
+2
+4
+6
+8</pre>
+
+        <h4>Exemple 2 - Compter à l'envers (pas négatif) :</h4>
+        <pre>for nombre in range(5, 0, -1):
+    print(nombre)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>5
+4
+3
+2
+1</pre>
+
+        <div class="note">
+            💡 Avec un pas <strong>négatif</strong> (-1), la boucle compte à l'envers !
+        </div>
+
+        <h3>Tableau récapitulatif de range() :</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Syntaxe</th>
+                    <th>Exemple</th>
+                    <th>Résultat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>range(n)</code></td>
+                    <td><code>range(5)</code></td>
+                    <td>0, 1, 2, 3, 4</td>
+                </tr>
+                <tr>
+                    <td><code>range(début, fin)</code></td>
+                    <td><code>range(2, 6)</code></td>
+                    <td>2, 3, 4, 5</td>
+                </tr>
+                <tr>
+                    <td><code>range(début, fin, pas)</code></td>
+                    <td><code>range(0, 10, 2)</code></td>
+                    <td>0, 2, 4, 6, 8</td>
+                </tr>
+                <tr>
+                    <td><code>range(début, fin, -pas)</code></td>
+                    <td><code>range(5, 0, -1)</code></td>
+                    <td>5, 4, 3, 2, 1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="sans-range">La boucle for sans range()</h2>
+
+        <p>
+            La boucle <code>for</code> ne sert pas uniquement à compter.
+            Elle peut aussi <strong>parcourir directement des éléments</strong> : mots, listes, etc.
+        </p>
+
+        <h3>Parcourir un mot :</h3>
+
+        <pre>mot = "Python"
+
+for lettre in mot:
+    print(lettre)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>P
+y
+t
+h
+o
+n</pre>
+
+        <p>
+            Chaque lettre du mot est affichée une par une.
+        </p>
+
+        <h3>Parcourir une liste :</h3>
+
+        <pre>fruits = ["pomme", "banane", "orange"]
+
+for fruit in fruits:
+    print(fruit)</pre>
+
+        <p><strong>Résultat :</strong></p>
+        <pre>pomme
+banane
+orange</pre>
+
+        <p>
+            Chaque élément de la liste est affiché successivement.
+        </p>
+
+        <div class="note">
+            💡 Quand utiliser <code>for</code> sans <code>range()</code> ?<br>
+            - Pour parcourir les <strong>lettres d'un mot</strong><br>
+            - Pour parcourir les <strong>éléments d'une liste</strong><br>
+            - Quand tu veux travailler directement avec les valeurs (pas les indices)
+        </div>
+
+        <h2 id="retenir">À retenir</h2>
+
+        <div class="resume">
+            <strong>📌 Récapitulatif :</strong>
+            <ul>
+                <li><code>while</code> répète <strong>tant qu'</strong>une condition est vraie</li>
+                <li><code>for</code> automatise les répétitions (pas de risque de boucle infinie)</li>
+                <li><code>range()</code> génère une suite de nombres</li>
+                <li><code>for</code> peut parcourir nombres, mots ou listes</li>
+                <li>Le dernier nombre de <code>range()</code> n'est <strong>jamais inclus</strong></li>
+            </ul>
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h2>Exercice 1 – Répéter un message</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche le mot <code>"Bonjour"</code> <strong>5 fois</strong></li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>Bonjour
+Bonjour
+Bonjour
+Bonjour
+Bonjour</pre>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h2>Exercice 2 – Compter de 0 à 4</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche les nombres de <strong>0 à 4</strong></li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+            <div class="exemple-correct">
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>0
+1
+2
+3
+4</pre>
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Rappel :</strong> <code>range(5)</code> produit 0, 1, 2, 3, 4 (s'arrête avant 5)
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h2>Exercice 3 – Compter de 1 à 5</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche les nombres de <strong>1 à 5</strong> (inclus)</li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>1
+2
+3
+4
+5</pre>
+
+
+
+        <div class="exercice" id="ex4">
+            <h2>Exercice 4 – Les nombres pairs</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche les nombres <strong>pairs</strong> de 0 à 10</li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+            <div class="exemple-correct">
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>0
+2
+4
+6
+8
+10</pre>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h2>Exercice 5 – Compter à l'envers</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche les nombres de <strong>5 à 1</strong> (dans l'ordre décroissant)</li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>5
+4
+3
+2
+1</pre>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h2>Exercice 6 – Additionner</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Calcule la <strong>somme</strong> des nombres de 1 à 5</li>
+                <li>Affiche le résultat final</li>
+            </ol>
+
+            <div class="exemple-correct">
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>La somme est : 15</pre>
+                <p>(car 1 + 2 + 3 + 4 + 5 = 15)</p>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h2>Exercice 7 – Avec une variable</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Crée une variable <code>n</code> avec une valeur de ton choix</li>
+                <li>Affiche tous les nombres de <strong>0 à n</strong> (inclus)</li>
+            </ol>
+
+                <p><strong>Exemple :</strong> Si <code>n = 3</code>, le résultat est :</p>
+                <pre>0
+1
+2
+3</pre>
+  
+
+            <div class="warning">
+                ⚠️ <strong>Attention :</strong> Pour aller jusqu'à <code>n</code> inclus, utilise <code>range(n + 1)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex8">
+            <h2>Exercice 8 – Parcourir un mot</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Affiche <strong>chaque lettre</strong> du mot <code>"python"</code> sur une ligne différente</li>
+                <li>Utilise une boucle <code>for</code></li>
+            </ol>
+
+            <div class="exemple-correct">
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>p
+y
+t
+h
+o
+n</pre>
+            </div>
+        </div>
+
+        <div class="difficile" id="ex9">
+            <h2>Exercice 9 – Défi final 🏆 (plus difficile)</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Écris un programme qui :</p>
+            <ol>
+                <li>Demande un nombre à l'utilisateur</li>
+                <li>Affiche tous les nombres de <strong>0 jusqu'à ce nombre</strong> (inclus)</li>
+                <li>Affiche à la fin la <strong>somme</strong> de ces nombres</li>
+            </ol>
+
+
+                <p><strong>Exemple d'exécution :</strong></p>
+                <pre>Entre un nombre : 4
+0
+1
+2
+3
+4
+Somme = 10</pre>
+                <p>(car 0 + 1 + 2 + 3 + 4 = 10)</p>
+
+
+            <p><strong>Cet exercice permet de vérifier que tu sais utiliser :</strong></p>
+            <ul>
+                <li>Une variable</li>
+                <li>Une boucle <code>for</code></li>
+                <li>La fonction <code>range()</code></li>
+                <li>L'addition dans une boucle</li>
+                <li>La fonction <code>input()</code></li>
+            </ul>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
