@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Le Module Turtle en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .resume {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #2a5298;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .easy {
+            background-color: #e3f2fd;
+            color: #1e3c72;
+        }
+
+        .medium {
+            background-color: #bbdefb;
+            color: #1e3c72;
+        }
+
+        .hard {
+            background-color: #2a5298;
+            color: #ffffff;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#demarrer">Démarrer avec Turtle</a></li>
+                <li><a href="#deplacements">Déplacements</a></li>
+                <li><a href="#crayon">Contrôler le crayon</a></li>
+                <li><a href="#remplir">Remplir des formes</a></li>
+                <li><a href="#cercles">Dessiner des cercles</a></li>
+                <li><a href="#vitesse">Vitesse et apparence</a></li>
+                <li><a href="#fenetre">Personnaliser la fenêtre</a></li>
+                <li><a href="#boucles">Combiner avec boucles</a></li>
+                <li><a href="#resume">Résumé commandes</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Ex 1 - Carré simple</a></li>
+                <li><a href="#ex2">Ex 2 - Triangle coloré</a></li>
+                <li><a href="#ex3">Ex 3 - Pentagone</a></li>
+                <li><a href="#ex4">Ex 4 - Hexagone rempli</a></li>
+                <li><a href="#ex5">Ex 5 - Maison</a></li>
+                <li><a href="#ex6">Ex 6 - Fleur</a></li>
+                <li><a href="#ex7">Ex 7 - Damier</a></li>
+                <li><a href="#ex8">Ex 8 - Sapin</a></li>
+                <li><a href="#ex9">Ex 9 - Carrés en rotation</a></li>
+                <li><a href="#ex10">Ex 10 - Spirale circulaire</a></li>
+                <li><a href="#ex11">Ex 11 - Spirale carrée</a></li>
+                <li><a href="#ex12">Ex 12 - Arc-en-ciel</a></li>
+                <li><a href="#ex13">Ex 13 - Étoile 5 branches</a></li>
+                <li><a href="#ex14">Ex 14 - Soleil</a></li>
+                <li><a href="#ex15">Ex 15 - Mandala</a></li>
+                <li><a href="#ex16">Ex 16 - Paysage complet</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🐢 Le Module Turtle en Python</h1>
+        <p class="subtitle">Dessiner avec du code !</p>
+
+        <!-- PARTIE COURS -->
+        <h2 id="intro">Introduction</h2>
+        <p>Le module <code>turtle</code> est un outil magique qui permet de dessiner en programmant ! Imagine une petite tortue qui se déplace sur l'écran avec un crayon. Tu lui donnes des instructions et elle dessine ce que tu veux : lignes, formes géométriques, spirales, et bien plus encore.</p>
+
+        <p>C'est un excellent moyen d'apprendre la programmation tout en s'amusant !</p>
+
+        <h2 id="demarrer">1. Démarrer avec Turtle</h2>
+        
+        <h3>Importer le module</h3>
+        <p>Pour utiliser turtle, il faut d'abord l'importer dans ton programme :</p>
+        
+        <pre>import turtle</pre>
+
+        <div class="info">
+            <strong>💡 Astuce :</strong> Tu peux aussi écrire <code>from turtle import *</code> pour importer toutes les fonctions directement, mais c'est moins recommandé pour les gros projets.
+        </div>
+
+        <h3>Créer ta tortue</h3>
+        <pre>import turtle
+
+# Créer une tortue
+ma_tortue = turtle.Turtle()
+
+# Garder la fenêtre ouverte
+turtle.done()</pre>
+
+        <p>La commande <code>turtle.done()</code> est importante : elle garde la fenêtre ouverte jusqu'à ce que tu la fermes manuellement.</p>
+
+        <h2 id="deplacements">2. Déplacements de Base</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Commande</th>
+                    <th>Description</th>
+                    <th>Exemple</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>forward(distance)</code></td>
+                    <td>Avancer d'une certaine distance</td>
+                    <td><code>ma_tortue.forward(100)</code></td>
+                </tr>
+                <tr>
+                    <td><code>backward(distance)</code></td>
+                    <td>Reculer d'une certaine distance</td>
+                    <td><code>ma_tortue.backward(50)</code></td>
+                </tr>
+                <tr>
+                    <td><code>right(angle)</code></td>
+                    <td>Tourner à droite (en degrés)</td>
+                    <td><code>ma_tortue.right(90)</code></td>
+                </tr>
+                <tr>
+                    <td><code>left(angle)</code></td>
+                    <td>Tourner à gauche (en degrés)</td>
+                    <td><code>ma_tortue.left(45)</code></td>
+                </tr>
+                <tr>
+                    <td><code>goto(x, y)</code></td>
+                    <td>Aller à une position précise</td>
+                    <td><code>ma_tortue.goto(100, 50)</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Exemple : Dessiner un carré</h3>
+        <div class="example">
+            <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+
+# Dessiner un carré
+for i in range(4):
+    ma_tortue.forward(100)
+    ma_tortue.right(90)
+
+turtle.done()</pre>
+        </div>
+
+        <h2 id="crayon">3. Contrôler le Crayon</h2>
+
+        <h3>Lever et baisser le crayon</h3>
+        <ul>
+            <li><code>penup()</code> ou <code>up()</code> : Lever le crayon (ne dessine plus)</li>
+            <li><code>pendown()</code> ou <code>down()</code> : Baisser le crayon (dessine à nouveau)</li>
+        </ul>
+
+        <div class="example">
+            <pre>ma_tortue.forward(50)
+ma_tortue.penup()      # Lever le crayon
+ma_tortue.forward(50)  # Se déplacer sans dessiner
+ma_tortue.pendown()    # Baisser le crayon
+ma_tortue.forward(50)  # Dessiner à nouveau</pre>
+        </div>
+
+        <h3>Changer la couleur et l'épaisseur</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Commande</th>
+                    <th>Description</th>
+                    <th>Exemple</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pencolor(couleur)</code></td>
+                    <td>Changer la couleur du trait</td>
+                    <td><code>ma_tortue.pencolor("red")</code></td>
+                </tr>
+                <tr>
+                    <td><code>pensize(largeur)</code></td>
+                    <td>Changer l'épaisseur du trait</td>
+                    <td><code>ma_tortue.pensize(5)</code></td>
+                </tr>
+                <tr>
+                    <td><code>fillcolor(couleur)</code></td>
+                    <td>Couleur de remplissage</td>
+                    <td><code>ma_tortue.fillcolor("blue")</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info">
+            <strong>🎨 Couleurs disponibles :</strong> "red", "blue", "green", "yellow", "orange", "purple", "pink", "brown", "black", "white", etc. Tu peux aussi utiliser des codes hexadécimaux comme "#FF5733".
+        </div>
+
+        <h2 id="remplir">4. Remplir des Formes</h2>
+        
+        <p>Pour colorier l'intérieur d'une forme, utilise <code>begin_fill()</code> et <code>end_fill()</code> :</p>
+
+        <div class="example">
+            <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.fillcolor("yellow")
+
+# Commencer le remplissage
+ma_tortue.begin_fill()
+
+# Dessiner un triangle
+for i in range(3):
+    ma_tortue.forward(100)
+    ma_tortue.left(120)
+
+# Terminer le remplissage
+ma_tortue.end_fill()
+
+turtle.done()</pre>
+        </div>
+
+        <h2 id="cercles">5. Dessiner des Cercles</h2>
+
+        <p>La commande <code>circle(rayon)</code> permet de dessiner un cercle :</p>
+
+        <pre>ma_tortue.circle(50)  # Cercle de rayon 50</pre>
+
+        <p>Tu peux aussi dessiner une portion de cercle en ajoutant un angle :</p>
+
+        <pre>ma_tortue.circle(50, 180)  # Demi-cercle</pre>
+
+        <h2 id="vitesse">6. Vitesse et Apparence</h2>
+
+        <h3>Contrôler la vitesse</h3>
+        <pre>ma_tortue.speed(1)   # Très lent (1)
+ma_tortue.speed(5)   # Moyen (par défaut)
+ma_tortue.speed(10)  # Très rapide
+ma_tortue.speed(0)   # Instantané (pas d'animation)</pre>
+
+        <h3>Changer l'apparence de la tortue</h3>
+        <pre>ma_tortue.shape("turtle")   # Forme de tortue
+ma_tortue.shape("arrow")    # Flèche (par défaut)
+ma_tortue.shape("circle")   # Cercle
+ma_tortue.shape("square")   # Carré
+ma_tortue.shape("triangle") # Triangle</pre>
+
+        <h3>Cacher ou montrer la tortue</h3>
+        <pre>ma_tortue.hideturtle()  # Cacher
+ma_tortue.showturtle()  # Montrer</pre>
+
+        <h2 id="fenetre">7. Personnaliser la Fenêtre</h2>
+
+        <h3>Changer la couleur de fond</h3>
+        <pre>screen = turtle.Screen()
+screen.bgcolor("lightblue")</pre>
+
+        <h3>Changer le titre et la taille</h3>
+        <pre>screen = turtle.Screen()
+screen.title("Mon dessin Turtle")
+screen.setup(width=800, height=600)</pre>
+
+        <h2 id="boucles">8. Combiner avec les Boucles</h2>
+
+        <p>Turtle devient vraiment puissant quand on le combine avec des boucles !</p>
+
+        <h3>Dessiner plusieurs carrés en rotation</h3>
+        <div class="example">
+            <pre>import turtle
+
+ma_tortue = turtle.Turtle()
+ma_tortue.speed(0)
+
+for i in range(36):
+    # Dessiner un carré
+    for j in range(4):
+        ma_tortue.forward(50)
+        ma_tortue.right(90)
+    # Tourner un peu
+    ma_tortue.right(10)
+
+ma_tortue.hideturtle()
+turtle.done()</pre>
+        </div>
+
+        <div class="important">
+            <strong>⚠️ Attention :</strong> N'oublie pas <code>turtle.done()</code> à la fin de ton programme, sinon la fenêtre se fermera immédiatement !
+        </div>
+
+        <h2 id="resume">Résumé des Commandes Importantes</h2>
+        
+        <div class="resume">
+            <ul>
+                <li><strong>Déplacements :</strong> <code>forward()</code>, <code>backward()</code>, <code>right()</code>, <code>left()</code>, <code>goto()</code></li>
+                <li><strong>Crayon :</strong> <code>penup()</code>, <code>pendown()</code>, <code>pencolor()</code>, <code>pensize()</code></li>
+                <li><strong>Remplissage :</strong> <code>fillcolor()</code>, <code>begin_fill()</code>, <code>end_fill()</code></li>
+                <li><strong>Formes :</strong> <code>circle()</code></li>
+                <li><strong>Apparence :</strong> <code>speed()</code>, <code>shape()</code>, <code>hideturtle()</code>, <code>showturtle()</code></li>
+                <li><strong>Fenêtre :</strong> <code>bgcolor()</code>, <code>title()</code>, <code>setup()</code></li>
+                <li><strong>Important :</strong> <code>turtle.done()</code> à la fin du programme</li>
+            </ul>
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <h2>Niveau 1 : Formes de Base</h2>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 : Carré Simple <span class="difficulty easy">Facile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un carré de <strong>100 pixels</strong> de côté avec une ligne <strong>rouge</strong> de <strong>3 pixels</strong> d'épaisseur.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise une boucle <code>for</code> qui se répète 4 fois. À chaque tour : avance de 100 et tourne à droite de 90°. N'oublie pas <code>pencolor()</code> et <code>pensize()</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 : Triangle Coloré <span class="difficulty easy">Facile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un triangle équilatéral <strong>rempli</strong> de la couleur de ton choix avec des côtés de <strong>120 pixels</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Un triangle a 3 côtés. Angle de rotation : 360° / 3 = 120°. N'oublie pas <code>begin_fill()</code> et <code>end_fill()</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 : Pentagone <span class="difficulty easy">Facile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un pentagone régulier (5 côtés égaux) de <strong>80 pixels</strong> de côté.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Angle de rotation : 360° / 5 = 72°. Utilise une boucle <code>for</code> avec <code>range(5)</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 : Hexagone Rempli <span class="difficulty medium">Moyen</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un hexagone (6 côtés) rempli en <strong>bleu</strong> avec un contour <strong>noir</strong> de <strong>2 pixels</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise <code>pencolor("black")</code> pour le contour et <code>fillcolor("blue")</code> pour l'intérieur. Angle : 360° / 6 = 60°.
+            </div>
+        </div>
+
+        <h2>Niveau 2 : Dessins Créatifs</h2>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 : Maison <span class="difficulty medium">Moyen</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine une maison complète avec :</p>
+            <ul>
+                <li>Un carré pour les murs (couleur au choix)</li>
+                <li>Un triangle pour le toit (couleur différente)</li>
+                <li>Un rectangle pour la porte</li>
+                <li>Deux carrés pour les fenêtres</li>
+            </ul>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise <code>goto(x, y)</code> pour te déplacer vers les différentes parties. Pense à <code>penup()</code> et <code>pendown()</code> pour ne pas tracer en te déplaçant entre les éléments.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 : Fleur <span class="difficulty medium">Moyen</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine une fleur composée de <strong>8 cercles</strong> (pétales) disposés en cercle autour d'un centre. Rayon de chaque pétale : <strong>50 pixels</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise une boucle qui se répète 8 fois. À chaque tour : dessine un cercle avec <code>circle(50)</code>, puis tourne de 45° (360° / 8). Utilise <code>penup()</code> pour revenir au centre entre chaque pétale.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h3>Exercice 7 : Damier <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un damier <strong>4x4</strong> (16 cases) avec des carrés noirs et blancs alternés. Chaque carré fait <strong>50 pixels</strong> de côté.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise deux boucles imbriquées (une pour les lignes, une pour les colonnes). Alterne la couleur avec une condition : <code>if (i + j) % 2 == 0</code> pour décider si le carré est noir ou blanc.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex8">
+            <h3>Exercice 8 : Sapin de Noël <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un sapin composé de :</p>
+            <ul>
+                <li>3 triangles verts empilés (tailles décroissantes : 150, 120, 90 pixels de base)</li>
+                <li>Un rectangle marron pour le tronc (30x40 pixels)</li>
+                <li>Une étoile jaune au sommet (optionnel)</li>
+            </ul>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Dessine chaque triangle séparément en utilisant <code>goto()</code> pour te positionner. Décale chaque triangle vers le haut pour créer l'effet d'empilement.
+            </div>
+        </div>
+
+        <h2>Niveau 3 : Motifs et Spirales</h2>
+
+        <div class="exercice" id="ex9">
+            <h3>Exercice 9 : Carrés en Rotation <span class="difficulty medium">Moyen</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine <strong>36 carrés</strong> de 60 pixels en faisant pivoter de 10° entre chaque carré pour créer un motif en rosace.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Boucle de 36 répétitions. À chaque tour : dessine un carré (boucle interne de 4), puis tourne de 10°. Mets <code>speed(0)</code> pour accélérer l'animation.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex10">
+            <h3>Exercice 10 : Spirale Circulaire <span class="difficulty medium">Moyen</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée une spirale en dessinant des cercles de rayons croissants. Commence avec un rayon de <strong>10</strong>, puis augmente de <strong>5</strong> à chaque tour. Dessine <strong>20 cercles</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Utilise une boucle <code>for i in range(20)</code> et calcule le rayon : <code>rayon = 10 + i * 5</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex11">
+            <h3>Exercice 11 : Spirale Carrée <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine une spirale avec des lignes de longueur croissante. Commence à <strong>10 pixels</strong>, augmente de <strong>5</strong> à chaque segment. Fais au moins <strong>50 segments</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Boucle de 50 répétitions. À chaque tour : avance d'une distance croissante (<code>distance = 10 + i * 5</code>), puis tourne de 90°.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex12">
+            <h3>Exercice 12 : Arc-en-Ciel <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un arc-en-ciel avec <strong>7 demi-cercles</strong> concentriques de couleurs différentes (du plus grand au plus petit) :</p>
+            <ul>
+                <li><strong>Couleurs :</strong> rouge, orange, jaune, vert, bleu clair, bleu, violet</li>
+                <li><strong>Rayons :</strong> 150, 130, 110, 90, 70, 50, 30</li>
+            </ul>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Crée deux listes (une pour les couleurs, une pour les rayons). Utilise une boucle pour parcourir les deux listes en même temps. Dessine des demi-cercles avec <code>circle(rayon, 180)</code>. Change l'épaisseur du trait avec <code>pensize()</code> pour un meilleur rendu.
+            </div>
+        </div>
+
+        <h2>Niveau 4 : Défis Avancés</h2>
+
+        <div class="exercice" id="ex13">
+            <h3>Exercice 13 : Étoile à 5 Branches <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine une étoile à 5 branches parfaite, remplie en <strong>jaune</strong> avec un contour <strong>doré</strong>.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Une étoile à 5 branches nécessite 5 segments. À chaque sommet, tourne de <strong>144°</strong> (pas 72° !). Utilise une boucle de 5 répétitions. N'oublie pas <code>begin_fill()</code> et <code>end_fill()</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex14">
+            <h3>Exercice 14 : Soleil <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Dessine un soleil avec :</p>
+            <ul>
+                <li>Un cercle jaune au centre (rayon 60)</li>
+                <li>16 rayons partant du cercle (lignes de 40 pixels)</li>
+            </ul>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Dessine d'abord le cercle rempli. Puis utilise une boucle de 16 répétitions. Pour chaque rayon : positionne-toi au centre, avance de 60 (rayon du cercle), dessine la ligne de 40, reviens au centre avec <code>backward()</code>, tourne de 22.5° (360° / 16).
+            </div>
+        </div>
+
+        <div class="exercice" id="ex15">
+            <h3>Exercice 15 : Mandala <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un mandala en dessinant <strong>12 hexagones</strong> disposés en cercle autour d'un point central. Chaque hexagone a <strong>40 pixels</strong> de côté.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Boucle de 12 répétitions. À chaque tour : dessine un hexagone (boucle interne de 6 avec angle de 60°), reviens au centre avec <code>goto(0, 0)</code> ou <code>penup()</code>, tourne de 30° (360° / 12).
+            </div>
+        </div>
+
+        <h2>Projet Final</h2>
+
+        <div class="exercice" id="ex16">
+            <h3>Exercice 16 : Paysage Complet <span class="difficulty hard">Difficile</span></h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un paysage complet de ton imagination incluant au minimum :</p>
+            <ul>
+                <li>Un ciel (fond bleu ou dégradé)</li>
+                <li>Un soleil ou une lune</li>
+                <li>Des montagnes ou des collines</li>
+                <li>Au moins 2 arbres ou sapins</li>
+                <li>Une maison</li>
+                <li>Des nuages (cercles blancs)</li>
+            </ul>
+            <p><strong>Sois créatif !</strong> Ajoute des détails et des couleurs.</p>
+            <div class="hint">
+                💡 <strong>Indice :</strong> Planifie ton dessin sur papier d'abord. Utilise <code>screen.bgcolor()</code> pour le fond. Positionne chaque élément avec <code>goto()</code>. Tu peux créer des fonctions pour chaque élément (arbre, maison, nuage) pour réutiliser ton code et rendre le programme plus organisé.
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
