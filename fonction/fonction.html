@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Les Fonctions en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h2 {
+            margin-top: 0;
+            color: #1e3c72;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .exercice h3 {
+            margin-top: 15px;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .exemple-correct {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .exemple-incorrect {
+            background-color: #ffebee;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#definition">Qu'est-ce qu'une fonction ?</a></li>
+                <li><a href="#regles">Règles importantes</a></li>
+                <li><a href="#utilite">Utilité dans un jeu</a></li>
+                <li><a href="#sans-parametre">Fonction sans paramètre</a></li>
+                <li><a href="#avec-parametre">Fonction avec paramètres</a></li>
+                <li><a href="#plusieurs-parametres">Plusieurs paramètres</a></li>
+                <li><a href="#print-vs-return">print vs return</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Exercice 1 - Paramètres simples</a></li>
+                <li><a href="#ex2">Exercice 2 - Calcul avec return</a></li>
+                <li><a href="#ex3">Exercice 3 - Comparaison</a></li>
+                <li><a href="#ex4">Exercice 4 - Valeur maximale</a></li>
+                <li><a href="#ex5">Exercice 5 - Utilisation</a></li>
+                <li><a href="#projet">Mini-projet - Jeu</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>⚙️ Les Fonctions en Python</h1>
+
+        <!-- PARTIE COURS -->
+        <h2 id="definition">I – Qu'est-ce qu'une fonction ?</h2>
+
+        <p>
+            Une fonction est un <strong>groupe d'instructions auquel on donne un nom</strong> pour pouvoir les utiliser plusieurs fois.  
+            Au lieu de répéter du code, on le place dans une fonction.
+        </p>
+
+        <h3>Exemple sans fonction (répétitif) :</h3>
+        <pre>print("Bonjour")
+print("Bonjour")
+print("Bonjour")</pre>
+
+        <h3>Exemple avec une fonction (réutilisable) :</h3>
+        <pre>def dire_bonjour():
+    print("Bonjour")
+
+dire_bonjour()
+dire_bonjour()
+dire_bonjour()</pre>
+
+        <div class="note">
+            💡 On <strong>définit</strong> une fonction avec <code>def</code> et on l'<strong>appelle</strong> par son nom suivi de parenthèses <code>()</code>.
+        </div>
+
+        <h2 id="regles">Règles importantes</h2>
+
+        <div class="important">
+            <strong>📌 Règle 1 – Définir une fonction :</strong>
+            <p>Une fonction se définit avec le mot-clé <code>def</code> suivi du nom de la fonction et de parenthèses <code>()</code>, puis d'un deux-points <code>:</code></p>
+            <pre>def ma_fonction():
+    ...</pre>
+        </div>
+
+        <div class="important">
+            <strong>📌 Règle 2 – L'indentation est obligatoire :</strong>
+            <p>Le code à l'intérieur de la fonction doit être indenté avec <strong>4 espaces</strong> :</p>
+            <pre>def test():
+    print("Dans la fonction")  # 4 espaces avant print</pre>
+        </div>
+
+        <div class="important">
+            <strong>📌 Règle 3 – Appeler une fonction :</strong>
+            <p>Une fonction ne s'exécute que si on l'<strong>appelle</strong> avec son nom suivi de <code>()</code> :</p>
+            <pre>test()  # Exécute la fonction</pre>
+        </div>
+
+        <div class="warning">
+            ⚠️ <strong>Erreur fréquente :</strong> Si tu définis une fonction mais ne l'appelles pas, elle ne s'exécutera jamais !
+        </div>
+
+        <h2 id="utilite">Pourquoi les fonctions sont utiles dans un jeu ?</h2>
+        <p>
+            Dans un jeu, plusieurs actions peuvent se répéter :
+        </p>
+        <ul>
+            <li>Cliquer sur un bouton</li>
+            <li>Déplacer un personnage</li>
+            <li>Augmenter un score</li>
+            <li>Perdre une vie</li>
+            <li>Afficher un message</li>
+        </ul>
+        <p>Chaque action peut être définie comme une fonction, ce qui rend le code plus organisé et facile à modifier.</p>
+
+        <h2 id="sans-parametre">II – Fonction simple (sans paramètre)</h2>
+        <p>Une fonction simple ne prend <strong>aucune information</strong> en entrée :</p>
+        <pre>def dire_bonjour():
+    print("Bonjour")</pre>
+        <p>Pour l'utiliser :</p>
+        <pre>dire_bonjour()  # affiche : Bonjour</pre>
+
+        <h2 id="avec-parametre">III – Fonctions avec paramètres</h2>
+        <p>
+            Un <strong>paramètre</strong> est une <strong>information que l'on donne à une fonction</strong> pour qu'elle puisse travailler avec.
+        </p>
+
+        <h3>Exemple :</h3>
+        <pre>def dire_bonjour(prenom):
+    print("Bonjour", prenom)</pre>
+        
+        <p>Exemples d'appels :</p>
+        <pre>dire_bonjour("Alice")   # affiche : Bonjour Alice
+dire_bonjour("Lucas")   # affiche : Bonjour Lucas
+dire_bonjour("Marie")   # affiche : Bonjour Marie</pre>
+
+        <div class="note">
+            💡 Le paramètre <code>prenom</code> peut prendre <strong>différentes valeurs</strong> à chaque appel.
+        </div>
+
+        <h2 id="plusieurs-parametres">IV – Plusieurs paramètres</h2>
+        <p>Une fonction peut accepter <strong>plusieurs paramètres</strong> séparés par des virgules :</p>
+        <pre>def addition(a, b):
+    print(a + b)</pre>
+
+        <p>Exemples d'appels :</p>
+        <pre>addition(3, 5)    # affiche : 8
+addition(10, 20)  # affiche : 30</pre>
+
+        <div class="info">
+            💡 L'<strong>ordre des paramètres est important</strong> :<br>
+            <code>addition(3, 5)</code> → a=3, b=5<br>
+            <code>addition(5, 3)</code> → a=5, b=3
+        </div>
+
+        <h2 id="print-vs-return">V – print vs return : quelle différence ?</h2>
+
+        <h3>Avec <code>print</code> :</h3>
+        <div class="note">
+            <strong>print</strong> affiche un résultat à l'écran, mais <strong>ne renvoie rien</strong>.
+            <pre>def addition(a, b):
+    print(a + b)</pre>
+            <p>Utilisation :</p>
+            <pre>addition(3, 4)  # affiche : 7</pre>
+            <div class="warning">
+                ⚠️ On ne peut <strong>pas réutiliser</strong> le résultat :
+                <pre>resultat = addition(3, 4)  # resultat vaut None (rien)</pre>
+            </div>
+        </div>
+
+        <h3>Avec <code>return</code> :</h3>
+        <div class="note">
+            <strong>return</strong> renvoie un résultat que l'on peut <strong>stocker et réutiliser</strong>.
+            <pre>def addition(a, b):
+    return a + b</pre>
+            <p>Utilisation :</p>
+            <pre>resultat = addition(3, 4)  # resultat vaut 7
+print(resultat)            # affiche : 7
+print(resultat * 2)        # affiche : 14</pre>
+        </div>
+
+        <div class="important">
+            <strong>🎯 Règle d'or :</strong><br>
+            - Utilise <code>print</code> quand tu veux <strong>afficher</strong> quelque chose<br>
+            - Utilise <code>return</code> quand tu veux <strong>récupérer et réutiliser</strong> un résultat
+        </div>
+
+        <h3>Comparaison visuelle :</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #2a5298; color: white;">
+                    <th style="padding: 12px; border: 1px solid #ddd;">Aspect</th>
+                    <th style="padding: 12px; border: 1px solid #ddd;">print</th>
+                    <th style="padding: 12px; border: 1px solid #ddd;">return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Affichage</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">✅ Affiche à l'écran</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">❌ N'affiche rien</td>
+                </tr>
+                <tr style="background-color: #f9f9f9;">
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Réutilisation</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">❌ Impossible</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">✅ Possible</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Stockage</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">❌ Renvoie None</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">✅ Renvoie une valeur</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h2>Exercice 1 – Paramètres simples</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une fonction nommée <code>dire_bonjour(prenom, nom)</code></li>
+                <li>Cette fonction doit afficher un message au format : <code>"Bonjour [prenom] [nom]"</code></li>
+                <li>Appeler la fonction avec différents prénoms et noms</li>
+            </ol>
+
+                <p><strong>Exemple d'appel :</strong></p>
+                <pre>dire_bonjour("Aya", "Nakamura")</pre>
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>Bonjour Aya Nakamura</pre>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h2>Exercice 2 – Calcul avec return</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une fonction <code>division(nombre1, nombre2)</code></li>
+                <li>Cette fonction doit <strong>retourner</strong> (avec <code>return</code>) le résultat de la division de <code>nombre1</code> par <code>nombre2</code></li>
+                <li>Appeler la fonction et stocker le résultat dans une variable</li>
+                <li>Afficher le résultat</li>
+            </ol>
+
+            <div class="warning">
+                ⚠️ <strong>Important :</strong> Utilise <code>return</code>, PAS <code>print</code> !
+            </div>
+
+                <p><strong>Exemple d'utilisation :</strong></p>
+                <pre>resultat = division(10, 2)
+print(resultat)  # affiche : 5.0</pre>
+
+
+        <div class="exercice" id="ex3">
+            <h2>Exercice 3 – Comparaison</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une fonction <code>est_majeur(age)</code></li>
+                <li>Cette fonction doit <strong>retourner</strong> :
+                    <ul>
+                        <li><code>True</code> si l'âge est supérieur ou égal à 18</li>
+                        <li><code>False</code> dans le cas contraire</li>
+                    </ul>
+                </li>
+                <li>Tester la fonction avec différents âges</li>
+            </ol>
+
+                <p><strong>Exemples d'utilisation :</strong></p>
+                <pre>print(est_majeur(20))  # affiche : True
+print(est_majeur(15))  # affiche : False
+print(est_majeur(18))  # affiche : True</pre>
+
+        <div class="exercice" id="ex4">
+            <h2>Exercice 4 – Valeur maximale</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une fonction <code>maximum(a, b)</code></li>
+                <li>Cette fonction doit <strong>retourner</strong> le plus grand des deux nombres</li>
+                <li>Tester avec différentes valeurs</li>
+            </ol>
+
+                <p><strong>Exemples d'utilisation :</strong></p>
+                <pre>print(maximum(5, 10))   # affiche : 10
+print(maximum(20, 15))  # affiche : 20
+print(maximum(7, 7))    # affiche : 7</pre>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h2>Exercice 5 – Utilisation d'une fonction</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Utiliser la fonction <code>maximum(a, b)</code> de l'exercice précédent (sans la modifier)</li>
+                <li>Stocker son résultat dans une variable</li>
+                <li>Afficher le message : <code>"Le plus grand nombre est [résultat]"</code></li>
+            </ol>
+                💡 Cet exercice montre l'utilité de <code>return</code> : on peut récupérer et réutiliser le résultat !
+        </div>
+
+        <div class="exercice" id="projet">
+            <h2>Mini-projet – Préparer le jeu</h2>
+
+            <h3>🎯 Objectif</h3>
+            <p>Créer deux fonctions qui seront utilisées dans un jeu : une pour gérer le score et une pour gérer les vies.</p>
+
+            <h3>📋 Partie 1 – Fonction <code>augmenter_score(score)</code></h3>
+            <p><strong>Consignes :</strong></p>
+            <ol>
+                <li>Créer une fonction <code>augmenter_score(score)</code> qui prend le score actuel en paramètre</li>
+                <li>La fonction doit :
+                    <ul>
+                        <li>Ajouter 1 point au score</li>
+                        <li><strong>Retourner</strong> la nouvelle valeur du score</li>
+                        <li>Afficher le message <code>"Gagné !"</code> si le score atteint <strong>exactement 10</strong></li>
+                    </ul>
+                </li>
+            </ol>
+
+
+                <p><strong>Exemple d'utilisation :</strong></p>
+                <pre>score = 0
+score = augmenter_score(score)  # score = 1
+score = augmenter_score(score)  # score = 2
+...
+score = augmenter_score(score)  # score = 10, affiche "Gagné !"</pre>
+
+
+            <h3>📋 Partie 2 – Fonction <code>perdre_vie(vies)</code></h3>
+            <p><strong>Consignes :</strong></p>
+            <ol>
+                <li>Créer une fonction <code>perdre_vie(vies)</code> qui prend le nombre de vies actuelles en paramètre</li>
+                <li>La fonction doit :
+                    <ul>
+                        <li>Retirer 1 point de vie</li>
+                        <li><strong>Retourner</strong> le nombre de vies restantes</li>
+                        <li>Afficher le message <code>"Perdu !"</code> s'il ne reste <strong>plus de vie</strong> (vies = 0)</li>
+                    </ul>
+                </li>
+            </ol>
+
+                <p><strong>Exemple d'utilisation :</strong></p>
+                <pre>vies = 3
+vies = perdre_vie(vies)  # vies = 2
+vies = perdre_vie(vies)  # vies = 1
+vies = perdre_vie(vies)  # vies = 0, affiche "Perdu !"</pre>
+
+
+            <h3>🧪 Test du projet</h3>
+            <p>Une fois les deux fonctions créées, teste-les ensemble :</p>
+            <pre># Initialisation
+score = 0
+vies = 3
+
+# Test
+score = augmenter_score(score)
+print("Score actuel :", score)
+
+vies = perdre_vie(vies)
+print("Vies restantes :", vies)</pre>
+
+            <h3>🌟 Bonus (facultatif)</h3>
+            <ul>
+                <li>Créer une fonction <code>afficher_status(score, vies)</code> qui affiche le score et les vies de manière formatée</li>
+                <li>Créer une fonction <code>reinitialiser()</code> qui retourne un score de 0 et 3 vies</li>
+                <li>Modifier <code>augmenter_score</code> pour ajouter des points bonus (paramètre <code>points</code>)</li>
+            </ul>
+
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
