@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Les Dictionnaires en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h2 {
+            margin-top: 0;
+            color: #1e3c72;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .exercice h3 {
+            margin-top: 15px;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .exemple-correct {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .exemple-incorrect {
+            background-color: #ffebee;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#definition">Qu'est-ce qu'un dictionnaire ?</a></li>
+                <li><a href="#creer">Créer un dictionnaire</a></li>
+                <li><a href="#acceder">Accéder à une valeur</a></li>
+                <li><a href="#modifier">Ajouter/Modifier</a></li>
+                <li><a href="#supprimer">Supprimer</a></li>
+                <li><a href="#parcourir">Parcourir un dictionnaire</a></li>
+                <li><a href="#taille">Taille d'un dictionnaire</a></li>
+                <li><a href="#retenir">À retenir</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Exercice 1 - Créer un dictionnaire</a></li>
+                <li><a href="#ex2">Exercice 2 - Lire une valeur</a></li>
+                <li><a href="#ex3">Exercice 3 - Ajouter des infos</a></li>
+                <li><a href="#ex4">Exercice 4 - Modifier une valeur</a></li>
+                <li><a href="#ex5">Exercice 5 - Parcourir</a></li>
+                <li><a href="#ex6">Exercice 6 - Compter</a></li>
+                <li><a href="#ex9">Exercice 7 - Saisie utilisateur</a></li>
+                <li><a href="#projet">Projet - Répertoire élèves</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>📚 Les Dictionnaires en Python</h1>
+
+        <!-- PARTIE COURS -->
+        <h2 id="definition">Qu'est-ce qu'un dictionnaire ?</h2>
+        <p>Un dictionnaire est une structure de données qui permet de stocker des informations sous forme de paires <strong>clé : valeur</strong>. C'est comme un vrai dictionnaire où tu cherches un mot (la clé) pour trouver sa définition (la valeur).</p>
+
+        <p>Les dictionnaires sont très utiles pour organiser des données de manière structurée et y accéder rapidement.</p>
+
+        <div class="info">
+            <strong>💡 Analogie :</strong> Imagine un carnet de contacts :<br>
+            - La <strong>clé</strong> = le nom de la personne<br>
+            - La <strong>valeur</strong> = son numéro de téléphone
+        </div>
+
+        <h2 id="creer">Créer un dictionnaire</h2>
+        <pre>eleve = {"prenom": "Alice", "age": 12, "note": 15}</pre>
+        <div class="note">
+            <strong>Structure :</strong><br>
+            <ul>
+                <li><code>eleve</code> est le nom du dictionnaire</li>
+                <li><code>"prenom"</code>, <code>"age"</code>, <code>"note"</code> sont les <strong>clés</strong></li>
+                <li><code>"Alice"</code>, <code>12</code>, <code>15</code> sont les <strong>valeurs</strong></li>
+                <li>Chaque paire est séparée par une virgule</li>
+                <li>Les clés et valeurs sont liées par <code>:</code></li>
+            </ul>
+        </div>
+
+        <h2 id="acceder">Accéder à une valeur</h2>
+        <p>On utilise la clé entre crochets <code>[ ]</code> pour accéder à la valeur correspondante :</p>
+        <pre>print(eleve["prenom"])  # affiche : Alice
+print(eleve["age"])     # affiche : 12
+print(eleve["note"])    # affiche : 15</pre>
+
+        <div class="warning">
+            ⚠️ <strong>Attention :</strong> Si la clé n'existe pas, Python affiche une erreur !<br>
+            Il faut être sûr que la clé existe dans le dictionnaire.
+        </div>
+
+        <div class="info">
+            <strong>💡 À noter :</strong> Les clés sont généralement des chaînes de caractères (entre guillemets), mais elles peuvent aussi être des nombres. Les valeurs peuvent être de n'importe quel type : nombres, chaînes, listes, ou même d'autres dictionnaires !
+        </div>
+
+        <h2 id="modifier">Ajouter ou modifier une information</h2>
+        
+        <h3>Ajouter une nouvelle clé-valeur :</h3>
+        <pre>eleve["classe"] = "5A"
+print(eleve)  # affiche : {'prenom': 'Alice', 'age': 12, 'note': 15, 'classe': '5A'}</pre>
+
+        <h3>Modifier une valeur existante :</h3>
+        <pre>eleve["age"] = 13
+print(eleve["age"])  # affiche : 13</pre>
+
+        <div class="note">
+            💡 Si la clé existe déjà, la valeur est <strong>modifiée</strong>.<br>
+            Si la clé n'existe pas, elle est <strong>ajoutée</strong>.
+        </div>
+
+        <h2 id="supprimer">Supprimer une information</h2>
+        <pre>del eleve["note"]
+print(eleve)  # affiche : {'prenom': 'Alice', 'age': 13, 'classe': '5A'}</pre>
+        <p>Le mot-clé <code>del</code> supprime la paire clé-valeur du dictionnaire.</p>
+
+        <h2 id="parcourir">Parcourir un dictionnaire</h2>
+        
+        <h3>Parcourir uniquement les clés :</h3>
+        <pre>for cle in eleve:
+    print(cle)</pre>
+        <p><strong>Résultat :</strong></p>
+        <pre>prenom
+age
+classe</pre>
+
+        <h3>Parcourir les clés et les valeurs en même temps :</h3>
+        <pre>for cle, valeur in eleve.items():
+    print(cle, ":", valeur)</pre>
+        <p><strong>Résultat :</strong></p>
+        <pre>prenom : Alice
+age : 13
+classe : 5A</pre>
+
+        <div class="note">
+            💡 La méthode <code>.items()</code> permet d'accéder aux clés ET aux valeurs en même temps.
+        </div>
+
+        <h2 id="taille">Taille d'un dictionnaire</h2>
+        <pre>print(len(eleve))  # affiche : 3</pre>
+        <p>La fonction <code>len()</code> affiche le <strong>nombre de paires clé-valeur</strong> stockées dans le dictionnaire.</p>
+
+        <h2 id="retenir">À retenir</h2>
+        <ul>
+            <li>Un dictionnaire associe une <strong>clé</strong> à une <strong>valeur</strong></li>
+            <li>On accède aux données avec les clés : <code>dico["cle"]</code></li>
+            <li>Les clés sont souvent des mots (chaînes de caractères)</li>
+            <li>On peut ajouter, modifier ou supprimer des informations</li>
+            <li>Les dictionnaires sont très utiles pour organiser des informations structurées</li>
+        </ul>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h2>Exercice 1 – Créer un dictionnaire</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer un dictionnaire appelé <code>animal</code> contenant :
+                    <ul>
+                        <li>La clé <code>"nom"</code> avec la valeur <code>"chat"</code></li>
+                        <li>La clé <code>"age"</code> avec la valeur <code>3</code></li>
+                    </ul>
+                </li>
+                <li>Afficher le dictionnaire.
+            </ol>
+            
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>{'nom': 'chat', 'age': 3}</pre>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h2>Exercice 2 – Lire une valeur</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Tu as ce dictionnaire :</p>
+            <pre>personne = {"prenom": "Lucie", "age": 14}</pre>
+            <ol>
+                <li>Afficher uniquement le <strong>prénom</strong> en utilisant la clé</li>
+                <li>Afficher uniquement l'<strong>âge</strong> en utilisant la clé</li>
+            </ol>
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>Lucas
+14</pre>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h2>Exercice 3 – Ajouter des informations</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer un dictionnaire <strong>vide</strong> appelé <code>eleve</code></li>
+                <li>Ajouter la clé <code>"prenom"</code> avec une valeur de ton choix</li>
+                <li>Ajouter la clé <code>"classe"</code> avec une valeur de ton choix</li>
+                <li>Ajouter la clé <code>"note"</code> avec un nombre de ton choix</li>
+                <li>Afficher le dictionnaire complet</li>
+            </ol>
+                <p><strong>Exemple de résultat :</strong></p>
+                <pre>{'prenom': 'Marie', 'classe': '5A', 'note': 15}</pre>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h2>Exercice 4 – Modifier une valeur</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer ce dictionnaire :</li>
+            </ol>
+            <pre>score = {"joueur": "Alex", "points": 10}</pre>
+            <ol start="2">
+                <li>Modifier la valeur de <code>"points"</code> pour qu'elle devienne <code>15</code></li>
+                <li>Afficher le dictionnaire après modification</li>
+            </ol>
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>{'joueur': 'Alex', 'points': 15}</pre>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h2>Exercice 5 – Parcourir un dictionnaire</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer un dictionnaire de matières et de notes :</li>
+            </ol>
+            <pre>notes = {"maths": 14, "francais": 12, "anglais": 16}</pre>
+            <ol start="2">
+                <li>Utiliser une boucle <code>for</code> avec <code>.items()</code> pour afficher <strong>chaque matière et sa note</strong> au format :</li>
+            </ol>
+            <pre>maths : 14
+francais : 12
+anglais : 16</pre>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h2>Exercice 6 – Compter les éléments</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer un dictionnaire avec <strong>au moins 4 informations</strong> de ton choix (exemple : prénom, âge, ville, hobby)</li>
+                <li>Afficher le dictionnaire</li>
+                <li>Afficher le nombre d'éléments qu'il contient avec <code>len()</code></li>
+            </ol>
+                <p><strong>Exemple de résultat :</strong></p>
+                <pre>Dictionnaire : {'prenom': 'Tom', 'age': 14, 'ville': 'Paris', 'hobby': 'football'}
+Nombre d'éléments : 4</pre>
+        </div>
+
+  
+        <div class="exercice" id="ex7">
+            <h2>Exercice 7 – Dictionnaire + saisie utilisateur</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer un dictionnaire <strong>vide</strong> appelé <code>personne</code></li>
+                <li>Demander à l'utilisateur d'entrer son prénom et le stocker dans le dictionnaire</li>
+                <li>Demander à l'utilisateur d'entrer son âge et le stocker dans le dictionnaire</li>
+                <li>Afficher le dictionnaire complet</li>
+            </ol>
+            
+                💡 Utilise <code>input()</code> pour demander les informations<br>
+                💡 N'oublie pas de convertir l'âge en nombre avec <code>int()</code>
+            
+                <p><strong>Exemple d'exécution :</strong></p>
+                <pre>Quel est ton prénom ? Lucas
+Quel est ton âge ? 14
+{'prenom': 'Lucas', 'age': 14}</pre>
+        </div>
+
+        <div class="exercice" id="projet">
+            <h2>Projet de fin – Répertoire d'élèves</h2>
+
+            <h3>🎯 Objectif</h3>
+            <p>Créer un programme permettant de gérer un répertoire d'élèves avec des dictionnaires, un menu interactif, des boucles et des conditions.</p>
+
+            <h3>📊 Structure attendue</h3>
+            <p>Dictionnaire principal <code>eleves</code> où <strong>chaque élève est identifié par son prénom</strong>, et ses informations sont stockées dans un <strong>dictionnaire imbriqué</strong> :</p>
+            <pre>eleves = {
+    "Alice": {"age": 12, "classe": "5A", "moyenne": 14},
+    "Lucas": {"age": 13, "classe": "5B", "moyenne": 11}
+}</pre>
+            <div class="info">
+                💡 C'est un <strong>dictionnaire de dictionnaires</strong> :<br>
+                - Clé principale = prénom de l'élève<br>
+                - Valeur = un autre dictionnaire avec les infos de l'élève
+            </div>
+
+            <h3>📋 Consignes générales</h3>
+            <ul>
+                <li>Utiliser des <strong>dictionnaires imbriqués</strong> (dictionnaires dans un dictionnaire)</li>
+                <li>Utiliser une boucle <code>while</code> pour le menu</li>
+                <li>Utiliser des boucles <code>for</code> pour parcourir les dictionnaires</li>
+                <li>Utiliser <code>if / elif / else</code> pour les choix du menu</li>
+                <li>Le programme fonctionne tant que l'utilisateur ne choisit pas de quitter</li>
+            </ul>
+
+            <h3>🔧 Étapes du projet</h3>
+
+            <h4>1 – Créer le dictionnaire principal</h4>
+            <p>Au début du programme, créer un dictionnaire vide :</p>
+            <pre>eleves = {}</pre>
+
+            <h4>2 – Menu principal</h4>
+            <p>Le programme doit afficher ce menu :</p>
+            <pre>=== RÉPERTOIRE D'ÉLÈVES ===
+1 - Ajouter un élève
+2 - Afficher tous les élèves
+3 - Afficher les informations d'un élève
+4 - Modifier la moyenne d'un élève
+5 - Supprimer un élève
+6 - Quitter</pre>
+
+            <h4>3 – Boucle principale</h4>
+            <p>Utiliser une boucle <code>while True:</code> qui répète le menu jusqu'à ce que l'utilisateur choisisse 6.</p>
+
+            <h4>4 – Détails des options</h4>
+
+            <p><strong>Option 1 – Ajouter un élève :</strong></p>
+            <ol>
+                <li>Demander le prénom de l'élève</li>
+                <li>Demander l'âge (convertir avec <code>int()</code>)</li>
+                <li>Demander la classe</li>
+                <li>Demander la moyenne (convertir avec <code>float()</code>)</li>
+                <li>Ajouter l'élève dans le dictionnaire au format :</li>
+            </ol>
+            <pre>eleves[prenom] = {"age": age, "classe": classe, "moyenne": moyenne}</pre>
+            <p>Afficher "Élève ajouté !"</p>
+
+            <p><strong>Option 2 – Afficher tous les élèves :</strong></p>
+            <ul>
+                <li>Si le dictionnaire est vide : afficher "Aucun élève enregistré"</li>
+                <li>Sinon : parcourir le dictionnaire avec une boucle <code>for</code> et afficher <strong>uniquement les prénoms</strong></li>
+            </ul>
+                <p><strong>Exemple de résultat :</strong></p>
+                <pre>Liste des élèves :
+- Alice
+- Lucas
+- Marie</pre>
+
+            <p><strong>Option 3 – Afficher les informations d'un élève :</strong></p>
+            <ol>
+                <li>Demander le prénom de l'élève</li>
+                <li>Vérifier si le prénom existe dans le dictionnaire avec <code>if prenom in eleves:</code></li>
+                <li>Si oui : afficher toutes les informations de l'élève</li>
+                <li>Si non : afficher "Élève introuvable"</li>
+            </ol>
+                <p><strong>Exemple de résultat :</strong></p>
+                <pre>Informations sur Alice :
+Age : 12
+Classe : 5A
+Moyenne : 14.0</pre>
+                💡 Pour accéder aux infos : <code>eleves[prenom]["age"]</code>, <code>eleves[prenom]["classe"]</code>, etc.
+
+            <p><strong>Option 4 – Modifier la moyenne d'un élève :</strong></p>
+            <ol>
+                <li>Demander le prénom de l'élève</li>
+                <li>Vérifier si le prénom existe</li>
+                <li>Si oui : demander la nouvelle moyenne et modifier la valeur avec :</li>
+            </ol>
+            <pre>eleves[prenom]["moyenne"] = nouvelle_moyenne</pre>
+            <p>Afficher "Moyenne modifiée !"</p>
+            <ul>
+                <li>Si non : afficher "Élève introuvable"</li>
+            </ul>
+
+            <p><strong>Option 5 – Supprimer un élève :</strong></p>
+            <ol>
+                <li>Demander le prénom de l'élève</li>
+                <li>Vérifier si le prénom existe</li>
+                <li>Si oui : supprimer l'élève avec <code>del eleves[prenom]</code></li>
+                <li>Si non : afficher "Élève introuvable"</li>
+            </ol>
+
+            <p><strong>Option 6 – Quitter :</strong></p>
+            <ul>
+                <li>Afficher "Au revoir !"</li>
+                <li>Utiliser <code>break</code> pour sortir de la boucle</li>
+            </ul>
+
+            <h4>🌟 Bonus (facultatif)</h4>
+            <ul>
+                <li>Calculer et afficher la moyenne générale de tous les élèves de la classe</li>
+                <li>Afficher uniquement les élèves avec une moyenne ≥ 10</li>
+                <li>Compter et afficher le nombre total d'élèves</li>
+                <li>Afficher l'élève avec la meilleure moyenne</li>
+            </ul>
+
+            <h4>💡 Conseils pour réussir</h4>
+            <ul>
+                <li>Commence par faire fonctionner le menu avec la boucle <code>while</code></li>
+                <li>Ajoute les options une par une et teste à chaque fois</li>
+                <li>Vérifie toujours si un élève existe avant de le modifier ou supprimer</li>
+                <li>Teste le programme avec un dictionnaire vide</li>
+                <li>N'oublie pas l'indentation (4 espaces)</li>
+                <li>Utilise <code>in</code> pour vérifier si une clé existe : <code>if prenom in eleves:</code></li>
+            </ul>
+
+            <h4>✅ Résultat attendu</h4>
+            <ul>
+                <li>Un programme qui ne plante pas</li>
+                <li>Utilise correctement les dictionnaires imbriqués</li>
+                <li>Vérifie l'existence des élèves avant modification/suppression</li>
+                <li>Affiche des messages clairs à l'utilisateur</li>
+                <li>S'arrête proprement avec l'option 6</li>
+            </ul>
+
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
