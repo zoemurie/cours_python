@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Les Listes en Python – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h2 {
+            margin-top: 0;
+            color: #1e3c72;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .exercice h3 {
+            margin-top: 15px;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .exemple-correct {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .exemple-incorrect {
+            background-color: #ffebee;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#definition">Qu'est-ce qu'une liste ?</a></li>
+                <li><a href="#creer">Créer une liste</a></li>
+                <li><a href="#indices">Les indices</a></li>
+                <li><a href="#ajouter">Ajouter un élément</a></li>
+                <li><a href="#parcourir">Parcourir une liste</a></li>
+                <li><a href="#taille">Taille d'une liste</a></li>
+                <li><a href="#retenir">À retenir</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Exercice 1 - Créer une liste</a></li>
+                <li><a href="#ex2">Exercice 2 - Lire un élément</a></li>
+                <li><a href="#ex3">Exercice 3 - Ajouter un élément</a></li>
+                <li><a href="#ex4">Exercice 4 - Parcourir une liste</a></li>
+                <li><a href="#ex5">Exercice 5 - Compter les éléments</a></li>
+                <li><a href="#ex6">Exercice 6 - Somme des nombres</a></li>
+                <li><a href="#ex7">Exercice 7 - Plus grand nombre</a></li>
+                <li><a href="#ex8">Exercice 8 - Liste et conditions</a></li>
+                <li><a href="#ex9">Exercice 9 - Mini défi</a></li>
+                <li><a href="#projet">Projet final - Gestion de notes</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="../index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>📋 Les Listes en Python</h1>
+
+        <!-- PARTIE COURS -->
+        <h2 id="definition">Qu'est-ce qu'une liste ?</h2>
+        <p>
+            Une liste est une variable qui peut contenir <strong>plusieurs valeurs</strong>.  
+            Au lieu d'avoir plusieurs variables :  
+        </p>
+        <pre>note1 = 12
+note2 = 15
+note3 = 9</pre>
+        <p>On peut utiliser une seule liste :</p>
+        <pre>notes = [12, 15, 9]</pre>
+        <div class="note">
+            💡 Une seule variable, plusieurs valeurs.
+        </div>
+
+        <h2 id="creer">Créer une liste</h2>
+        <pre>nombres = [1, 2, 3, 4]
+mots = ["chat", "chien", "oiseau"]
+vide = []</pre>
+        <p>Une liste peut contenir :</p>
+        <ul>
+            <li>des nombres</li>
+            <li>des mots (chaînes de caractères)</li>
+            <li>ou être vide</li>
+        </ul>
+
+        <h2 id="indices">Les positions dans une liste (indices)</h2>
+        <div class="warning">
+            ⚠️ <strong>Important :</strong> les indices commencent à <strong>0</strong>, pas à 1 !
+        </div>
+        <pre>fruits = ["pomme", "banane", "orange"]</pre>
+        <p>Position et valeur :</p>
+        <ul>
+            <li><strong>Indice 0 :</strong> "pomme"</li>
+            <li><strong>Indice 1 :</strong> "banane"</li>
+            <li><strong>Indice 2 :</strong> "orange"</li>
+        </ul>
+        <p><strong>Exemples :</strong></p>
+        <pre>print(fruits[0])  # affiche : pomme
+print(fruits[1])  # affiche : banane
+print(fruits[2])  # affiche : orange</pre>
+
+        <h2 id="ajouter">Ajouter un élément dans une liste</h2>
+        <pre>fruits = ["pomme", "banane"]
+fruits.append("fraise")
+print(fruits)  # affiche : ['pomme', 'banane', 'fraise']</pre>
+        <p>La méthode <code>append()</code> ajoute l'élément <strong>à la fin</strong> de la liste.</p>
+
+        <h2 id="parcourir">Parcourir une liste avec une boucle <code>for</code></h2>
+        <p>Pour afficher <strong>chaque élément</strong> de la liste un par un :</p>
+        <pre>fruits = ["pomme", "banane", "orange"]
+
+for fruit in fruits:
+    print(fruit)</pre>
+        <p><strong>Résultat :</strong></p>
+        <pre>pomme
+banane
+orange</pre>
+        <div class="note">
+            💡 La variable <code>fruit</code> prend successivement la valeur de chaque élément de la liste.
+        </div>
+
+        <h2 id="taille">Connaître la taille d'une liste</h2>
+        <pre>fruits = ["pomme", "banane", "orange"]
+print(len(fruits))  # affiche : 3</pre>
+        <p>La fonction <code>len()</code> renvoie le <strong>nombre d'éléments</strong> dans la liste.</p>
+
+        <h2 id="retenir">À retenir</h2>
+        <ul>
+            <li>Une liste stocke plusieurs valeurs entre crochets <code>[ ]</code></li>
+            <li>Les indices commencent à <strong>0</strong></li>
+            <li><code>append()</code> permet d'ajouter un élément à la fin</li>
+            <li>Une boucle <code>for</code> permet de parcourir tous les éléments</li>
+            <li><code>len()</code> donne le nombre d'éléments</li>
+        </ul>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h2>Exercice 1 – Créer une liste</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste appelée <code>animaux</code> contenant : <code>"chat"</code>, <code>"chien"</code>, <code>"lapin"</code></li>
+                <li>Afficher la liste.</li>
+            </ol>
+            
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h2>Exercice 2 – Lire un élément</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Tu as cette liste :</p>
+            <pre>couleurs = ["rouge", "vert", "bleu"]</pre>
+            <ol>
+                <li>Afficher la <strong>première</strong> couleur (indice 0)</li>
+                <li>Afficher la <strong>dernière</strong> couleur (indice 2)</li>
+            </ol>
+
+        <div class="exercice" id="ex3">
+            <h2>Exercice 3 – Ajouter un élément</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste <strong>vide</strong> appelée <code>notes</code></li>
+                <li>Ajouter les nombres <code>12</code>, <code>15</code>, <code>9</code> dans la liste.</li>
+                <li>Afficher la liste complète</li>
+            </ol>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h2>Exercice 4 – Parcourir une liste</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste de prénoms : <code>["Alice", "Bob", "Charlie"]</code></li>
+                <li>Utiliser une boucle <code>for</code> pour afficher <strong>chaque prénom</strong> sur une ligne séparée</li>
+            </ol>
+
+            
+            <div class="exemple-incorrect">
+                <p>❌ <strong>INCORRECT :</strong></p>
+                <pre>prenoms = ["Alice", "Bob", "Charlie"]
+for i in range(1):
+    print(prenoms)  # Ceci affiche TOUTE la liste 1 fois</pre>
+            </div>
+                <p><strong>Résultat attendu :</strong></p>
+                <pre>Alice
+Bob
+Charlie</pre>
+
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h2>Exercice 5 – Compter les éléments</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste de nombres de ton choix (au moins 5 nombres)</li>
+                <li>Afficher la liste complète</li>
+                <li>Afficher le nombre d'éléments dans la liste.</li>
+            </ol>
+            
+            <p><strong>Exemple de résultat attendu :</strong></p>
+            <pre>Liste : [10, 20, 30, 40, 50]
+Nombre d'éléments : 5</pre>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h2>Exercice 6 – Somme des nombres</h2>
+            <p><strong>Consigne :</strong></p>
+            <p>Tu as cette liste :</p>
+            <pre>nombres = [3, 7, 2, 5]</pre>
+            <ol>
+                <li>Créer une variable <code>somme</code> initialisée à 0</li>
+                <li>Utiliser une boucle <code>for</code> pour parcourir <strong>chaque nombre</strong> de la liste</li>
+                <li>À chaque tour de boucle, ajouter le nombre à la variable <code>somme</code></li>
+                <li>Afficher la somme finale</li>
+            </ol>
+            
+            <p><strong>Résultat attendu :</strong> <code>La somme est : 17</code></p>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h2>Exercice 7 – Trouver le plus grand nombre</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste de nombres : <code>[12, 45, 7, 23, 56, 89, 34]</code></li>
+                <li>Créer une variable <code>maximum</code> et lui donner la valeur du premier élément</li>
+                <li>Utiliser une boucle <code>for</code> pour parcourir chaque nombre</li>
+                <li>Si un nombre est plus grand que <code>maximum</code>, mettre à jour <code>maximum</code></li>
+                <li>Afficher le plus grand nombre trouvé</li>
+            </ol>
+            
+            <p><strong>Résultat attendu :</strong> <code>Le plus grand nombre est : 89</code></p>
+        </div>
+
+        <div class="exercice" id="ex8">
+            <h2>Exercice 8 – Liste et conditions</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste de notes : <code>[8, 12, 15, 9, 18, 11]</code></li>
+                <li>Utiliser une boucle <code>for</code> pour parcourir <strong>chaque note</strong></li>
+                <li>Pour chaque note :
+                    <ul>
+                        <li>Si la note est ≥ 10 : afficher <code>"[note] : Réussi"</code></li>
+                        <li>Sinon : afficher <code>"[note] : Échec"</code></li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p><strong>Exemple de résultat attendu :</strong></p>
+            <pre>8 : Échec
+12 : Réussi
+15 : Réussi
+9 : Échec
+18 : Réussi
+11 : Réussi</pre>
+            
+        </div>
+
+        <div class="exercice" id="ex9">
+            <h2>Exercice 9 – Mini défi</h2>
+            <p><strong>Consigne :</strong></p>
+            <ol>
+                <li>Créer une liste vide appelée <code>nombres</code></li>
+                <li>Demander à l'utilisateur d'entrer <strong>5 nombres</strong> (un par un)</li>
+                <li>Ajouter chaque nombre à la liste.</li>
+                <li>Afficher la liste complète à la fin</li>
+            </ol>
+            
+            <p><strong>Exemple d'exécution :</strong></p>
+            <pre>Entre un nombre : 10
+Entre un nombre : 25
+Entre un nombre : 7
+Entre un nombre : 42
+Entre un nombre : 18
+Liste finale : [10, 25, 7, 42, 18]</pre>
+        </div>
+
+        <div class="exercice" id="projet">
+            <h2>Projet de fin – Gestion d'une liste de notes</h2>
+
+            <h3>🎯 Objectif</h3>
+            <p>Créer un programme qui permet de gérer les notes d'un élève à l'aide d'une liste et d'un menu interactif.</p>
+
+            <h3>📋 Consignes générales</h3>
+            <ul>
+                <li>Utiliser une liste pour stocker les notes</li>
+                <li>Utiliser une boucle <code>while</code> pour le menu</li>
+                <li>Utiliser <code>if / elif / else</code> pour les choix</li>
+                <li>Le programme fonctionne tant que l'utilisateur ne choisit pas de quitter</li>
+            </ul>
+
+            <h3>🔧 Étapes du projet</h3>
+
+            <h4>1 – Créer la liste</h4>
+            <p>Au début du programme, créer une liste vide appelée <code>notes</code>.</p>
+            <pre>notes = []</pre>
+
+            <h4>2 – Afficher un menu</h4>
+            <p>Le programme doit afficher ce menu :</p>
+            <pre>=== GESTION DES NOTES ===
+1 - Ajouter une note
+2 - Afficher les notes
+3 - Calculer la moyenne
+4 - Afficher la meilleure note
+5 - Quitter</pre>
+
+            <h4>3 – Boucle principale</h4>
+            <p>Utiliser une boucle <code>while True:</code> qui :</p>
+            <ul>
+                <li>Affiche le menu</li>
+                <li>Demande à l'utilisateur de choisir une option</li>
+                <li>Exécute l'action correspondante</li>
+                <li>S'arrête si l'utilisateur choisit 5</li>
+            </ul>
+
+            <h4>4 – Détails des options</h4>
+
+            <p><strong>Option 1 – Ajouter une note :</strong></p>
+            <ul>
+                <li>Demander une note à l'utilisateur avec <code>input()</code></li>
+                <li>Convertir en nombre avec <code>float()</code></li>
+                <li>Ajouter la note dans la liste avec <code>append()</code></li>
+                <li>Afficher "Note ajoutée !"</li>
+            </ul>
+
+            <p><strong>Option 2 – Afficher les notes :</strong></p>
+            <ul>
+                <li>Si la liste est vide : afficher "Aucune note pour le moment"</li>
+                <li>Sinon : afficher les notes</li>
+            </ul>
+
+            <p><strong>Option 3 – Calculer la moyenne :</strong></p>
+            <ul>
+                <li>Si la liste est vide : afficher "Aucune note"</li>
+                <li>Sinon :
+                    <ul>
+                        <li>Créer une variable <code>somme = 0</code></li>
+                        <li>Parcourir chaque note avec une boucle <code>for</code></li>
+                        <li>Additionner toutes les notes</li>
+                        <li>Calculer la moyenne : <code>somme / len(notes)</code></li>
+                        <li>Afficher la moyenne</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Option 4 – Meilleure note :</strong></p>
+            <ul>
+                <li>Si la liste est vide : afficher "Aucune note"</li>
+                <li>Sinon :
+                    <ul>
+                        <li>Afficher la meilleure note</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Option 5 – Quitter :</strong></p>
+            <ul>
+                <li>Afficher "Au revoir !"</li>
+                <li>Utiliser <code>break</code> pour sortir de la boucle</li>
+            </ul>
+
+            <h4>🌟 Bonus (facultatif)</h4>
+            <ul>
+                <li>Afficher la plus petite note</li>
+                <li>Compter le nombre de notes ≥ 10</li>
+                <li>Ajouter une option pour supprimer une note</li>
+                <li>Ajouter une option pour supprimer toutes les notes</li>
+            </ul>
+
+            <h4>💡 Conseils pour réussir</h4>
+            <ul>
+                <li>Commence par faire fonctionner le menu avec la boucle <code>while</code></li>
+                <li>Ajoute les options une par une et teste à chaque fois</li>
+                <li>Teste le programme souvent pour voir si tout fonctionne</li>
+                <li>Vérifie que ton programme ne plante pas quand la liste est vide</li>
+                <li>N'oublie pas d'indenter correctement ton code (4 espaces)</li>
+            </ul>
+
+            <h4>✅ Résultat attendu</h4>
+            <ul>
+                <li>Un programme qui ne plante pas</li>
+                <li>Utilise correctement une liste</li>
+                <li>Répond aux choix de l'utilisateur</li>
+                <li>Affiche les notes une par une (pas toute la liste d'un coup)</li>
+                <li>S'arrête proprement avec l'option 5</li>
+            </ul>
+
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
