@@ -418,7 +418,6 @@ turtle.done()</pre>
         </table>
 
         <h3>Exemple : Dessiner un carré</h3>
-        <div class="example">
             <pre>import turtle
 
 ma_tortue = turtle.Turtle()
@@ -429,7 +428,7 @@ for i in range(4):
     ma_tortue.right(90)
 
 turtle.done()</pre>
-        </div>
+
 
         <h2 id="crayon">3. Contrôler le Crayon</h2>
 
@@ -439,13 +438,11 @@ turtle.done()</pre>
             <li><code>pendown()</code> ou <code>down()</code> : Baisser le crayon (dessine à nouveau)</li>
         </ul>
 
-        <div class="example">
             <pre>ma_tortue.forward(50)
 ma_tortue.penup()      # Lever le crayon
 ma_tortue.forward(50)  # Se déplacer sans dessiner
 ma_tortue.pendown()    # Baisser le crayon
 ma_tortue.forward(50)  # Dessiner à nouveau</pre>
-        </div>
 
         <h3>Changer la couleur et l'épaisseur</h3>
         <table>
@@ -482,8 +479,6 @@ ma_tortue.forward(50)  # Dessiner à nouveau</pre>
         <h2 id="remplir">4. Remplir des Formes</h2>
         
         <p>Pour colorier l'intérieur d'une forme, utilise <code>begin_fill()</code> et <code>end_fill()</code> :</p>
-
-        <div class="example">
             <pre>import turtle
 
 ma_tortue = turtle.Turtle()
@@ -501,7 +496,6 @@ for i in range(3):
 ma_tortue.end_fill()
 
 turtle.done()</pre>
-        </div>
 
         <h2 id="cercles">5. Dessiner des Cercles</h2>
 
@@ -548,7 +542,6 @@ screen.setup(width=800, height=600)</pre>
         <p>Turtle devient vraiment puissant quand on le combine avec des boucles !</p>
 
         <h3>Dessiner plusieurs carrés en rotation</h3>
-        <div class="example">
             <pre>import turtle
 
 ma_tortue = turtle.Turtle()
@@ -564,7 +557,6 @@ for i in range(36):
 
 ma_tortue.hideturtle()
 turtle.done()</pre>
-        </div>
 
         <div class="important">
             <strong>⚠️ Attention :</strong> N'oublie pas <code>turtle.done()</code> à la fin de ton programme, sinon la fenêtre se fermera immédiatement !
