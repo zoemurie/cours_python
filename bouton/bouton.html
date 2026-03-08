@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Tkinter – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction à Tkinter</a></li>
+                <li><a href="#fenetre">Créer une fenêtre</a></li>
+                <li><a href="#widgets">Les widgets de base</a></li>
+                <li><a href="#label">Label (texte)</a></li>
+                <li><a href="#button">Button (bouton)</a></li>
+                <li><a href="#entry">Entry (champ de texte)</a></li>
+                <li><a href="#placement">Placer les widgets</a></li>
+                <li><a href="#fonctions">Fonctions et événements</a></li>
+                <li><a href="#resume">Résumé</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Ex 1 - Fenêtre simple</a></li>
+                <li><a href="#ex2">Ex 2 - Bouton "Bonjour"</a></li>
+                <li><a href="#ex3">Ex 3 - Messages différents</a></li>
+                <li><a href="#ex4">Ex 4 - Compteur de clics</a></li>
+                <li><a href="#ex5">Ex 5 - Saisie de nom</a></li>
+                <li><a href="#ex6">Ex 6 - Calculatrice simple</a></li>
+                <li><a href="#ex7">Ex 7 - Jeu de devinette</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🖼️ Tkinter </h1>
+        <p class="subtitle">Créer des interfaces graphiques</p>
+
+        <!-- PARTIE COURS -->
+        <h2 id="intro">Introduction à Tkinter</h2>
+        
+        <p>
+            <strong>Tkinter</strong> est une bibliothèque Python qui permet de créer des <strong>interfaces graphiques</strong> 
+            (fenêtres, boutons, champs de texte, etc.). C'est inclus par défaut avec Python, donc pas besoin d'installer quoi que ce soit !
+        </p>
+
+        <p>
+            Avec Tkinter, tu peux créer des programmes avec des fenêtres, comme les applications que tu utilises tous les jours.
+        </p>
+
+        <h2 id="fenetre">Créer une fenêtre</h2>
+
+        <h3>Code minimal</h3>
+        <div class="example">
+            <pre>import tkinter as tk
+
+# Créer la fenêtre principale
+fenetre = tk.Tk()
+fenetre.title("Ma première fenêtre")
+
+# Lancer la boucle principale
+fenetre.mainloop()</pre>
+        </div>
+
+        <p><strong>Explication :</strong></p>
+        <ul>
+            <li><code>import tkinter as tk</code> : Importe la bibliothèque Tkinter</li>
+            <li><code>fenetre = tk.Tk()</code> : Crée la fenêtre principale</li>
+            <li><code>fenetre.title("...")</code> : Définit le titre de la fenêtre</li>
+            <li><code>fenetre.mainloop()</code> : Lance la fenêtre et attend les actions de l'utilisateur</li>
+        </ul>
+
+        <div class="important">
+            ⚠️ <strong>Important :</strong> <code>mainloop()</code> doit toujours être à la fin ! C'est ce qui garde la fenêtre ouverte.
+        </div>
+
+        <h3>Personnaliser la fenêtre</h3>
+        <pre># Définir la taille de la fenêtre (largeur x hauteur)
+fenetre.geometry("400x300")
+
+# Changer la couleur de fond
+fenetre.configure(bg="lightblue")</pre>
+
+        <h2 id="widgets">Les widgets de base</h2>
+
+        <p>
+            Les <strong>widgets</strong> sont les éléments que tu ajoutes dans ta fenêtre : 
+            boutons, textes, champs de saisie, etc.
+        </p>
+
+        <h2 id="label">Label (afficher du texte)</h2>
+
+        <p>Un <code>Label</code> permet d'afficher du texte dans la fenêtre.</p>
+
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Label exemple")
+
+# Créer un label
+texte = tk.Label(fenetre, text="Bonjour le monde !")
+texte.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <h3>Personnaliser un Label</h3>
+        <pre>texte = tk.Label(
+    fenetre,
+    text="Mon texte",
+    font=("Arial", 20),      # Police et taille
+    fg="blue",               # Couleur du texte (foreground)
+    bg="yellow"              # Couleur de fond (background)
+)
+texte.pack()</pre>
+
+        <h2 id="button">Button (bouton cliquable)</h2>
+
+        <p>Un <code>Button</code> est un bouton sur lequel l'utilisateur peut cliquer.</p>
+
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Bouton exemple")
+
+# Créer un bouton
+bouton = tk.Button(fenetre, text="Clique-moi !")
+bouton.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <h3>Personnaliser un Button</h3>
+        <pre>bouton = tk.Button(
+    fenetre,
+    text="Clique ici",
+    font=("Arial", 14),
+    fg="white",
+    bg="green",
+    width=15,                # Largeur en caractères
+    height=2                 # Hauteur en lignes
+)
+bouton.pack()</pre>
+
+        <h2 id="entry">Entry (champ de saisie)</h2>
+
+        <p>Un <code>Entry</code> permet à l'utilisateur de taper du texte.</p>
+
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Entry exemple")
+
+# Créer un champ de saisie
+champ = tk.Entry(fenetre)
+champ.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <h3>Récupérer le texte d'un Entry</h3>
+        <pre>texte_saisi = champ.get()  # Récupère le texte</pre>
+
+        <h2 id="placement">Placer les widgets</h2>
+
+        <p>Il existe plusieurs façons de placer les widgets dans une fenêtre :</p>
+
+        <h3>1. pack() - Placement automatique</h3>
+        <pre>widget.pack()           # Centre par défaut
+widget.pack(side="top")    # En haut
+widget.pack(side="bottom") # En bas
+widget.pack(side="left")   # À gauche
+widget.pack(side="right")  # À droite</pre>
+
+        <h3>2. grid() - Placement en grille</h3>
+        <pre>widget.grid(row=0, column=0)  # Ligne 0, colonne 0
+widget.grid(row=1, column=1)  # Ligne 1, colonne 1</pre>
+
+        <h3>3. place() - Placement précis</h3>
+        <pre>widget.place(x=50, y=100)  # Position exacte en pixels</pre>
+
+        <div class="note">
+            💡 <strong>Conseil :</strong> Pour débuter, utilise <code>pack()</code>, c'est le plus simple !
+        </div>
+
+        <h2 id="fonctions">Fonctions et événements</h2>
+
+        <p>
+            Pour qu'un bouton fasse quelque chose quand on clique dessus, 
+            il faut créer une <strong>fonction</strong> et la lier au bouton avec <code>command</code>.
+        </p>
+
+        <h3>Exemple : Afficher un message au clic</h3>
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Bouton interactif")
+
+# Définir la fonction à exécuter
+def dire_bonjour():
+    print("Bonjour !")
+
+# Créer le bouton et lier la fonction
+bouton = tk.Button(fenetre, text="Clique-moi !", command=dire_bonjour)
+bouton.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <div class="important">
+            ⚠️ <strong>Attention :</strong> Écris <code>command=dire_bonjour</code> <strong>sans parenthèses</strong> !<br>
+            Si tu écris <code>command=dire_bonjour()</code>, la fonction s'exécute immédiatement au lieu d'attendre le clic.
+        </div>
+
+        <h3>Exemple : Modifier un Label au clic</h3>
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Modifier un texte")
+
+# Créer le label
+label = tk.Label(fenetre, text="Texte initial")
+label.pack()
+
+# Fonction qui modifie le label
+def changer_texte():
+    label.config(text="Nouveau texte !")
+
+# Créer le bouton
+bouton = tk.Button(fenetre, text="Changer", command=changer_texte)
+bouton.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <div class="note">
+            💡 <code>label.config(text="...")</code> permet de modifier le texte d'un Label après sa création.
+        </div>
+
+        <h3>Exemple : Utiliser un Entry avec un Button</h3>
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Salutation personnalisée")
+
+# Créer les widgets
+champ = tk.Entry(fenetre)
+champ.pack()
+
+label = tk.Label(fenetre, text="")
+label.pack()
+
+# Fonction qui utilise le texte saisi
+def afficher_salutation():
+    nom = champ.get()
+    label.config(text=f"Bonjour {nom} !")
+
+bouton = tk.Button(fenetre, text="Valider", command=afficher_salutation)
+bouton.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <h2 id="resume">Résumé des commandes importantes</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Élément</th>
+                    <th>Code</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fenêtre</td>
+                    <td><code>tk.Tk()</code></td>
+                    <td>Créer la fenêtre principale</td>
+                </tr>
+                <tr>
+                    <td>Label</td>
+                    <td><code>tk.Label(fenetre, text="...")</code></td>
+                    <td>Afficher du texte</td>
+                </tr>
+                <tr>
+                    <td>Button</td>
+                    <td><code>tk.Button(fenetre, text="...", command=fonction)</code></td>
+                    <td>Créer un bouton cliquable</td>
+                </tr>
+                <tr>
+                    <td>Entry</td>
+                    <td><code>tk.Entry(fenetre)</code></td>
+                    <td>Champ de saisie</td>
+                </tr>
+                <tr>
+                    <td>Récupérer texte</td>
+                    <td><code>champ.get()</code></td>
+                    <td>Lire le contenu d'un Entry</td>
+                </tr>
+                <tr>
+                    <td>Modifier Label</td>
+                    <td><code>label.config(text="...")</code></td>
+                    <td>Changer le texte d'un Label</td>
+                </tr>
+                <tr>
+                    <td>Placer widget</td>
+                    <td><code>widget.pack()</code></td>
+                    <td>Afficher le widget</td>
+                </tr>
+                <tr>
+                    <td>Boucle principale</td>
+                    <td><code>fenetre.mainloop()</code></td>
+                    <td>Garder la fenêtre ouverte</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 - Première fenêtre</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée une fenêtre avec :</p>
+            <ul>
+                <li>Le titre : <code>"Mon application"</code></li>
+                <li>Une taille de <code>300x200</code> pixels</li>
+                <li>Un Label affichant <code>"Bienvenue dans mon programme !"</code></li>
+            </ul>
+            <div class="hint">
+                💡 N'oublie pas : <code>import tkinter as tk</code>, puis <code>fenetre = tk.Tk()</code>, et termine par <code>fenetre.mainloop()</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 - Bouton "Bonjour"</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme avec :</p>
+            <ul>
+                <li>Un Label qui affiche <code>"Rien pour le moment"</code></li>
+                <li>Un Button avec le texte <code>"Dire bonjour"</code></li>
+                <li>Quand on clique sur le bouton, le Label change pour afficher <code>"Bonjour !"</code></li>
+            </ul>
+            <div class="hint">
+                💡 Crée une fonction qui modifie le Label avec <code>label.config(text="Bonjour !")</code>, puis lie cette fonction au bouton avec <code>command=ta_fonction</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 - Messages différents ⭐</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme avec :</p>
+            <ul>
+                <li>Un Label qui affiche un message</li>
+                <li><strong>Trois boutons</strong> différents : "Bonjour", "Au revoir", "Comment ça va ?"</li>
+                <li>Chaque bouton affiche un <strong>message différent</strong> dans le Label quand on clique dessus</li>
+            </ul>
+            
+            <p><strong>Exemple de résultat :</strong></p>
+            <ul>
+                <li>Clic sur "Bonjour" → Label affiche : <code>"Salut ! 👋"</code></li>
+                <li>Clic sur "Au revoir" → Label affiche : <code>"À bientôt ! 😊"</code></li>
+                <li>Clic sur "Comment ça va ?" → Label affiche : <code>"Je vais bien, merci !"</code></li>
+            </ul>
+
+            <div class="hint">
+                💡 Crée <strong>trois fonctions différentes</strong>, une pour chaque bouton :<br>
+                - <code>dire_bonjour()</code> qui change le Label en "Salut ! 👋"<br>
+                - <code>dire_au_revoir()</code> qui change le Label en "À bientôt ! 😊"<br>
+                - <code>demander_nouvelles()</code> qui change le Label en "Je vais bien, merci !"<br><br>
+                Puis crée trois boutons, chacun avec sa propre fonction dans <code>command</code>.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 - Compteur de clics</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme avec :</p>
+            <ul>
+                <li>Un Label qui affiche <code>"Nombre de clics : 0"</code></li>
+                <li>Un Button avec le texte <code>"Clique ici"</code></li>
+                <li>À chaque clic, le nombre augmente : <code>"Nombre de clics : 1"</code>, <code>"Nombre de clics : 2"</code>, etc.</li>
+            </ul>
+            <div class="hint">
+                💡 Crée une variable <code>compteur = 0</code> <strong>avant</strong> la fenêtre. Dans la fonction, utilise <code>global compteur</code> pour la modifier, puis augmente-la de 1 et mets à jour le Label.
+            </div>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 - Saisie de nom</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme avec :</p>
+            <ul>
+                <li>Un Label qui dit <code>"Entre ton nom :"</code></li>
+                <li>Un Entry (champ de texte)</li>
+                <li>Un Button avec le texte <code>"Valider"</code></li>
+                <li>Un Label vide en bas</li>
+                <li>Quand on clique sur "Valider", le Label du bas affiche : <code>"Bonjour [nom] !"</code></li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>champ.get()</code> pour récupérer le texte saisi, puis affiche-le dans le Label avec <code>label.config(text=f"Bonjour {nom} !")</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 - Calculatrice simple</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée une calculatrice simple avec :</p>
+            <ul>
+                <li>Deux Entry pour saisir deux nombres</li>
+                <li>Un Button <code>"Additionner"</code></li>
+                <li>Un Label qui affiche le résultat : <code>"Résultat : ..."</code></li>
+            </ul>
+            <p>Quand on clique sur le bouton, le programme additionne les deux nombres et affiche le résultat.</p>
+            <div class="hint">
+                💡 N'oublie pas de convertir les textes en nombres avec <code>int()</code> ou <code>float()</code> avant de les additionner :<br>
+                <code>nombre1 = float(champ1.get())</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h3>Exercice 7 - Jeu de devinette</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un petit jeu où l'utilisateur doit deviner un nombre entre 1 et 10 :</p>
+            <ul>
+                <li>Le programme choisit un nombre secret (par exemple 7)</li>
+                <li>Un Label qui dit <code>"Devine le nombre (entre 1 et 10)"</code></li>
+                <li>Un Entry pour que l'utilisateur tape sa proposition</li>
+                <li>Un Button <code>"Vérifier"</code></li>
+                <li>Un Label qui affiche :
+                    <ul>
+                        <li><code>"Trop petit !"</code> si le nombre est trop petit</li>
+                        <li><code>"Trop grand !"</code> si le nombre est trop grand</li>
+                        <li><code>"Bravo ! Tu as trouvé !"</code> si c'est le bon nombre</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hint">
+                💡 Crée une variable <code>nombre_secret = 7</code> au début. Dans la fonction, récupère la proposition avec <code>int(champ.get())</code>, puis compare-la avec <code>nombre_secret</code> en utilisant des <code>if/elif/else</code>.
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
