@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Canvas Tkinter - Dessiner avec la souris – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction au Canvas</a></li>
+                <li><a href="#creer-canvas">Créer un Canvas</a></li>
+                <li><a href="#formes">Dessiner des formes</a></li>
+                <li><a href="#couleurs">Couleurs et styles</a></li>
+                <li><a href="#evenements-souris">Événements de souris</a></li>
+                <li><a href="#dessin-libre">Dessin libre</a></li>
+                <li><a href="#bind">La méthode bind()</a></li>
+                <li><a href="#exemple-complet">Exemple complet</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Ex 1 - Canvas de base</a></li>
+                <li><a href="#ex2">Ex 2 - Dessiner au clic</a></li>
+                <li><a href="#ex3">Ex 3 - Application de peinture</a></li>
+                <li><a href="#ex4">Ex 4 - Changer de couleur</a></li>
+                <li><a href="#ex5">Ex 5 - Taille du pinceau</a></li>
+                <li><a href="#ex6">Ex 6 - Effacer le dessin</a></li>
+                <li><a href="#projet">Projet - Application complète</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🎨 Canvas Tkinter - Dessiner avec la souris</h1>
+        <p class="subtitle">Créer une application de peinture</p>
+
+        <!-- PARTIE COURS -->
+        <h2 id="intro">Introduction au Canvas</h2>
+        
+        <p>
+            Le <strong>Canvas</strong> (toile en français) est un widget Tkinter qui permet de dessiner : 
+            lignes, rectangles, cercles, textes, et bien plus encore. C'est comme une feuille blanche 
+            sur laquelle tu peux créer tes propres dessins !
+        </p>
+
+        <p>
+            Avec le Canvas, tu peux créer :
+        </p>
+        <ul>
+            <li>Des applications de dessin (comme Paint)</li>
+            <li>Des jeux graphiques</li>
+            <li>Des graphiques et diagrammes</li>
+            <li>Des animations</li>
+        </ul>
+
+        <h2 id="creer-canvas">Créer un Canvas</h2>
+
+        <h3>Code minimal</h3>
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Mon Canvas")
+
+# Créer un Canvas
+canvas = tk.Canvas(fenetre, width=600, height=400, bg="white")
+canvas.pack()
+
+fenetre.mainloop()</pre>
+
+        <p><strong>Explication :</strong></p>
+        <ul>
+            <li><code>tk.Canvas(fenetre, ...)</code> : Crée le Canvas dans la fenêtre</li>
+            <li><code>width=600, height=400</code> : Définit la taille (largeur × hauteur en pixels)</li>
+            <li><code>bg="white"</code> : Définit la couleur de fond</li>
+            <li><code>canvas.pack()</code> : Affiche le Canvas</li>
+        </ul>
+
+        <h2 id="formes">Dessiner des formes sur le Canvas</h2>
+
+        <h3>Ligne</h3>
+        <pre>canvas.create_line(x1, y1, x2, y2, fill="black", width=2)</pre>
+        <p>Dessine une ligne du point (x1, y1) au point (x2, y2).</p>
+
+        <h3>Rectangle</h3>
+        <pre>canvas.create_rectangle(x1, y1, x2, y2, fill="blue", outline="black")</pre>
+        <p>Dessine un rectangle entre deux coins opposés.</p>
+
+        <h3>Ovale/Cercle</h3>
+        <pre>canvas.create_oval(x1, y1, x2, y2, fill="red", outline="black")</pre>
+        <p>Dessine un cercle ou une ellipse.</p>
+
+        <h3>Exemple : Dessiner quelques formes</h3>
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Formes sur Canvas")
+
+canvas = tk.Canvas(fenetre, width=400, height=300, bg="white")
+canvas.pack()
+
+# Dessiner une ligne
+canvas.create_line(50, 50, 200, 50, fill="black", width=3)
+
+# Dessiner un rectangle
+canvas.create_rectangle(50, 100, 150, 200, fill="blue", outline="black")
+
+# Dessiner un cercle
+canvas.create_oval(200, 100, 300, 200, fill="red", outline="black")
+
+fenetre.mainloop()</pre>
+
+        <h2 id="couleurs">Couleurs et styles</h2>
+
+        <h3>Couleurs disponibles</h3>
+        <p>Tu peux utiliser des noms de couleurs en anglais :</p>
+        <pre>"red", "blue", "green", "yellow", "orange", "purple", "pink", 
+"brown", "black", "white", "gray", "lightblue", etc.</pre>
+
+        <p>Ou des codes hexadécimaux :</p>
+        <pre>"#FF0000"  # Rouge
+"#00FF00"  # Vert
+"#0000FF"  # Bleu
+"#FFA500"  # Orange</pre>
+
+        <h3>Options importantes</h3>
+        <ul>
+            <li><code>fill</code> : Couleur de remplissage</li>
+            <li><code>outline</code> : Couleur du contour</li>
+            <li><code>width</code> : Épaisseur du trait</li>
+        </ul>
+
+        <h2 id="evenements-souris">Événements de souris</h2>
+
+        <p>
+            Pour créer une application de dessin, il faut <strong>détecter les mouvements de la souris</strong> 
+            et dessiner à chaque position.
+        </p>
+
+        <h3>Les événements principaux</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Événement</th>
+                    <th>Description</th>
+                    <th>Quand se déclenche-t-il ?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>&lt;Button-1&gt;</code></td>
+                    <td>Clic gauche</td>
+                    <td>Quand on clique avec le bouton gauche</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;B1-Motion&gt;</code></td>
+                    <td>Glisser (clic maintenu)</td>
+                    <td>Quand on déplace la souris en maintenant le clic gauche</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;ButtonRelease-1&gt;</code></td>
+                    <td>Relâcher le clic</td>
+                    <td>Quand on relâche le bouton gauche</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;Motion&gt;</code></td>
+                    <td>Mouvement de souris</td>
+                    <td>Quand la souris bouge (même sans clic)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="bind">La méthode bind()</h2>
+
+        <p>
+            La méthode <code>bind()</code> permet de lier un événement (comme un clic) 
+            à une fonction qui sera exécutée quand cet événement se produit.
+        </p>
+
+        <h3>Syntaxe</h3>
+        <pre>canvas.bind("&lt;événement&gt;", fonction)</pre>
+
+        <h3>Récupérer la position de la souris</h3>
+        <p>
+            Quand un événement souris se déclenche, Python passe automatiquement 
+            un objet <code>event</code> qui contient la position de la souris :
+        </p>
+        <ul>
+            <li><code>event.x</code> : Position horizontale (x)</li>
+            <li><code>event.y</code> : Position verticale (y)</li>
+        </ul>
+
+        <h3>Exemple : Afficher la position de la souris</h3>
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Position de la souris")
+
+canvas = tk.Canvas(fenetre, width=400, height=300, bg="white")
+canvas.pack()
+
+def afficher_position(event):
+    print(f"Position : x={event.x}, y={event.y}")
+
+# Lier l'événement de mouvement à la fonction
+canvas.bind("&lt;Motion&gt;", afficher_position)
+
+fenetre.mainloop()</pre>
+
+        <h2 id="dessin-libre">Dessiner en bougeant la souris</h2>
+
+        <h3>Principe</h3>
+        <p>
+            Pour créer un dessin libre (comme avec un pinceau), on dessine des petits cercles 
+            à chaque position de la souris quand le bouton est maintenu enfoncé.
+        </p>
+
+        <h3>Exemple simple : Dessiner au clic maintenu</h3>
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Dessin simple")
+
+canvas = tk.Canvas(fenetre, width=600, height=400, bg="white")
+canvas.pack()
+
+def dessiner(event):
+    # Dessiner un petit cercle à la position de la souris
+    x, y = event.x, event.y
+    rayon = 3
+    canvas.create_oval(x-rayon, y-rayon, x+rayon, y+rayon, 
+                       fill="black", outline="black")
+
+# Dessiner seulement quand on glisse avec le clic maintenu
+canvas.bind("&lt;B1-Motion&gt;", dessiner)
+
+fenetre.mainloop()</pre>
+
+        <div class="note">
+            💡 <code>&lt;B1-Motion&gt;</code> signifie "Button 1 Motion" : la souris bouge <strong>pendant</strong> 
+            que le bouton gauche est maintenu enfoncé.
+        </div>
+
+        <h3>Amélioration : Dessiner des lignes continues</h3>
+        <p>
+            Pour un dessin plus fluide, on peut dessiner des lignes entre les positions successives 
+            au lieu de petits cercles.
+        </p>
+
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Dessin avec lignes")
+
+canvas = tk.Canvas(fenetre, width=600, height=400, bg="white")
+canvas.pack()
+
+# Variables pour mémoriser la dernière position
+derniere_x = None
+derniere_y = None
+
+def commencer_dessin(event):
+    global derniere_x, derniere_y
+    derniere_x = event.x
+    derniere_y = event.y
+
+def dessiner(event):
+    global derniere_x, derniere_y
+    if derniere_x and derniere_y:
+        # Dessiner une ligne de la dernière position à la position actuelle
+        canvas.create_line(derniere_x, derniere_y, event.x, event.y,
+                          fill="black", width=3, capstyle="round", smooth=True)
+    # Mettre à jour la dernière position
+    derniere_x = event.x
+    derniere_y = event.y
+
+def arreter_dessin(event):
+    global derniere_x, derniere_y
+    derniere_x = None
+    derniere_y = None
+
+# Lier les événements
+canvas.bind("&lt;Button-1&gt;", commencer_dessin)
+canvas.bind("&lt;B1-Motion&gt;", dessiner)
+canvas.bind("&lt;ButtonRelease-1&gt;", arreter_dessin)
+
+fenetre.mainloop()</pre>
+
+        <div class="important">
+            <strong>⚠️ Points clés :</strong>
+            <ul>
+                <li><code>&lt;Button-1&gt;</code> : Déclenché quand on <strong>commence</strong> à cliquer</li>
+                <li><code>&lt;B1-Motion&gt;</code> : Déclenché <strong>pendant</strong> qu'on glisse avec le clic maintenu</li>
+                <li><code>&lt;ButtonRelease-1&gt;</code> : Déclenché quand on <strong>relâche</strong> le clic</li>
+                <li>On utilise des variables globales pour mémoriser la dernière position</li>
+            </ul>
+        </div>
+
+        <h2 id="exemple-complet">Exemple complet : Application de peinture basique</h2>
+
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Application de peinture")
+
+# Créer le Canvas
+canvas = tk.Canvas(fenetre, width=800, height=600, bg="white")
+canvas.pack()
+
+# Variables globales
+derniere_x = None
+derniere_y = None
+couleur_actuelle = "black"
+
+def commencer_dessin(event):
+    global derniere_x, derniere_y
+    derniere_x = event.x
+    derniere_y = event.y
+
+def dessiner(event):
+    global derniere_x, derniere_y
+    if derniere_x and derniere_y:
+        canvas.create_line(derniere_x, derniere_y, event.x, event.y,
+                          fill=couleur_actuelle, width=5, 
+                          capstyle="round", smooth=True)
+    derniere_x = event.x
+    derniere_y = event.y
+
+def arreter_dessin(event):
+    global derniere_x, derniere_y
+    derniere_x = None
+    derniere_y = None
+
+def changer_couleur_noir():
+    global couleur_actuelle
+    couleur_actuelle = "black"
+
+def changer_couleur_rouge():
+    global couleur_actuelle
+    couleur_actuelle = "red"
+
+def changer_couleur_bleu():
+    global couleur_actuelle
+    couleur_actuelle = "blue"
+
+def effacer_tout():
+    canvas.delete("all")
+
+# Lier les événements de dessin
+canvas.bind("&lt;Button-1&gt;", commencer_dessin)
+canvas.bind("&lt;B1-Motion&gt;", dessiner)
+canvas.bind("&lt;ButtonRelease-1&gt;", arreter_dessin)
+
+# Créer des boutons pour changer de couleur
+bouton_noir = tk.Button(fenetre, text="Noir", command=changer_couleur_noir, bg="black", fg="white")
+bouton_noir.pack(side="left", padx=5)
+
+bouton_rouge = tk.Button(fenetre, text="Rouge", command=changer_couleur_rouge, bg="red", fg="white")
+bouton_rouge.pack(side="left", padx=5)
+
+bouton_bleu = tk.Button(fenetre, text="Bleu", command=changer_couleur_bleu, bg="blue", fg="white")
+bouton_bleu.pack(side="left", padx=5)
+
+bouton_effacer = tk.Button(fenetre, text="Effacer tout", command=effacer_tout)
+bouton_effacer.pack(side="left", padx=5)
+
+fenetre.mainloop()</pre>
+
+        <div class="note">
+            💡 <strong>Astuces :</strong>
+            <ul>
+                <li><code>canvas.delete("all")</code> efface tout le contenu du Canvas</li>
+                <li><code>capstyle="round"</code> rend les extrémités des lignes arrondies</li>
+                <li><code>smooth=True</code> lisse les lignes pour un rendu plus naturel</li>
+                <li><code>side="left"</code> dans <code>pack()</code> place les boutons côte à côte</li>
+            </ul>
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 - Canvas de base</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme avec :</p>
+            <ul>
+                <li>Une fenêtre de titre <code>"Mon premier Canvas"</code></li>
+                <li>Un Canvas de taille <code>500x400</code> pixels avec un fond blanc</li>
+                <li>Dessine 3 formes de ton choix sur le Canvas (rectangle, cercle, ligne...)</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>canvas.create_rectangle()</code>, <code>canvas.create_oval()</code>, <code>canvas.create_line()</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 - Dessiner au clic</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée un programme qui :</p>
+            <ul>
+                <li>Affiche un Canvas blanc</li>
+                <li>Dessine un <strong>petit cercle noir</strong> à chaque endroit où tu cliques avec la souris</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>canvas.bind("&lt;Button-1&gt;", fonction)</code> pour détecter les clics.<br>
+                💡 Dans la fonction, récupère la position avec <code>event.x</code> et <code>event.y</code>, puis dessine un petit cercle avec <code>canvas.create_oval()</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 - Application de peinture basique 🎨</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée une application qui permet de <strong>dessiner en faisant glisser la souris</strong> :</p>
+            <ul>
+                <li>Un Canvas blanc de taille <code>700x500</code></li>
+                <li>Quand on glisse la souris avec le clic maintenu, le programme dessine une ligne noire</li>
+                <li>L'épaisseur du trait doit être de <strong>3 pixels</strong></li>
+            </ul>
+            
+            <div class="hint">
+                💡 <strong>Méthode :</strong><br>
+                1. Crée deux variables globales <code>derniere_x = None</code> et <code>derniere_y = None</code><br>
+                2. Crée 3 fonctions :<br>
+                &nbsp;&nbsp;&nbsp;- <code>commencer_dessin(event)</code> : mémorise la position de départ<br>
+                &nbsp;&nbsp;&nbsp;- <code>dessiner(event)</code> : dessine une ligne de la dernière position à la position actuelle<br>
+                &nbsp;&nbsp;&nbsp;- <code>arreter_dessin(event)</code> : remet les variables à None<br>
+                3. Lie les événements :<br>
+                &nbsp;&nbsp;&nbsp;- <code>&lt;Button-1&gt;</code> → commencer_dessin<br>
+                &nbsp;&nbsp;&nbsp;- <code>&lt;B1-Motion&gt;</code> → dessiner<br>
+                &nbsp;&nbsp;&nbsp;- <code>&lt;ButtonRelease-1&gt;</code> → arreter_dessin
+            </div>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 - Changer de couleur</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Améliore ton application de peinture en ajoutant :</p>
+            <ul>
+                <li>3 boutons en bas de la fenêtre : "Noir", "Rouge", "Bleu"</li>
+                <li>Chaque bouton change la couleur du pinceau</li>
+                <li>Le dessin se fait avec la couleur sélectionnée</li>
+            </ul>
+            
+            <div class="hint">
+                💡 Crée une variable globale <code>couleur_actuelle = "black"</code><br>
+                💡 Crée 3 fonctions qui changent cette variable (exemple : <code>changer_couleur_rouge()</code>)<br>
+                💡 Dans la fonction <code>dessiner()</code>, utilise <code>fill=couleur_actuelle</code><br>
+                💡 Place les boutons avec <code>.pack(side="left")</code> pour les mettre côte à côte
+            </div>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 - Taille du pinceau</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute la possibilité de changer l'épaisseur du trait :</p>
+            <ul>
+                <li>Ajoute 3 boutons : "Fin" (2 pixels), "Moyen" (5 pixels), "Épais" (10 pixels)</li>
+                <li>Le trait se dessine avec l'épaisseur sélectionnée</li>
+            </ul>
+            
+            <div class="hint">
+                💡 Crée une variable globale <code>epaisseur_actuelle = 3</code><br>
+                💡 Utilise <code>width=epaisseur_actuelle</code> dans <code>canvas.create_line()</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 - Effacer le dessin</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute un bouton "Effacer tout" qui :</p>
+            <ul>
+                <li>Supprime tout ce qui a été dessiné sur le Canvas</li>
+                <li>Remet le Canvas blanc et vide</li>
+            </ul>
+            
+            <div class="hint">
+                💡 Utilise <code>canvas.delete("all")</code> pour tout effacer
+            </div>
+        </div>
+
+        <div class="exercice" id="projet">
+            <h3>Projet final - Application de peinture complète 🎨✨</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée une application de peinture complète qui combine toutes les fonctionnalités :</p>
+            
+            <h4>Fonctionnalités obligatoires :</h4>
+            <ul>
+                <li>Un Canvas blanc de <code>800x600</code> pixels</li>
+                <li>Possibilité de dessiner en faisant glisser la souris</li>
+                <li>Au moins <strong>5 couleurs</strong> différentes au choix (noir, rouge, bleu, vert, jaune...)</li>
+                <li>Au moins <strong>3 tailles de pinceau</strong> différentes</li>
+                <li>Un bouton "Effacer tout"</li>
+            </ul>
+
+            <h4>Fonctionnalités bonus (optionnelles) :</h4>
+            <ul>
+                <li>Ajouter plus de couleurs (orange, violet, rose, marron...)</li>
+                <li>Ajouter un bouton "Gomme" qui dessine en blanc</li>
+                <li>Organiser les boutons de manière esthétique (utilise <code>frame</code> pour grouper les boutons)</li>
+                <li>Ajouter un Label qui affiche la couleur et taille actuelles</li>
+                <li>Permettre de dessiner des formes (rectangle, cercle) en cliquant</li>
+            </ul>
+
+            <h4>Conseils pour réussir :</h4>
+            <ul>
+                <li>Commence par le dessin de base (exercice 3)</li>
+                <li>Ajoute ensuite les couleurs (exercice 4)</li>
+                <li>Puis les tailles de pinceau (exercice 5)</li>
+                <li>Enfin le bouton effacer (exercice 6)</li>
+                <li>Teste ton programme régulièrement !</li>
+            </ul>
+
+            <div class="hint">
+                💡 <strong>Structure recommandée :</strong><br>
+                - Variables globales : <code>derniere_x</code>, <code>derniere_y</code>, <code>couleur_actuelle</code>, <code>epaisseur_actuelle</code><br>
+                - Fonctions de dessin : <code>commencer_dessin()</code>, <code>dessiner()</code>, <code>arreter_dessin()</code><br>
+                - Fonctions pour les couleurs : une fonction par couleur<br>
+                - Fonctions pour les tailles : une fonction par taille<br>
+                - Fonction <code>effacer_tout()</code><br>
+                - Canvas en haut, boutons en bas organisés par catégorie
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
