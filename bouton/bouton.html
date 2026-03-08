@@ -323,7 +323,6 @@
         <h2 id="fenetre">Créer une fenêtre</h2>
 
         <h3>Code minimal</h3>
-        <div class="example">
             <pre>import tkinter as tk
 
 # Créer la fenêtre principale
@@ -332,7 +331,6 @@ fenetre.title("Ma première fenêtre")
 
 # Lancer la boucle principale
 fenetre.mainloop()</pre>
-        </div>
 
         <p><strong>Explication :</strong></p>
         <ul>
@@ -364,7 +362,6 @@ fenetre.configure(bg="lightblue")</pre>
 
         <p>Un <code>Label</code> permet d'afficher du texte dans la fenêtre.</p>
 
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -375,7 +372,6 @@ texte = tk.Label(fenetre, text="Bonjour le monde !")
 texte.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <h3>Personnaliser un Label</h3>
         <pre>texte = tk.Label(
@@ -391,7 +387,6 @@ texte.pack()</pre>
 
         <p>Un <code>Button</code> est un bouton sur lequel l'utilisateur peut cliquer.</p>
 
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -402,7 +397,6 @@ bouton = tk.Button(fenetre, text="Clique-moi !")
 bouton.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <h3>Personnaliser un Button</h3>
         <pre>bouton = tk.Button(
@@ -420,7 +414,6 @@ bouton.pack()</pre>
 
         <p>Un <code>Entry</code> permet à l'utilisateur de taper du texte.</p>
 
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -431,7 +424,6 @@ champ = tk.Entry(fenetre)
 champ.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <h3>Récupérer le texte d'un Entry</h3>
         <pre>texte_saisi = champ.get()  # Récupère le texte</pre>
@@ -466,7 +458,6 @@ widget.grid(row=1, column=1)  # Ligne 1, colonne 1</pre>
         </p>
 
         <h3>Exemple : Afficher un message au clic</h3>
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -481,7 +472,6 @@ bouton = tk.Button(fenetre, text="Clique-moi !", command=dire_bonjour)
 bouton.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <div class="important">
             ⚠️ <strong>Attention :</strong> Écris <code>command=dire_bonjour</code> <strong>sans parenthèses</strong> !<br>
@@ -489,7 +479,6 @@ fenetre.mainloop()</pre>
         </div>
 
         <h3>Exemple : Modifier un Label au clic</h3>
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -508,14 +497,12 @@ bouton = tk.Button(fenetre, text="Changer", command=changer_texte)
 bouton.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <div class="note">
             💡 <code>label.config(text="...")</code> permet de modifier le texte d'un Label après sa création.
         </div>
 
         <h3>Exemple : Utiliser un Entry avec un Button</h3>
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -537,7 +524,6 @@ bouton = tk.Button(fenetre, text="Valider", command=afficher_salutation)
 bouton.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <h2 id="resume">Résumé des commandes importantes</h2>
 
