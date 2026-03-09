@@ -392,7 +392,6 @@
         <h2 id="canvas-jeu">Canvas pour le jeu</h2>
 
         <h3>Créer le terrain de jeu</h3>
-        <div class="example">
             <pre>import tkinter as tk
 
 fenetre = tk.Tk()
@@ -403,7 +402,6 @@ canvas = tk.Canvas(fenetre, width=800, height=600, bg="black")
 canvas.pack()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <div class="note">
             💡 Pour un jeu, on utilise souvent un fond noir ou sombre, comme les jeux d'arcade classiques !
@@ -429,7 +427,6 @@ raquette_droite = canvas.create_rectangle(760, 250, 770, 350, fill="white")</pre
             <li><code>dy</code> : Déplacement vertical (positif = bas, négatif = haut)</li>
         </ul>
 
-        <div class="example">
             <pre># Déplacer la balle de 5 pixels vers la droite et 3 vers le bas
 canvas.move(balle, 5, 3)
 
@@ -447,7 +444,6 @@ canvas.move(raquette_gauche, 0, -10)</pre>
         <h3>Détecter les touches du clavier</h3>
         <p>Pour contrôler les raquettes avec le clavier, on utilise <code>bind()</code> :</p>
 
-        <div class="example">
             <pre>def deplacer_raquette_gauche_haut(event):
     canvas.move(raquette_gauche, 0, -20)
 
@@ -516,7 +512,6 @@ if (pos_balle[0] <= pos_raquette[2] and  # La balle est à gauche de la raquette
             (comme une animation). On utilise <code>after()</code> pour créer cette boucle :
         </p>
 
-        <div class="example">
             <pre>def boucle_jeu():
     # Déplacer la balle
     canvas.move(balle, vitesse_x, vitesse_y)
@@ -529,7 +524,6 @@ if (pos_balle[0] <= pos_raquette[2] and  # La balle est à gauche de la raquette
 
 # Démarrer la boucle
 boucle_jeu()</pre>
-        </div>
 
         <div class="important">
             ⚠️ <code>fenetre.after(20, boucle_jeu)</code> signifie : "Appelle la fonction <code>boucle_jeu</code> 
@@ -538,7 +532,6 @@ boucle_jeu()</pre>
 
         <h2 id="structure">Structure complète d'un jeu Pong</h2>
 
-        <div class="example">
             <pre>import tkinter as tk
 
 # Créer la fenêtre
@@ -602,7 +595,6 @@ def boucle_jeu():
 boucle_jeu()
 
 fenetre.mainloop()</pre>
-        </div>
 
         <div class="note">
             💡 Ceci est une version simplifiée. Dans les exercices, tu vas construire un jeu complet 
@@ -624,9 +616,9 @@ fenetre.mainloop()</pre>
                 <li>Un Canvas de taille <code>800x600</code> pixels avec un fond <strong>noir</strong></li>
                 <li>Une ligne blanche verticale au milieu du terrain (pour séparer les deux côtés)</li>
             </ul>
-            <div class="hint">
+            <!-- <div class="hint">
                 💡 Utilise <code>canvas.create_line(400, 0, 400, 600, fill="white", dash=(10, 5))</code> pour créer une ligne pointillée au centre
-            </div>
+            </div> -->
         </div>
 
         <div class="exercice" id="ex2">
@@ -637,10 +629,10 @@ fenetre.mainloop()</pre>
                 <li>Un cercle blanc de <strong>20 pixels de diamètre</strong></li>
                 <li>Positionné au centre du Canvas (coordonnées 390, 290, 410, 310)</li>
             </ul>
-            <div class="hint">
+            <!-- <div class="hint">
                 💡 Utilise <code>canvas.create_oval(x1, y1, x2, y2, fill="white")</code><br>
                 💡 Stocke l'objet dans une variable : <code>balle = canvas.create_oval(...)</code>
-            </div>
+            </div> -->
         </div>
 
         <div class="exercice" id="ex3">
