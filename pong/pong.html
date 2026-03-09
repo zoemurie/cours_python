@@ -427,12 +427,13 @@ raquette_droite = canvas.create_rectangle(760, 250, 770, 350, fill="white")</pre
             <li><code>dy</code> : Déplacement vertical (positif = bas, négatif = haut)</li>
         </ul>
 
+
             <pre># Déplacer la balle de 5 pixels vers la droite et 3 vers le bas
 canvas.move(balle, 5, 3)
 
 # Déplacer la raquette de 10 pixels vers le haut
 canvas.move(raquette_gauche, 0, -10)</pre>
-        </div>
+
 
         <h3>Récupérer la position d'un objet</h3>
         <p>Pour savoir où se trouve un objet, on utilise <code>canvas.coords(objet)</code> :</p>
@@ -453,7 +454,6 @@ def deplacer_raquette_gauche_bas(event):
 # Lier les touches aux fonctions
 fenetre.bind("&lt;z&gt;", deplacer_raquette_gauche_haut)
 fenetre.bind("&lt;s&gt;", deplacer_raquette_gauche_bas)</pre>
-        </div>
 
         <h3>Touches courantes pour Pong :</h3>
         <table>
@@ -595,6 +595,7 @@ def boucle_jeu():
 boucle_jeu()
 
 fenetre.mainloop()</pre>
+
 
         <div class="note">
             💡 Ceci est une version simplifiée. Dans les exercices, tu vas construire un jeu complet 
