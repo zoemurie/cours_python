@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Créer un jeu Pong avec Tkinter – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction au jeu Pong</a></li>
+                <li><a href="#principe">Principe du jeu</a></li>
+                <li><a href="#elements">Éléments nécessaires</a></li>
+                <li><a href="#canvas-jeu">Canvas pour le jeu</a></li>
+                <li><a href="#deplacer-objets">Déplacer des objets</a></li>
+                <li><a href="#clavier">Contrôles clavier</a></li>
+                <li><a href="#collisions">Détection de collisions</a></li>
+                <li><a href="#boucle-jeu">Boucle de jeu</a></li>
+                <li><a href="#structure">Structure complète</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Ex 1 - Terrain de jeu</a></li>
+                <li><a href="#ex2">Ex 2 - Créer la balle</a></li>
+                <li><a href="#ex3">Ex 3 - Déplacer la balle</a></li>
+                <li><a href="#ex4">Ex 4 - Rebonds sur les murs</a></li>
+                <li><a href="#ex5">Ex 5 - Créer les raquettes</a></li>
+                <li><a href="#ex6">Ex 6 - Contrôler les raquettes</a></li>
+                <li><a href="#ex7">Ex 7 - Collision balle-raquette</a></li>
+                <li><a href="#ex8">Ex 8 - Système de score</a></li>
+                <li><a href="#projet">Projet - Pong complet</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🎮 Créer un jeu Pong avec Tkinter</h1>
+        <p class="subtitle">Ton premier jeu vidéo en Python !</p>
+
+        <!-- PARTIE COURS -->
+        <h2 id="intro">Introduction au jeu Pong</h2>
+        
+        <p>
+            <strong>Pong</strong> est l'un des premiers jeux vidéo de l'histoire (1972) ! C'est un jeu simple 
+            où deux joueurs contrôlent des raquettes pour renvoyer une balle, comme au tennis de table.
+        </p>
+
+        <p>
+            Dans ce cours, tu vas apprendre à créer ton propre jeu Pong en utilisant Python et Tkinter. 
+            C'est un excellent projet pour comprendre :
+        </p>
+        <ul>
+            <li>Comment créer des animations</li>
+            <li>Comment détecter les collisions</li>
+            <li>Comment gérer les contrôles au clavier</li>
+            <li>Comment créer une boucle de jeu</li>
+        </ul>
+
+        <h2 id="principe">Principe du jeu</h2>
+
+        <h3>Règles du Pong :</h3>
+        <ol>
+            <li>Une <strong>balle</strong> se déplace sur l'écran</li>
+            <li>Deux <strong>raquettes</strong> (une à gauche, une à droite) peuvent monter et descendre</li>
+            <li>Les joueurs doivent <strong>renvoyer la balle</strong> avec leur raquette</li>
+            <li>Si la balle passe derrière une raquette, l'<strong>adversaire marque un point</strong></li>
+            <li>Le premier à atteindre un certain score gagne</li>
+        </ol>
+
+        <h2 id="elements">Éléments nécessaires pour créer Pong</h2>
+
+        <h3>Les composants du jeu :</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Élément</th>
+                    <th>Description</th>
+                    <th>Type sur Canvas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Terrain</td>
+                    <td>Le fond du jeu</td>
+                    <td>Canvas avec couleur de fond</td>
+                </tr>
+                <tr>
+                    <td>Balle</td>
+                    <td>Cercle qui se déplace</td>
+                    <td>Ovale (circle)</td>
+                </tr>
+                <tr>
+                    <td>Raquette gauche</td>
+                    <td>Rectangle contrôlé par le joueur 1</td>
+                    <td>Rectangle</td>
+                </tr>
+                <tr>
+                    <td>Raquette droite</td>
+                    <td>Rectangle contrôlé par le joueur 2</td>
+                    <td>Rectangle</td>
+                </tr>
+                <tr>
+                    <td>Scores</td>
+                    <td>Affichage des points</td>
+                    <td>Texte (Label ou canvas text)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="canvas-jeu">Canvas pour le jeu</h2>
+
+        <h3>Créer le terrain de jeu</h3>
+        <div class="example">
+            <pre>import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Pong")
+
+# Créer le Canvas (terrain de jeu)
+canvas = tk.Canvas(fenetre, width=800, height=600, bg="black")
+canvas.pack()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <div class="note">
+            💡 Pour un jeu, on utilise souvent un fond noir ou sombre, comme les jeux d'arcade classiques !
+        </div>
+
+        <h3>Créer les objets du jeu</h3>
+        <pre># Créer la balle (cercle blanc)
+balle = canvas.create_oval(390, 290, 410, 310, fill="white")
+
+# Créer la raquette gauche (rectangle blanc)
+raquette_gauche = canvas.create_rectangle(30, 250, 40, 350, fill="white")
+
+# Créer la raquette droite
+raquette_droite = canvas.create_rectangle(760, 250, 770, 350, fill="white")</pre>
+
+        <h2 id="deplacer-objets">Déplacer des objets sur le Canvas</h2>
+
+        <h3>La méthode move()</h3>
+        <p>Pour déplacer un objet sur le Canvas, on utilise <code>canvas.move(objet, dx, dy)</code> :</p>
+        <ul>
+            <li><code>objet</code> : L'objet à déplacer (balle, raquette...)</li>
+            <li><code>dx</code> : Déplacement horizontal (positif = droite, négatif = gauche)</li>
+            <li><code>dy</code> : Déplacement vertical (positif = bas, négatif = haut)</li>
+        </ul>
+
+        <div class="example">
+            <pre># Déplacer la balle de 5 pixels vers la droite et 3 vers le bas
+canvas.move(balle, 5, 3)
+
+# Déplacer la raquette de 10 pixels vers le haut
+canvas.move(raquette_gauche, 0, -10)</pre>
+        </div>
+
+        <h3>Récupérer la position d'un objet</h3>
+        <p>Pour savoir où se trouve un objet, on utilise <code>canvas.coords(objet)</code> :</p>
+        <pre>position = canvas.coords(balle)
+# Retourne : [x1, y1, x2, y2] (coin haut-gauche et coin bas-droit)</pre>
+
+        <h2 id="clavier">Contrôles clavier</h2>
+
+        <h3>Détecter les touches du clavier</h3>
+        <p>Pour contrôler les raquettes avec le clavier, on utilise <code>bind()</code> :</p>
+
+        <div class="example">
+            <pre>def deplacer_raquette_gauche_haut(event):
+    canvas.move(raquette_gauche, 0, -20)
+
+def deplacer_raquette_gauche_bas(event):
+    canvas.move(raquette_gauche, 0, 20)
+
+# Lier les touches aux fonctions
+fenetre.bind("&lt;z&gt;", deplacer_raquette_gauche_haut)
+fenetre.bind("&lt;s&gt;", deplacer_raquette_gauche_bas)</pre>
+        </div>
+
+        <h3>Touches courantes pour Pong :</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Joueur</th>
+                    <th>Monter</th>
+                    <th>Descendre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Joueur 1 (gauche)</td>
+                    <td><code>"&lt;z&gt;"</code> ou <code>"&lt;w&gt;"</code></td>
+                    <td><code>"&lt;s&gt;"</code></td>
+                </tr>
+                <tr>
+                    <td>Joueur 2 (droite)</td>
+                    <td><code>"&lt;Up&gt;"</code> (flèche haut)</td>
+                    <td><code>"&lt;Down&gt;"</code> (flèche bas)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="collisions">Détection de collisions</h2>
+
+        <h3>Rebond sur les murs (haut et bas)</h3>
+        <pre>position_balle = canvas.coords(balle)
+y_haut = position_balle[1]  # Coordonnée Y du haut de la balle
+y_bas = position_balle[3]   # Coordonnée Y du bas de la balle
+
+# Si la balle touche le haut ou le bas
+if y_haut <= 0 or y_bas >= 600:
+    vitesse_y = -vitesse_y  # Inverser la direction verticale</pre>
+
+        <h3>Collision avec une raquette</h3>
+        <p>Pour détecter si la balle touche une raquette, on compare leurs positions :</p>
+        <pre>pos_balle = canvas.coords(balle)
+pos_raquette = canvas.coords(raquette_gauche)
+
+# Vérifier si la balle touche la raquette gauche
+if (pos_balle[0] <= pos_raquette[2] and  # La balle est à gauche de la raquette
+    pos_balle[2] >= pos_raquette[0] and  # La balle est à droite du bord gauche
+    pos_balle[3] >= pos_raquette[1] and  # La balle est sous le haut de la raquette
+    pos_balle[1] <= pos_raquette[3]):    # La balle est au-dessus du bas
+    vitesse_x = -vitesse_x  # Inverser la direction horizontale</pre>
+
+        <div class="note">
+            💡 Cette vérification vérifie si les rectangles (balle et raquette) se chevauchent.
+        </div>
+
+        <h2 id="boucle-jeu">Boucle de jeu</h2>
+
+        <p>
+            Un jeu a besoin d'une <strong>boucle de jeu</strong> qui met à jour l'écran en continu 
+            (comme une animation). On utilise <code>after()</code> pour créer cette boucle :
+        </p>
+
+        <div class="example">
+            <pre>def boucle_jeu():
+    # Déplacer la balle
+    canvas.move(balle, vitesse_x, vitesse_y)
+    
+    # Vérifier les collisions
+    # ... (code de collision)
+    
+    # Rappeler cette fonction après 20 millisecondes
+    fenetre.after(20, boucle_jeu)
+
+# Démarrer la boucle
+boucle_jeu()</pre>
+        </div>
+
+        <div class="important">
+            ⚠️ <code>fenetre.after(20, boucle_jeu)</code> signifie : "Appelle la fonction <code>boucle_jeu</code> 
+            dans 20 millisecondes". Cela crée une boucle infinie qui rafraîchit le jeu environ 50 fois par seconde.
+        </div>
+
+        <h2 id="structure">Structure complète d'un jeu Pong</h2>
+
+        <div class="example">
+            <pre>import tkinter as tk
+
+# Créer la fenêtre
+fenetre = tk.Tk()
+fenetre.title("Pong")
+
+# Créer le Canvas
+canvas = tk.Canvas(fenetre, width=800, height=600, bg="black")
+canvas.pack()
+
+# Créer les objets
+balle = canvas.create_oval(390, 290, 410, 310, fill="white")
+raquette_gauche = canvas.create_rectangle(30, 250, 40, 350, fill="white")
+raquette_droite = canvas.create_rectangle(760, 250, 770, 350, fill="white")
+
+# Variables de vitesse
+vitesse_x = 5
+vitesse_y = 3
+
+# Fonctions de contrôle des raquettes
+def raquette_gauche_haut(event):
+    canvas.move(raquette_gauche, 0, -20)
+
+def raquette_gauche_bas(event):
+    canvas.move(raquette_gauche, 0, 20)
+
+def raquette_droite_haut(event):
+    canvas.move(raquette_droite, 0, -20)
+
+def raquette_droite_bas(event):
+    canvas.move(raquette_droite, 0, 20)
+
+# Lier les touches
+fenetre.bind("&lt;z&gt;", raquette_gauche_haut)
+fenetre.bind("&lt;s&gt;", raquette_gauche_bas)
+fenetre.bind("&lt;Up&gt;", raquette_droite_haut)
+fenetre.bind("&lt;Down&gt;", raquette_droite_bas)
+
+# Boucle de jeu
+def boucle_jeu():
+    global vitesse_x, vitesse_y
+    
+    # Déplacer la balle
+    canvas.move(balle, vitesse_x, vitesse_y)
+    
+    # Récupérer la position de la balle
+    pos = canvas.coords(balle)
+    
+    # Rebond haut/bas
+    if pos[1] <= 0 or pos[3] >= 600:
+        vitesse_y = -vitesse_y
+    
+    # Rebond gauche/droite (simplifié)
+    if pos[0] <= 0 or pos[2] >= 800:
+        vitesse_x = -vitesse_x
+    
+    # Continuer la boucle
+    fenetre.after(20, boucle_jeu)
+
+# Démarrer le jeu
+boucle_jeu()
+
+fenetre.mainloop()</pre>
+        </div>
+
+        <div class="note">
+            💡 Ceci est une version simplifiée. Dans les exercices, tu vas construire un jeu complet 
+            avec collisions de raquettes et système de score !
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 - Terrain de jeu</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée le terrain de jeu de base :</p>
+            <ul>
+                <li>Une fenêtre avec le titre <code>"Pong Game"</code></li>
+                <li>Un Canvas de taille <code>800x600</code> pixels avec un fond <strong>noir</strong></li>
+                <li>Une ligne blanche verticale au milieu du terrain (pour séparer les deux côtés)</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>canvas.create_line(400, 0, 400, 600, fill="white", dash=(10, 5))</code> pour créer une ligne pointillée au centre
+            </div>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 - Créer la balle</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute une balle au centre du terrain :</p>
+            <ul>
+                <li>Un cercle blanc de <strong>20 pixels de diamètre</strong></li>
+                <li>Positionné au centre du Canvas (coordonnées 390, 290, 410, 310)</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>canvas.create_oval(x1, y1, x2, y2, fill="white")</code><br>
+                💡 Stocke l'objet dans une variable : <code>balle = canvas.create_oval(...)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 - Déplacer la balle</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Fais bouger la balle automatiquement :</p>
+            <ul>
+                <li>Crée deux variables <code>vitesse_x = 5</code> et <code>vitesse_y = 3</code></li>
+                <li>Crée une fonction <code>deplacer_balle()</code> qui :
+                    <ul>
+                        <li>Déplace la balle avec <code>canvas.move()</code></li>
+                        <li>Se rappelle elle-même après 20 millisecondes avec <code>fenetre.after()</code></li>
+                    </ul>
+                </li>
+                <li>Appelle la fonction pour démarrer l'animation</li>
+            </ul>
+            <div class="hint">
+                💡 Structure de la fonction :<br>
+                <code>def deplacer_balle():</code><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<code>canvas.move(balle, vitesse_x, vitesse_y)</code><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<code>fenetre.after(20, deplacer_balle)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 - Rebonds sur les murs</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Fais rebondir la balle sur les murs haut et bas :</p>
+            <ul>
+                <li>Dans la fonction <code>deplacer_balle()</code>, récupère la position de la balle avec <code>canvas.coords(balle)</code></li>
+                <li>Si la balle touche le haut (y ≤ 0) ou le bas (y ≥ 600), inverse <code>vitesse_y</code></li>
+                <li>Si la balle touche la gauche (x ≤ 0) ou la droite (x ≥ 800), inverse <code>vitesse_x</code></li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>global vitesse_x, vitesse_y</code> au début de la fonction pour modifier ces variables<br>
+                💡 Pour inverser : <code>vitesse_y = -vitesse_y</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 - Créer les raquettes</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute les deux raquettes :</p>
+            <ul>
+                <li><strong>Raquette gauche</strong> : Rectangle blanc de 10×100 pixels, positionné à x=30, y=250</li>
+                <li><strong>Raquette droite</strong> : Rectangle blanc de 10×100 pixels, positionné à x=760, y=250</li>
+            </ul>
+            <div class="hint">
+                💡 <code>raquette_gauche = canvas.create_rectangle(30, 250, 40, 350, fill="white")</code><br>
+                💡 <code>raquette_droite = canvas.create_rectangle(760, 250, 770, 350, fill="white")</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 - Contrôler les raquettes</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Permets aux joueurs de contrôler les raquettes avec le clavier :</p>
+            <ul>
+                <li><strong>Joueur 1 (gauche)</strong> : Touche <code>Z</code> pour monter, <code>S</code> pour descendre</li>
+                <li><strong>Joueur 2 (droite)</strong> : Flèche <code>Haut</code> pour monter, flèche <code>Bas</code> pour descendre</li>
+                <li>Les raquettes se déplacent de <strong>20 pixels</strong> à chaque pression</li>
+                <li>Les raquettes ne doivent <strong>pas sortir</strong> du Canvas (bloquer à y=0 et y=500)</li>
+            </ul>
+            <div class="hint">
+                💡 Crée 4 fonctions : <code>raquette_gauche_haut(event)</code>, <code>raquette_gauche_bas(event)</code>, etc.<br>
+                💡 Utilise <code>canvas.move(raquette, 0, -20)</code> pour monter<br>
+                💡 Vérifie la position avec <code>canvas.coords()</code> avant de déplacer pour ne pas sortir
+            </div>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h3>Exercice 7 - Collision balle-raquette</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Détecte quand la balle touche une raquette et fais-la rebondir :</p>
+            <ul>
+                <li>Dans la fonction <code>deplacer_balle()</code>, récupère les positions de la balle et des deux raquettes</li>
+                <li>Vérifie si la balle chevauche la raquette gauche</li>
+                <li>Vérifie si la balle chevauche la raquette droite</li>
+                <li>Si collision détectée, inverse <code>vitesse_x</code></li>
+            </ul>
+            <div class="hint">
+                💡 Condition de collision (exemple pour raquette gauche) :<br>
+                <code>if (pos_balle[0] <= pos_raquette[2] and</code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;pos_balle[2] >= pos_raquette[0] and</code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;pos_balle[3] >= pos_raquette[1] and</code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;pos_balle[1] <= pos_raquette[3]):</code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;vitesse_x = -vitesse_x</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex8">
+            <h3>Exercice 8 - Système de score</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute un système de score :</p>
+            <ul>
+                <li>Crée deux variables <code>score_gauche = 0</code> et <code>score_droite = 0</code></li>
+                <li>Affiche les scores en haut du Canvas avec <code>canvas.create_text()</code></li>
+                <li>Quand la balle sort à gauche (x ≤ 0), le joueur de droite marque un point</li>
+                <li>Quand la balle sort à droite (x ≥ 800), le joueur de gauche marque un point</li>
+                <li>Après un point, replace la balle au centre</li>
+                <li>Mets à jour l'affichage du score</li>
+            </ul>
+            <div class="hint">
+                💡 Crée les textes de score au début :<br>
+                <code>texte_score_gauche = canvas.create_text(200, 50, text="0", fill="white", font=("Arial", 40))</code><br>
+                💡 Pour mettre à jour : <code>canvas.itemconfig(texte_score_gauche, text=str(score_gauche))</code><br>
+                💡 Pour recentrer la balle : <code>canvas.coords(balle, 390, 290, 410, 310)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="projet">
+            <h3>Projet final - Pong complet 🎮</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Combine tous les exercices pour créer un jeu Pong entièrement fonctionnel !</p>
+            
+            <h4>Fonctionnalités obligatoires :</h4>
+            <ul>
+                <li>✅ Terrain de jeu noir de 800x600 avec ligne centrale</li>
+                <li>✅ Balle blanche qui se déplace automatiquement</li>
+                <li>✅ Rebonds sur les murs haut et bas</li>
+                <li>✅ Deux raquettes contrôlables (Z/S et Flèches)</li>
+                <li>✅ Collision balle-raquette avec rebond</li>
+                <li>✅ Système de score fonctionnel</li>
+                <li>✅ Remise au centre après chaque point</li>
+                <li>✅ Les raquettes ne sortent pas du terrain</li>
+            </ul>
+
+            <h4>Améliorations bonus (optionnelles) :</h4>
+            <ul>
+                <li>🌟 Augmenter progressivement la vitesse de la balle</li>
+                <li>🌟 Ajouter un son lors des rebonds (module <code>winsound</code> ou <code>pygame</code>)</li>
+                <li>🌟 Changer la couleur de la balle quand elle touche une raquette</li>
+                <li>🌟 Afficher un message "Joueur X gagne !" quand un joueur atteint 5 points</li>
+                <li>🌟 Ajouter un bouton "Pause" pour arrêter/reprendre le jeu</li>
+                <li>🌟 Ajouter un mode 1 joueur où la raquette droite se déplace automatiquement (IA simple)</li>
+                <li>🌟 Varier l'angle de rebond selon l'endroit où la balle touche la raquette</li>
+            </ul>
+
+            <h4>Conseils pour réussir :</h4>
+            <ul>
+                <li>📝 Commence par créer le terrain et la balle (Ex 1-2)</li>
+                <li>📝 Fais bouger la balle avec les rebonds (Ex 3-4)</li>
+                <li>📝 Ajoute les raquettes et les contrôles (Ex 5-6)</li>
+                <li>📝 Implémente les collisions balle-raquette (Ex 7)</li>
+                <li>📝 Ajoute le système de score (Ex 8)</li>
+                <li>📝 Teste régulièrement ton jeu !</li>
+                <li>📝 Utilise des <code>print()</code> pour déboguer si quelque chose ne fonctionne pas</li>
+            </ul>
+
+            <h4>Structure du code :</h4>
+            <div class="hint">
+                <strong>Organisation recommandée :</strong><br><br>
+                1️⃣ <strong>Imports et configuration</strong><br>
+                &nbsp;&nbsp;&nbsp;- import tkinter<br>
+                &nbsp;&nbsp;&nbsp;- créer fenêtre et canvas<br><br>
+                
+                2️⃣ <strong>Créer les objets</strong><br>
+                &nbsp;&nbsp;&nbsp;- balle, raquettes, scores, ligne centrale<br><br>
+                
+                3️⃣ <strong>Variables globales</strong><br>
+                &nbsp;&nbsp;&nbsp;- vitesse_x, vitesse_y<br>
+                &nbsp;&nbsp;&nbsp;- score_gauche, score_droite<br><br>
+                
+                4️⃣ <strong>Fonctions de contrôle des raquettes</strong><br>
+                &nbsp;&nbsp;&nbsp;- raquette_gauche_haut(), raquette_gauche_bas()<br>
+                &nbsp;&nbsp;&nbsp;- raquette_droite_haut(), raquette_droite_bas()<br><br>
+                
+                5️⃣ <strong>Fonction boucle de jeu</strong><br>
+                &nbsp;&nbsp;&nbsp;- déplacer la balle<br>
+                &nbsp;&nbsp;&nbsp;- vérifier rebonds sur murs<br>
+                &nbsp;&nbsp;&nbsp;- vérifier collisions avec raquettes<br>
+                &nbsp;&nbsp;&nbsp;- vérifier si un point est marqué<br>
+                &nbsp;&nbsp;&nbsp;- rappeler la fonction avec after()<br><br>
+                
+                6️⃣ <strong>Lier les touches et démarrer</strong><br>
+                &nbsp;&nbsp;&nbsp;- bind() pour les 4 touches<br>
+                &nbsp;&nbsp;&nbsp;- appeler boucle_jeu()<br>
+                &nbsp;&nbsp;&nbsp;- mainloop()
+            </div>
+
+            <h4>Points importants :</h4>
+            <div class="warning">
+                <strong>⚠️ Erreurs fréquentes à éviter :</strong>
+                <ul>
+                    <li>Oublier <code>global vitesse_x, vitesse_y</code> dans la boucle de jeu</li>
+                    <li>Ne pas vérifier si les raquettes sortent du terrain</li>
+                    <li>Oublier de remettre la balle au centre après un point</li>
+                    <li>Ne pas mettre à jour l'affichage du score</li>
+                    <li>Utiliser <code>after()</code> avec un délai trop grand (le jeu sera lent)</li>
+                </ul>
+            </div>
+
+            <h4>Test final :</h4>
+            <p>Ton jeu est réussi si :</p>
+            <ul>
+                <li>✅ La balle se déplace en continu</li>
+                <li>✅ La balle rebondit correctement sur tous les murs et raquettes</li>
+                <li>✅ Les deux joueurs peuvent contrôler leur raquette</li>
+                <li>✅ Le score augmente correctement</li>
+                <li>✅ Le jeu est jouable et amusant !</li>
+            </ul>
+
+            <p style="text-align: center; margin-top: 30px; font-size: 1.2em; color: #2a5298;">
+                <strong>🎉 Félicitations ! Tu as créé ton premier jeu vidéo ! 🎉</strong>
+            </p>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
