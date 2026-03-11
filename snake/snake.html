@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Créer un jeu Snake avec Tkinter – Cours et Exercices</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Navigation latérale */
+        .sidebar {
+            width: 280px;
+            position: sticky;
+            top: 30px;
+            height: fit-content;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #1e3c72;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ffde59;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Contenu principal */
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #1e3c72;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        ul li, ol li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #2a5298;
+            font-family: "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        code {
+            background-color: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .note {
+            background-color: #f4f8ff;
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ffde59;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .exercice h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .hint {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: #2a5298;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back:hover {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 3px;
+            background: linear-gradient(to right, #1e3c72, #ffde59, #1e3c72);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background-color: #2a5298;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+    <!-- Navigation latérale -->
+    <aside class="sidebar">
+        <h2>📚 Navigation</h2>
+        
+        <div class="section-title">📖 Cours</div>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction au Snake</a></li>
+                <li><a href="#principe">Principe du jeu</a></li>
+                <li><a href="#grille">Système de grille</a></li>
+                <li><a href="#serpent">Représenter le serpent</a></li>
+                <li><a href="#deplacement">Déplacement</a></li>
+                <li><a href="#nourriture">Ajouter la nourriture</a></li>
+                <li><a href="#collision">Détection de collision</a></li>
+                <li><a href="#croissance">Faire grandir le serpent</a></li>
+                <li><a href="#game-over">Game Over</a></li>
+            </ul>
+        </nav>
+
+        <div class="section-title">✏️ Exercices</div>
+        <nav>
+            <ul>
+                <li><a href="#ex1">Ex 1 - Grille de jeu</a></li>
+                <li><a href="#ex2">Ex 2 - Serpent initial</a></li>
+                <li><a href="#ex3">Ex 3 - Déplacement automatique</a></li>
+                <li><a href="#ex4">Ex 4 - Contrôles directionnels</a></li>
+                <li><a href="#ex5">Ex 5 - Apparition de nourriture</a></li>
+                <li><a href="#ex6">Ex 6 - Manger et grandir</a></li>
+                <li><a href="#ex7">Ex 7 - Collisions et fin</a></li>
+                <li><a href="#ex8">Ex 8 - Afficher le score</a></li>
+                <li><a href="#projet">Projet - Snake complet</a></li>
+            </ul>
+        </nav>
+
+        <a class="back" href="index.html">⬅ Retour à l'accueil</a>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <h1>🐍 Créer un jeu Snake avec Tkinter</h1>
+        <p class="subtitle">Le jeu classique du serpent gourmand</p>
+
+        <!-- PARTIE COURS -->
+        <h2 id="intro">Introduction au jeu Snake</h2>
+        
+        <p>
+            <strong>Snake</strong> (le serpent) est un jeu classique où tu contrôles un serpent qui doit manger 
+            de la nourriture pour grandir, tout en évitant de se mordre la queue ou de percuter les murs !
+        </p>
+
+        <p>
+            Ce jeu est parfait pour apprendre :
+        </p>
+        <ul>
+            <li>La gestion d'une grille</li>
+            <li>Les listes pour représenter le corps du serpent</li>
+            <li>Les déplacements dans 4 directions</li>
+            <li>La détection de collision</li>
+            <li>Le système de score</li>
+        </ul>
+
+        <h2 id="principe">Principe du jeu</h2>
+
+        <h3>Règles du Snake :</h3>
+        <ol>
+            <li>Un <strong>serpent</strong> se déplace sur une grille</li>
+            <li>Le serpent avance automatiquement dans une direction</li>
+            <li>Le joueur peut changer la direction avec les flèches du clavier</li>
+            <li>Des <strong>fruits</strong> apparaissent aléatoirement sur la grille</li>
+            <li>Quand le serpent mange un fruit :
+                <ul>
+                    <li>Il grandit d'une case</li>
+                    <li>Le score augmente</li>
+                    <li>Un nouveau fruit apparaît</li>
+                </ul>
+            </li>
+            <li>Le jeu se termine si :
+                <ul>
+                    <li>Le serpent se mord la queue</li>
+                    <li>Le serpent touche un mur</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2 id="grille">Système de grille</h2>
+
+        <p>
+            Dans Snake, on ne travaille pas en pixels, mais avec un <strong>système de grille</strong>. 
+            Le terrain est divisé en cases (par exemple 20×20 cases).
+        </p>
+
+        <h3>Principe de la grille</h3>
+        <pre># Paramètres de la grille
+TAILLE_CASE = 20      # Taille d'une case en pixels
+LARGEUR_GRILLE = 20   # Nombre de cases en largeur
+HAUTEUR_GRILLE = 20   # Nombre de cases en hauteur
+
+# Taille du Canvas
+LARGEUR = LARGEUR_GRILLE * TAILLE_CASE   # 400 pixels
+HAUTEUR = HAUTEUR_GRILLE * TAILLE_CASE   # 400 pixels</pre>
+
+        <h3>Dessiner une case sur la grille</h3>
+        <pre>def dessiner_case(x, y, couleur):
+    """Dessine un rectangle à la position (x, y) de la grille"""
+    x1 = x * TAILLE_CASE
+    y1 = y * TAILLE_CASE
+    x2 = x1 + TAILLE_CASE
+    y2 = y1 + TAILLE_CASE
+    canvas.create_rectangle(x1, y1, x2, y2, fill=couleur, outline="black")</pre>
+
+        <div class="note">
+            💡 Si le serpent est en position (5, 3) sur la grille, il sera dessiné aux pixels (100, 60) sur le Canvas.
+        </div>
+
+        <h2 id="serpent">Représenter le serpent</h2>
+
+        <p>
+            Le serpent est représenté par une <strong>liste de positions</strong>. Chaque position est 
+            un tuple (x, y) qui correspond à une case de la grille.
+        </p>
+
+        <h3>Exemple : serpent de 3 cases</h3>
+        <pre># Le serpent occupe 3 cases : (5,10), (6,10), (7,10)
+serpent = [(5, 10), (6, 10), (7, 10)]
+
+# La tête du serpent est toujours à la fin de la liste
+tete = serpent[-1]  # (7, 10)</pre>
+
+        <div class="important">
+            ⚠️ <strong>Convention importante :</strong> La <strong>tête</strong> du serpent est toujours le <strong>dernier élément</strong> de la liste.
+        </div>
+
+        <h3>Dessiner le serpent</h3>
+        <pre>def dessiner_serpent():
+    """Dessine toutes les parties du serpent"""
+    for x, y in serpent:
+        dessiner_case(x, y, "green")</pre>
+
+        <h2 id="deplacement">Déplacement du serpent</h2>
+
+        <h3>Principe du mouvement</h3>
+        <p>Pour déplacer le serpent :</p>
+        <ol>
+            <li>Calculer la position de la nouvelle tête selon la direction</li>
+            <li>Ajouter cette nouvelle tête à la fin de la liste</li>
+            <li>Retirer la queue (premier élément) pour que le serpent garde la même taille</li>
+        </ol>
+
+            <pre># Direction actuelle
+direction = "droite"
+
+def deplacer_serpent():
+    # Récupérer la tête actuelle
+    tete_x, tete_y = serpent[-1]
+    
+    # Calculer la nouvelle position selon la direction
+    if direction == "droite":
+        nouvelle_tete = (tete_x + 1, tete_y)
+    elif direction == "gauche":
+        nouvelle_tete = (tete_x - 1, tete_y)
+    elif direction == "haut":
+        nouvelle_tete = (tete_x, tete_y - 1)
+    elif direction == "bas":
+        nouvelle_tete = (tete_x, tete_y + 1)
+    
+    # Ajouter la nouvelle tête
+    serpent.append(nouvelle_tete)
+    
+    # Retirer la queue
+    serpent.pop(0)</pre>
+
+        <h3>Changer de direction avec le clavier</h3>
+        <pre>def changer_direction(event):
+    global direction
+    touche = event.keysym
+    
+    # Empêcher de faire demi-tour
+    if touche == "Up" and direction != "bas":
+        direction = "haut"
+    elif touche == "Down" and direction != "haut":
+        direction = "bas"
+    elif touche == "Left" and direction != "droite":
+        direction = "gauche"
+    elif touche == "Right" and direction != "gauche":
+        direction = "droite"
+
+# Lier les touches
+fenetre.bind("&lt;Key&gt;", changer_direction)</pre>
+
+        <div class="warning">
+            ⚠️ <strong>Important :</strong> Il faut empêcher le serpent de faire demi-tour (si il va à droite, il ne peut pas aller directement à gauche).
+        </div>
+
+        <h2 id="nourriture">Ajouter la nourriture</h2>
+
+        <h3>Positionner un fruit aléatoire</h3>
+        <pre>import random
+
+def placer_nourriture():
+    """Place un fruit à une position aléatoire"""
+    x = random.randint(0, LARGEUR_GRILLE - 1)
+    y = random.randint(0, HAUTEUR_GRILLE - 1)
+    return (x, y)
+
+# Position de la nourriture
+nourriture = placer_nourriture()</pre>
+
+        <h3>Dessiner la nourriture</h3>
+        <pre>def dessiner_nourriture():
+    x, y = nourriture
+    dessiner_case(x, y, "red")</pre>
+
+        <h2 id="collision">Détection de collision</h2>
+
+        <h3>Vérifier si le serpent mange la nourriture</h3>
+        <pre>def verifier_nourriture():
+    global nourriture, score
+    tete = serpent[-1]
+    
+    if tete == nourriture:
+        # Le serpent mange !
+        score += 1
+        nourriture = placer_nourriture()
+        return True
+    return False</pre>
+
+        <h3>Vérifier si le serpent se mord</h3>
+        <pre>def verifier_collision_soi():
+    tete = serpent[-1]
+    # Vérifier si la tête touche le corps (tous les éléments sauf la tête)
+    return tete in serpent[:-1]</pre>
+
+        <h3>Vérifier si le serpent touche un mur</h3>
+        <pre>def verifier_collision_mur():
+    tete_x, tete_y = serpent[-1]
+    
+    if tete_x < 0 or tete_x >= LARGEUR_GRILLE:
+        return True
+    if tete_y < 0 or tete_y >= HAUTEUR_GRILLE:
+        return True
+    return False</pre>
+
+        <h2 id="croissance">Faire grandir le serpent</h2>
+
+        <p>
+            Quand le serpent mange, il doit grandir. Pour cela, il suffit de <strong>ne pas retirer la queue</strong> 
+            lors du prochain déplacement.
+        </p>
+
+        <pre>def deplacer_serpent():
+    # ... (calculer nouvelle_tete)
+    
+    # Ajouter la nouvelle tête
+    serpent.append(nouvelle_tete)
+    
+    # Vérifier si le serpent mange
+    if not verifier_nourriture():
+        # Si pas de nourriture mangée, retirer la queue
+        serpent.pop(0)
+    # Sinon, on garde la queue → le serpent grandit !</pre>
+
+        <h2 id="game-over">Game Over et boucle de jeu</h2>
+
+        <h3>Structure de la boucle principale</h3>
+            <pre>def boucle_jeu():
+    global en_cours
+    
+    if not en_cours:
+        return
+    
+    # Déplacer le serpent
+    deplacer_serpent()
+    
+    # Vérifier les collisions
+    if verifier_collision_mur() or verifier_collision_soi():
+        en_cours = False
+        canvas.create_text(200, 200, text="GAME OVER!", 
+                          fill="red", font=("Arial", 40))
+        return
+    
+    # Effacer le Canvas
+    canvas.delete("all")
+    
+    # Redessiner tout
+    dessiner_serpent()
+    dessiner_nourriture()
+    
+    # Rappeler la fonction après 150ms
+    fenetre.after(150, boucle_jeu)</pre>
+
+        <div class="note">
+            💡 Plus la valeur dans <code>after()</code> est petite, plus le jeu est rapide. 
+            150ms = vitesse moyenne, 100ms = rapide, 200ms = lent.
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="section-separator"></div>
+
+        <!-- PARTIE EXERCICES -->
+        <h1>✏️ Exercices pratiques</h1>
+
+        <div class="exercice" id="ex1">
+            <h3>Exercice 1 - Grille de jeu</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée le terrain de jeu avec un système de grille :</p>
+            <ul>
+                <li>Définis les constantes : <code>TAILLE_CASE = 20</code>, <code>LARGEUR_GRILLE = 20</code>, <code>HAUTEUR_GRILLE = 20</code></li>
+                <li>Crée un Canvas de la bonne taille (400×400 pixels)</li>
+                <li>Crée une fonction <code>dessiner_case(x, y, couleur)</code> qui dessine un carré à la position (x, y) de la grille</li>
+                <li>Teste en dessinant 3 cases de couleurs différentes</li>
+            </ul>
+            <div class="hint">
+                💡 Pour convertir position grille → pixels : <code>pixel_x = grille_x * TAILLE_CASE</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex2">
+            <h3>Exercice 2 - Serpent initial</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Crée le serpent de départ :</p>
+            <ul>
+                <li>Crée une liste <code>serpent</code> contenant 3 positions : [(8, 10), (9, 10), (10, 10)]</li>
+                <li>Crée une fonction <code>dessiner_serpent()</code> qui dessine toutes les cases du serpent en vert</li>
+                <li>Affiche le serpent sur la grille</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise une boucle <code>for</code> pour parcourir la liste serpent et dessiner chaque case
+            </div>
+        </div>
+
+        <div class="exercice" id="ex3">
+            <h3>Exercice 3 - Déplacement automatique</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Fais avancer le serpent automatiquement vers la droite :</p>
+            <ul>
+                <li>Crée une variable globale <code>direction = "droite"</code></li>
+                <li>Crée une fonction <code>deplacer_serpent()</code> qui :
+                    <ul>
+                        <li>Récupère la position de la tête actuelle</li>
+                        <li>Calcule la nouvelle position (tête + 1 en x si direction = "droite")</li>
+                        <li>Ajoute la nouvelle tête à la fin de la liste</li>
+                        <li>Retire la queue (premier élément)</li>
+                    </ul>
+                </li>
+                <li>Crée une boucle de jeu qui appelle <code>deplacer_serpent()</code>, efface le Canvas, redessine le serpent, puis se rappelle avec <code>after(200)</code></li>
+            </ul>
+            <div class="hint">
+                💡 Structure : <code>serpent.append(nouvelle_tete)</code> puis <code>serpent.pop(0)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex4">
+            <h3>Exercice 4 - Contrôles directionnels</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Permets au joueur de contrôler le serpent avec les flèches :</p>
+            <ul>
+                <li>Crée une fonction <code>changer_direction(event)</code> qui change la variable <code>direction</code></li>
+                <li>Si on appuie sur ↑ : <code>direction = "haut"</code></li>
+                <li>Si on appuie sur ↓ : <code>direction = "bas"</code></li>
+                <li>Si on appuie sur ← : <code>direction = "gauche"</code></li>
+                <li>Si on appuie sur → : <code>direction = "droite"</code></li>
+                <li>Modifie <code>deplacer_serpent()</code> pour gérer les 4 directions</li>
+                <li><strong>Important :</strong> Empêche le serpent de faire demi-tour</li>
+            </ul>
+            <div class="hint">
+                💡 Utilise <code>event.keysym</code> pour récupérer la touche : "Up", "Down", "Left", "Right"<br>
+                💡 Pour empêcher le demi-tour : <code>if touche == "Up" and direction != "bas":</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex5">
+            <h3>Exercice 5 - Apparition de nourriture</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute un fruit rouge sur la grille :</p>
+            <ul>
+                <li>Importe le module <code>random</code></li>
+                <li>Crée une fonction <code>placer_nourriture()</code> qui retourne une position aléatoire (x, y)</li>
+                <li>Crée une variable globale <code>nourriture = placer_nourriture()</code></li>
+                <li>Crée une fonction <code>dessiner_nourriture()</code> qui dessine un carré rouge à la position de la nourriture</li>
+                <li>Appelle cette fonction dans la boucle de jeu pour afficher le fruit</li>
+            </ul>
+            <div class="hint">
+                💡 Position aléatoire : <code>x = random.randint(0, LARGEUR_GRILLE - 1)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex6">
+            <h3>Exercice 6 - Manger et grandir</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Détecte quand le serpent mange et fais-le grandir :</p>
+            <ul>
+                <li>Crée une fonction <code>verifier_nourriture()</code> qui :
+                    <ul>
+                        <li>Compare la position de la tête du serpent avec la position de la nourriture</li>
+                        <li>Si elles sont identiques, retourne <code>True</code></li>
+                        <li>Sinon, retourne <code>False</code></li>
+                    </ul>
+                </li>
+                <li>Dans <code>deplacer_serpent()</code>, après avoir ajouté la nouvelle tête :
+                    <ul>
+                        <li>Appelle <code>verifier_nourriture()</code></li>
+                        <li>Si <code>False</code> : retire la queue (comportement normal)</li>
+                        <li>Si <code>True</code> : ne retire pas la queue (le serpent grandit !) et place une nouvelle nourriture</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hint">
+                💡 La tête du serpent est toujours <code>serpent[-1]</code><br>
+                💡 Structure : <code>if not verifier_nourriture(): serpent.pop(0)</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex7">
+            <h3>Exercice 7 - Collisions et Game Over</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Détecte les collisions et arrête le jeu :</p>
+            <ul>
+                <li>Crée une variable globale <code>en_cours = True</code></li>
+                <li>Crée une fonction <code>verifier_collision_mur()</code> qui :
+                    <ul>
+                        <li>Vérifie si la tête est hors de la grille (x &lt; 0 ou x ≥ LARGEUR_GRILLE ou y &lt; 0 ou y ≥ HAUTEUR_GRILLE)</li>
+                        <li>Retourne <code>True</code> si collision, <code>False</code> sinon</li>
+                    </ul>
+                </li>
+                <li>Crée une fonction <code>verifier_collision_soi()</code> qui :
+                    <ul>
+                        <li>Vérifie si la tête touche une autre partie du corps</li>
+                        <li>Retourne <code>True</code> si collision, <code>False</code> sinon</li>
+                    </ul>
+                </li>
+                <li>Dans la boucle de jeu, au début :
+                    <ul>
+                        <li>Si <code>en_cours == False</code>, arrête la fonction avec <code>return</code></li>
+                        <li>Après le déplacement, vérifie les collisions</li>
+                        <li>Si collision détectée : <code>en_cours = False</code> et affiche "GAME OVER!" en rouge sur le Canvas</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hint">
+                💡 Vérifier collision avec soi-même : <code>tete in serpent[:-1]</code> (la tête dans le reste du corps)<br>
+                💡 Afficher texte : <code>canvas.create_text(200, 200, text="GAME OVER!", fill="red", font=("Arial", 40))</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="ex8">
+            <h3>Exercice 8 - Afficher le score</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Ajoute un système de score :</p>
+            <ul>
+                <li>Crée une variable globale <code>score = 0</code></li>
+                <li>Dans <code>verifier_nourriture()</code>, quand le serpent mange, augmente le score de 1</li>
+                <li>Affiche le score en haut du Canvas avec <code>canvas.create_text()</code></li>
+                <li>Le score doit se mettre à jour à chaque fois qu'on mange</li>
+            </ul>
+            <div class="hint">
+                💡 Affiche le score dans la boucle de jeu après avoir redessiné tout<br>
+                💡 Exemple : <code>canvas.create_text(50, 10, text=f"Score: {score}", fill="black", font=("Arial", 14))</code>
+            </div>
+        </div>
+
+        <div class="exercice" id="projet">
+            <h3>Projet final - Snake complet 🐍</h3>
+            <p><strong>Consigne :</strong></p>
+            <p>Combine tous les exercices pour créer un jeu Snake entièrement fonctionnel !</p>
+            
+            <h4>Fonctionnalités obligatoires :</h4>
+            <ul>
+                <li>✅ Grille de jeu 20×20 avec fond blanc ou noir</li>
+                <li>✅ Serpent vert qui se déplace automatiquement</li>
+                <li>✅ Contrôle avec les 4 flèches du clavier</li>
+                <li>✅ Nourriture rouge qui apparaît aléatoirement</li>
+                <li>✅ Le serpent grandit quand il mange</li>
+                <li>✅ Détection collision avec les murs → Game Over</li>
+                <li>✅ Détection collision avec soi-même → Game Over</li>
+                <li>✅ Affichage du score</li>
+                <li>✅ Message "GAME OVER" à la fin</li>
+            </ul>
+
+            <h4>Améliorations bonus (optionnelles) :</h4>
+            <ul>
+                <li>🌟 Augmenter la vitesse du jeu au fur et à mesure que le score augmente</li>
+                <li>🌟 Afficher le meilleur score (high score)</li>
+                <li>🌟 Bouton "Rejouer" pour recommencer sans fermer la fenêtre</li>
+                <li>🌟 Changer la couleur du serpent (tête différente du corps)</li>
+                <li>🌟 Ajouter des obstacles sur la grille</li>
+                <li>🌟 Mode "murs traversables" : le serpent réapparaît de l'autre côté</li>
+                <li>🌟 Plusieurs types de nourriture avec des points différents</li>
+                <li>🌟 Afficher la longueur du serpent</li>
+            </ul>
+
+            <h4>Conseils pour réussir :</h4>
+            <ul>
+                <li>📝 Commence par la grille et le serpent statique (Ex 1-2)</li>
+                <li>📝 Fais bouger le serpent (Ex 3)</li>
+                <li>📝 Ajoute les contrôles (Ex 4)</li>
+                <li>📝 Ajoute la nourriture (Ex 5-6)</li>
+                <li>📝 Implémente les collisions (Ex 7)</li>
+                <li>📝 Ajoute le score (Ex 8)</li>
+                <li>📝 Teste régulièrement chaque fonctionnalité !</li>
+            </ul>
+
+            <h4>Structure du code :</h4>
+            <div class="hint">
+                <strong>Organisation recommandée :</strong><br><br>
+                
+                1️⃣ <strong>Imports et constantes</strong><br>
+                &nbsp;&nbsp;&nbsp;- import tkinter, random<br>
+                &nbsp;&nbsp;&nbsp;- TAILLE_CASE, LARGEUR_GRILLE, HAUTEUR_GRILLE<br><br>
+                
+                2️⃣ <strong>Variables globales</strong><br>
+                &nbsp;&nbsp;&nbsp;- serpent = [(8,10), (9,10), (10,10)]<br>
+                &nbsp;&nbsp;&nbsp;- direction = "droite"<br>
+                &nbsp;&nbsp;&nbsp;- nourriture = (5, 5)<br>
+                &nbsp;&nbsp;&nbsp;- score = 0<br>
+                &nbsp;&nbsp;&nbsp;- en_cours = True<br><br>
+                
+                3️⃣ <strong>Fonctions de dessin</strong><br>
+                &nbsp;&nbsp;&nbsp;- dessiner_case(x, y, couleur)<br>
+                &nbsp;&nbsp;&nbsp;- dessiner_serpent()<br>
+                &nbsp;&nbsp;&nbsp;- dessiner_nourriture()<br><br>
+                
+                4️⃣ <strong>Fonctions de logique</strong><br>
+                &nbsp;&nbsp;&nbsp;- placer_nourriture()<br>
+                &nbsp;&nbsp;&nbsp;- deplacer_serpent()<br>
+                &nbsp;&nbsp;&nbsp;- verifier_nourriture()<br>
+                &nbsp;&nbsp;&nbsp;- verifier_collision_mur()<br>
+                &nbsp;&nbsp;&nbsp;- verifier_collision_soi()<br><br>
+                
+                5️⃣ <strong>Fonction de contrôle</strong><br>
+                &nbsp;&nbsp;&nbsp;- changer_direction(event)<br><br>
+                
+                6️⃣ <strong>Boucle de jeu</strong><br>
+                &nbsp;&nbsp;&nbsp;- Vérifier si en_cours<br>
+                &nbsp;&nbsp;&nbsp;- Déplacer serpent<br>
+                &nbsp;&nbsp;&nbsp;- Vérifier collisions<br>
+                &nbsp;&nbsp;&nbsp;- Effacer et redessiner<br>
+                &nbsp;&nbsp;&nbsp;- Afficher score<br>
+                &nbsp;&nbsp;&nbsp;- after() pour continuer<br><br>
+                
+                7️⃣ <strong>Initialisation</strong><br>
+                &nbsp;&nbsp;&nbsp;- Créer fenêtre et canvas<br>
+                &nbsp;&nbsp;&nbsp;- bind() pour le clavier<br>
+                &nbsp;&nbsp;&nbsp;- Lancer boucle_jeu()<br>
+                &nbsp;&nbsp;&nbsp;- mainloop()
+            </div>
+
+            <h4>Points importants :</h4>
+            <div class="warning">
+                <strong>⚠️ Erreurs fréquentes à éviter :</strong>
+                <ul>
+                    <li>Oublier <code>global</code> pour modifier les variables dans les fonctions</li>
+                    <li>Ne pas empêcher le demi-tour (serpent ne peut pas aller de droite à gauche directement)</li>
+                    <li>Oublier de vérifier les collisions APRÈS le déplacement</li>
+                    <li>Ne pas effacer le Canvas avant de redessiner (utilise <code>canvas.delete("all")</code>)</li>
+                    <li>Confondre position grille (0-19) et position pixels (0-380)</li>
+                    <li>Oublier le <code>-1</code> dans les limites de grille (0 à LARGEUR_GRILLE-1)</li>
+                </ul>
+            </div>
+
+            <h4>Test final :</h4>
+            <p>Ton jeu est réussi si :</p>
+            <ul>
+                <li>✅ Le serpent se déplace en continu</li>
+                <li>✅ Les 4 directions fonctionnent correctement</li>
+                <li>✅ Le serpent grandit quand il mange</li>
+                <li>✅ Le jeu s'arrête en cas de collision</li>
+                <li>✅ Le score augmente à chaque fruit mangé</li>
+                <li>✅ Le jeu est jouable et amusant !</li>
+            </ul>
+
+            <p style="text-align: center; margin-top: 30px; font-size: 1.2em; color: #2a5298;">
+                <strong>🎉 Bravo ! Tu as créé ton propre Snake ! 🐍</strong>
+            </p>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
